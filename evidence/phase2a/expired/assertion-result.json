@@ -1,0 +1,8 @@
+{
+  "progress": {
+    "label": "rejected",
+    "stage": "target_submission"
+  },
+  "status": "PASS",
+  "test": "05 expired authorization"
+}

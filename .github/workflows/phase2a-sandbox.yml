@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   real-sandbox:
-    if: ${{ github.event.repository.private == true }}
+    if: ${{ github.event.repository.private == true && github.repository == 'onchainbuilds/MandateLock' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     env:

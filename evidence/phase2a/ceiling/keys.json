@@ -1,0 +1,8 @@
+{
+  "agent": "agent.ceiling.test.near",
+  "agent_keys": "[AccessKeyInfo { public_key: PublicKey(ed25519:mYirY5ZQH72kNvE8bJTtyNSymPrfgngBPzJnEqR8UeD), access_key: AccessKey { nonce: 163000000, permission: FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 1000000000000000000000000 }), receiver_id: \"vault.ceiling.test.near\", method_names: [\"execute_payment\"] }) } }, AccessKeyInfo { public_key: PublicKey(ed25519:D3W1Ay8UqtnJZdF32Cv52AMDgVULzud9QEYwJkSmyviR), access_key: AccessKey { nonce: 168000000, permission: FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 1000000000000000000000000 }), receiver_id: \"vault.ceiling.test.near\", method_names: [\"execute_payment\"] }) } }, AccessKeyInfo { public_key: PublicKey(ed25519:EWrpArYtZAwgdW3gKeXHb8MJqxnJ2vdT2D4dUghfBrHd), access_key: AccessKey { nonce: 173000000, permission: FunctionCall(FunctionCallPermission { allowance: Some(NearToken { inner: 1000000000000000000000000 }), receiver_id: \"vault.ceiling.test.near\", method_names: [\"execute_payment\"] }) } }, AccessKeyInfo { public_key: PublicKey(ed25519:Gxa24TGbJu4mqdhW3GbvLXmf4bSEyxVicrtpChDWbgga), access_key: AccessKey { nonce: 146000003, permission: FullAccess } }]",
+  "owner": "ceiling.test.near",
+  "trusted_full_access_vault_key_retained": true,
+  "vault": "vault.ceiling.test.near",
+  "vault_keys": "[AccessKeyInfo { public_key: PublicKey(ed25519:7YDymSZewbLTCTVoTY2owV88nK59BkvsqCZ8DCdMMrxK), access_key: AccessKey { nonce: 140000000, permission: FullAccess } }]"
+}

@@ -1,0 +1,2498 @@
+{
+  "transactions": [
+    {
+      "file": "admin/forgery-transaction.json",
+      "hash": "FJLe3DXw3pZzUKMFUdqSZLmmLEd9fRkMSTR3ojD5aKi7",
+      "signer": "attacker.admin.test.near",
+      "public_key": "ed25519:Gxa24TGbJu4mqdhW3GbvLXmf4bSEyxVicrtpChDWbgga",
+      "nonce": 536000001,
+      "receiver": "vault.admin.test.near",
+      "method": "revoke",
+      "args": {},
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_OWNER"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "8JWitH6JqjoAwAu5iyL1wkP7dLtfjCApveb1d9JJBNzU",
+          "block_hash": "DuAwhWNd6MMMFRCW5DpkmFpAuEzn6yukM4r1rruKQ63S",
+          "executor": "vault.admin.test.near",
+          "gas_burnt": 1607836398203,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_OWNER"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "CenuQNSto1CorTR8GC2yY5FeHjApCJgaBbaNxixD1CNH",
+          "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+          "executor": "attacker.admin.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "authorized/authorized-transaction.json",
+      "hash": "ELK5LSL7eUPFisCR4JjMxnwLtb2k8M1a7bFrBMXyL2x5",
+      "signer": "agent.authorized.test.near",
+      "public_key": "ed25519:4U2e795gt1mDPZCHQps29T66Xg6AnCNesmoMBo5yKcaX",
+      "nonce": 31000001,
+      "receiver": "vault.authorized.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.authorized.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "4eobpUr31gv9PwyXeMZGeQMMk1ekBNZSDt6uXJLG4pzC",
+          "gas_burnt": 3048622232112,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.authorized.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "100000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ",
+          "gas_burnt": 2394705073755,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.authorized.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "0",
+              "spent": "100000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "4eobpUr31gv9PwyXeMZGeQMMk1ekBNZSDt6uXJLG4pzC",
+          "block_hash": "EdyZrNvQHVo3Qqe3FgjLsBGaFbZswE9GEwz5DRZwbwHf",
+          "executor": "vault.authorized.test.near",
+          "gas_burnt": 3048622232112,
+          "status": {
+            "SuccessReceiptId": "D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ"
+          }
+        },
+        {
+          "id": "7N5rmodv2av81jo8QezXV2CtvZsWdpuAEoi8UUev55yw",
+          "block_hash": "5At2tCs2QmBsZJY4w9vxMLrSAbwJfT9guVpTfYhytLn7",
+          "executor": "merchant.authorized.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "67hxdP9T5NX619VPa2ASTdxoBdAwCbQGMERqu9aVWhkK",
+          "block_hash": "BwnUH3gx5H1DVoN6Hdu5cUb9NRKBNSq7qNjd9uXNeuiJ",
+          "executor": "agent.authorized.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ",
+          "block_hash": "BwnUH3gx5H1DVoN6Hdu5cUb9NRKBNSq7qNjd9uXNeuiJ",
+          "executor": "vault.authorized.test.near",
+          "gas_burnt": 2394705073755,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "FaNe3Nnq6Gxfqgdvv9AHihkt75TMhyVn2aEEqYMRCj3z",
+          "block_hash": "CGqmLYKg2JJpfUAK4nBKT6J56NGcJYb2REjvtmoqTBtF",
+          "executor": "agent.authorized.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "GugebHooXwk9hTWckhKkEau3xEqHEyzUhRT1Nh88Kw32",
+          "block_hash": "5At2tCs2QmBsZJY4w9vxMLrSAbwJfT9guVpTfYhytLn7",
+          "executor": "agent.authorized.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "budget/accepted-0-transaction.json",
+      "hash": "Ey2wYnj24e6NZkR7B46mGJF71zr6fbupYQnuH4W1bLjE",
+      "signer": "agent.budget.test.near",
+      "public_key": "ed25519:1HtXnvDcBsrkdYe3KHUsWtx191k7wUSKJ2ZxMCTiwXc",
+      "nonce": 233000001,
+      "receiver": "vault.budget.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.budget.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "4RACJ4MybxbijefQX5NxqkPQ6Ffmm4foe2AHGj1WievT",
+          "gas_burnt": 3047639421344,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.budget.test.near",
+              "amount": "400000000000000000000000",
+              "available": "600000000000000000000000",
+              "pending": "400000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "4pM7NkiaFk2QMtDxBDP4hLpFXc7d4V8z4LhgvgiXqxEC",
+          "gas_burnt": 2396684770779,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.budget.test.near",
+              "amount": "400000000000000000000000",
+              "available": "600000000000000000000000",
+              "pending": "0",
+              "spent": "400000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "4RACJ4MybxbijefQX5NxqkPQ6Ffmm4foe2AHGj1WievT",
+          "block_hash": "8QAt9PtcyxSedXzPYLNBXCZedproqBuZ5RBUR4g4NZu9",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 3047639421344,
+          "status": {
+            "SuccessReceiptId": "4pM7NkiaFk2QMtDxBDP4hLpFXc7d4V8z4LhgvgiXqxEC"
+          }
+        },
+        {
+          "id": "HaNNiu7CNwsDsyXKC4fd86evHGMZ4U8DYnHtKv9Y1kbh",
+          "block_hash": "HFE35uxJbX3o7DmAELrsGeUhkr9LQmWJf8D7EEBY6scZ",
+          "executor": "merchant.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "ATmXmxvuPMVocLMX8beuJCNSNQ8wtKt6Uv9LByZwQGU5",
+          "block_hash": "77aFJ3Y7efXRdBtM3v4iCqRhAj8iiwwKKYjL3VMfDBhW",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "4pM7NkiaFk2QMtDxBDP4hLpFXc7d4V8z4LhgvgiXqxEC",
+          "block_hash": "77aFJ3Y7efXRdBtM3v4iCqRhAj8iiwwKKYjL3VMfDBhW",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 2396684770779,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "EUGysRxjrvdD4KAMkMWqXg2iPawP2HjHCcUU9sz4BvBP",
+          "block_hash": "8e4BL8e4G9vQKwhsr238Yhh6Ft7fuMGwiNQSiDdJBjJZ",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "ZBYuJo18rYCg7brune1ynk7PRzExXX9HAq7MHKgFoL8",
+          "block_hash": "HFE35uxJbX3o7DmAELrsGeUhkr9LQmWJf8D7EEBY6scZ",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "budget/accepted-1-transaction.json",
+      "hash": "BEEkrnCJWcQN6wBeJeBKhBv1n8eHWpr72uEgNn1f6ymP",
+      "signer": "agent.budget.test.near",
+      "public_key": "ed25519:1HtXnvDcBsrkdYe3KHUsWtx191k7wUSKJ2ZxMCTiwXc",
+      "nonce": 233000002,
+      "receiver": "vault.budget.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 1,
+        "recipient": "merchant.budget.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "EqPSDGHCgXE6L1U8eW8G72VkQ9ENZAtZrTNxGUfi69Wb",
+          "gas_burnt": 3056302479881,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 1,
+              "recipient": "merchant.budget.test.near",
+              "amount": "400000000000000000000000",
+              "available": "200000000000000000000000",
+              "pending": "400000000000000000000000",
+              "spent": "400000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "CNeXdJVAmqZC8cHgfRd7dALtRbvW3q88ACce2ELfzvE4",
+          "gas_burnt": 2396723440311,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 1,
+              "recipient": "merchant.budget.test.near",
+              "amount": "400000000000000000000000",
+              "available": "200000000000000000000000",
+              "pending": "0",
+              "spent": "800000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "EqPSDGHCgXE6L1U8eW8G72VkQ9ENZAtZrTNxGUfi69Wb",
+          "block_hash": "BAXG5KUnYYPhssZnmYzP2cABFwZGCz216JJMsdm6SWGa",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 3056302479881,
+          "status": {
+            "SuccessReceiptId": "CNeXdJVAmqZC8cHgfRd7dALtRbvW3q88ACce2ELfzvE4"
+          }
+        },
+        {
+          "id": "8JckA9bKojxnbB3gPxyqoJU1YQLC4UF1byuwkz1UkDXu",
+          "block_hash": "ANhRaxfq5QdqrBLqgqMB4s7dvdiHJd3FQTZWzoBG7MRs",
+          "executor": "merchant.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "6sW1VSPYbpmoYwsQta9RXUhBQiWavM3H45dpTiMz3f52",
+          "block_hash": "6wrew5LdTHMDQBLTs3M8Z7mf3atHoiHwTe7ZSCzyGWeH",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "CNeXdJVAmqZC8cHgfRd7dALtRbvW3q88ACce2ELfzvE4",
+          "block_hash": "6wrew5LdTHMDQBLTs3M8Z7mf3atHoiHwTe7ZSCzyGWeH",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 2396723440311,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "24pbPHhJx5uTwMnLYTbvNeFk2CesEahjWaes9FGNJyyJ",
+          "block_hash": "Bt62RrYVwXrukfEn4XAzVsUQp4LPgkEwk2YdSudsPHng",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "DDBWRe9996pGnhcyG834yhqdTDuYbFu1gZjuTvNPqViH",
+          "block_hash": "ANhRaxfq5QdqrBLqgqMB4s7dvdiHJd3FQTZWzoBG7MRs",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "budget/accepted-2-transaction.json",
+      "hash": "FtciYsaqWrDBuKCqMpHeJnU4Sm4jCJ7PFPP5oKWLS3Wf",
+      "signer": "agent.budget.test.near",
+      "public_key": "ed25519:1HtXnvDcBsrkdYe3KHUsWtx191k7wUSKJ2ZxMCTiwXc",
+      "nonce": 233000003,
+      "receiver": "vault.budget.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "200000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 2,
+        "recipient": "merchant.budget.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "GLLhTgEXFYGVGwMr3isJctYmiD7oc8PSAUwjG3exbi9v",
+          "gas_burnt": 3047701950800,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 2,
+              "recipient": "merchant.budget.test.near",
+              "amount": "200000000000000000000000",
+              "available": "0",
+              "pending": "200000000000000000000000",
+              "spent": "800000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "9E7GXEBUJmGFwfL7A3CyJH8WvoByMhMUDdZo3RMDzdvC",
+          "gas_burnt": 2388531868065,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 2,
+              "recipient": "merchant.budget.test.near",
+              "amount": "200000000000000000000000",
+              "available": "0",
+              "pending": "0",
+              "spent": "1000000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "GLLhTgEXFYGVGwMr3isJctYmiD7oc8PSAUwjG3exbi9v",
+          "block_hash": "9bCde19JLoFBJ3FbBbNGwYeDqFLXptP4qXMiJTXkKtB9",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 3047701950800,
+          "status": {
+            "SuccessReceiptId": "9E7GXEBUJmGFwfL7A3CyJH8WvoByMhMUDdZo3RMDzdvC"
+          }
+        },
+        {
+          "id": "D2pbGVDS28PjYLENjwMTeNvtHGzAuk15MUEgybdTG7WL",
+          "block_hash": "DbSSp9oPbDcE4DfPeGFnpigizvtXuDFnuFc6FBBbtzAz",
+          "executor": "merchant.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "CZCrZGHWkCQyWFi1ovDtKAmtgxsvRXK9mhEKt1RNk3n4",
+          "block_hash": "2RC5auv4oCL96r6QAA3Ub5Z9EzDwUR85EnoqMJ7oi8do",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "9E7GXEBUJmGFwfL7A3CyJH8WvoByMhMUDdZo3RMDzdvC",
+          "block_hash": "2RC5auv4oCL96r6QAA3Ub5Z9EzDwUR85EnoqMJ7oi8do",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 2388531868065,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "qFdtfcBJLHtyiZJcuSDUeKx4w6oUwPHbm4MMkbkGAoZ",
+          "block_hash": "48BX5ph2wmU9hKTWtwHfR8ex4VK62xHGEHC5eZXqK8EG",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "5Tr9e15FQxzstffePEGuFCRiHEzCq9N49uHbfX3UYZWd",
+          "block_hash": "DbSSp9oPbDcE4DfPeGFnpigizvtXuDFnuFc6FBBbtzAz",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "budget/over-budget-transaction.json",
+      "hash": "CAQHAaxg6NRKuUPpHXkJyigTtz8d52DdsyKTWNcGfgb",
+      "signer": "agent.budget.test.near",
+      "public_key": "ed25519:1HtXnvDcBsrkdYe3KHUsWtx191k7wUSKJ2ZxMCTiwXc",
+      "nonce": 233000004,
+      "receiver": "vault.budget.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "1",
+        "mandate_id": "1",
+        "nonce": 3,
+        "recipient": "merchant.budget.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_BUDGET"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "fc5ttbcLt6ePxdt21nCu6ESAbAWBG4j6rNRtgQs1yre",
+          "block_hash": "2iYST3apnrdcjGdnDPHQUtzZhxKp2fUQSkU9EHtwrXch",
+          "executor": "vault.budget.test.near",
+          "gas_burnt": 1630782722799,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_BUDGET"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "DbFZf7NnwBVdmPHV8NRXPvjQBtv1NQdFBVN7kDJmxcEj",
+          "block_hash": "38iLYpXeFLjKnEPak2V91vrhVXkewgJeqvzFAyBcBcCV",
+          "executor": "agent.budget.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "callback/forgery-transaction.json",
+      "hash": "LUNYRg7eNPMmRznfxdRdjgd2G9fm69ev1ZrgrLdkjhz",
+      "signer": "attacker.callback.test.near",
+      "public_key": "ed25519:Gxa24TGbJu4mqdhW3GbvLXmf4bSEyxVicrtpChDWbgga",
+      "nonce": 674000001,
+      "receiver": "vault.callback.test.near",
+      "method": "on_payment_result",
+      "args": {
+        "mandate_id": "1",
+        "nonce": 0
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: Method on_payment_result is private"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "E8XB5Ks7E1CrVVbF5yz6xpiiLVtFhtVnERqjFkSXyzb6",
+          "block_hash": "5ypBgQ9WUu7iLCWjY8sWPAHSwFvSxmoWFYQb2sFTZrEP",
+          "executor": "vault.callback.test.near",
+          "gas_burnt": 1102364033181,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: Method on_payment_result is private"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "EUfWikTPLXefm6HLoSrzb8np9z7oHZWXcEWuQe8jsaWL",
+          "block_hash": "BVdGxH5j6yEb7yFZWK4wSFuhtPf7Mchjg285vCUuodsj",
+          "executor": "attacker.callback.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "ceiling/rejected-transaction.json",
+      "hash": "8qRVVDg72ZQLn3CRZcooACXPktDX8q6VznDPkG4xCacR",
+      "signer": "agent.ceiling.test.near",
+      "public_key": "ed25519:mYirY5ZQH72kNvE8bJTtyNSymPrfgngBPzJnEqR8UeD",
+      "nonce": 163000001,
+      "receiver": "vault.ceiling.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000001",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.ceiling.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_PER_TX_LIMIT"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "FSz6MPKfTjpTzwMfAwiREcv3yMZjSZRfrZoTmqVkvQE7",
+          "block_hash": "EvTRPbZkzKp2PKGkYVPURJDUys5QCy7JN3YCJKVXc78G",
+          "executor": "vault.ceiling.test.near",
+          "gas_burnt": 1636245624441,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_PER_TX_LIMIT"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "CUwAGFrgde5sodygARz43SAumctDWMqVhgaJfBe8hQMX",
+          "block_hash": "8L9HhnH9LosxxZwZPi2eUYMxmgYTLwVMYVckwv8rLdyh",
+          "executor": "agent.ceiling.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "concurrency/competing-0-transaction.json",
+      "hash": "HrM5is7PPkNAknb1mHbBdgJJaTD1EcEspJkHjg42mTvT",
+      "signer": "agent.concurrency.test.near",
+      "public_key": "ed25519:7aY1BjsoqSQPdUkcEbhj6QtTsozKTbfPzbFK6N5mvKxb",
+      "nonce": 884000001,
+      "receiver": "vault.concurrency.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.concurrency.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "DDA3MeVRw21wrpR37VgQGKzP3xH6wxNoheq8W672ZNiY",
+          "gas_burnt": 3041497401634,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.concurrency.test.near",
+              "amount": "400000000000000000000000",
+              "available": "200000000000000000000000",
+              "pending": "800000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "8T4dRKW9vf2ZCRpyLb4rszFPS126fvvmJVM46Jk9n9HH",
+          "gas_burnt": 2386907082321,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.concurrency.test.near",
+              "amount": "400000000000000000000000",
+              "available": "200000000000000000000000",
+              "pending": "0",
+              "spent": "800000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "DDA3MeVRw21wrpR37VgQGKzP3xH6wxNoheq8W672ZNiY",
+          "block_hash": "FKkdJP7CZVHA6H52zxCHGvNXPNnfTRjntAaLLKXA4Xb4",
+          "executor": "vault.concurrency.test.near",
+          "gas_burnt": 3041497401634,
+          "status": {
+            "SuccessReceiptId": "8T4dRKW9vf2ZCRpyLb4rszFPS126fvvmJVM46Jk9n9HH"
+          }
+        },
+        {
+          "id": "CCggFzVNjcNq2z2f1j4itwz5bfeGNJvb2uScP1StXeyq",
+          "block_hash": "AMpAGMbTRybJSqmauwvH3idqvUrsz9McwtU5cTVRzQfQ",
+          "executor": "merchant.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "5sg8Td9XNpVE1bBWBrSs3BCSfTTJwE6DwLq6ac8KJnvt",
+          "block_hash": "GUe9Un2u844R4HgTKL3AV83t2J7qtcxBmcEMWyeB4y6g",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "8T4dRKW9vf2ZCRpyLb4rszFPS126fvvmJVM46Jk9n9HH",
+          "block_hash": "GUe9Un2u844R4HgTKL3AV83t2J7qtcxBmcEMWyeB4y6g",
+          "executor": "vault.concurrency.test.near",
+          "gas_burnt": 2386907082321,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "J4ZBzjFTu7E9tzQxy69hpXY83UnwRTqWpF5ipna5vkuh",
+          "block_hash": "6ek5fayiwPmEQqGNqaRH8gLAXWVdyonfmNAzpN9tFGa2",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "9eaeQVxb7bfQGYefr77RidxjZUSE1fVWw5tGxjYz832M",
+          "block_hash": "AMpAGMbTRybJSqmauwvH3idqvUrsz9McwtU5cTVRzQfQ",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "concurrency/competing-1-transaction.json",
+      "hash": "Dw4CyEBYAm86QkHzTtN7yAtge5HBoAWUKJRKmwzF3KBn",
+      "signer": "agent.concurrency.test.near",
+      "public_key": "ed25519:DV6pDou3bp989rP5gQ2d5amEG5VGJVrFKLTYeZdfZMtb",
+      "nonce": 889000001,
+      "receiver": "vault.concurrency.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 1,
+        "recipient": "merchant.concurrency.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "2ivnMaU5gn2ukNvaArumbBmMQekVoXG95qU4bokBChHa",
+          "gas_burnt": 3062325112378,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 1,
+              "recipient": "merchant.concurrency.test.near",
+              "amount": "400000000000000000000000",
+              "available": "600000000000000000000000",
+              "pending": "400000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "BRC1Wg3Mcy5n1PUmncLSGRhBeRDVhNBjWbxTU8QnR6zn",
+          "gas_burnt": 2416230832134,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 1,
+              "recipient": "merchant.concurrency.test.near",
+              "amount": "400000000000000000000000",
+              "available": "200000000000000000000000",
+              "pending": "400000000000000000000000",
+              "spent": "400000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "2ivnMaU5gn2ukNvaArumbBmMQekVoXG95qU4bokBChHa",
+          "block_hash": "FKkdJP7CZVHA6H52zxCHGvNXPNnfTRjntAaLLKXA4Xb4",
+          "executor": "vault.concurrency.test.near",
+          "gas_burnt": 3062325112378,
+          "status": {
+            "SuccessReceiptId": "BRC1Wg3Mcy5n1PUmncLSGRhBeRDVhNBjWbxTU8QnR6zn"
+          }
+        },
+        {
+          "id": "HH6nX8oCeAYtu2Q8xn65wcuXs6aw1MFhc47ZWjfZb554",
+          "block_hash": "AMpAGMbTRybJSqmauwvH3idqvUrsz9McwtU5cTVRzQfQ",
+          "executor": "merchant.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "4cpPEMzRJ6PtBvmNn4L45b7MwHSQSL4seFUxwSPRvt66",
+          "block_hash": "GUe9Un2u844R4HgTKL3AV83t2J7qtcxBmcEMWyeB4y6g",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "BRC1Wg3Mcy5n1PUmncLSGRhBeRDVhNBjWbxTU8QnR6zn",
+          "block_hash": "GUe9Un2u844R4HgTKL3AV83t2J7qtcxBmcEMWyeB4y6g",
+          "executor": "vault.concurrency.test.near",
+          "gas_burnt": 2416230832134,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "6CR7JEAgmnFxi1jGg9E4ay3fWVMQo4CEVR4yzoDBATiK",
+          "block_hash": "6ek5fayiwPmEQqGNqaRH8gLAXWVdyonfmNAzpN9tFGa2",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "7XHkQo3hUCPB3guiSnm39zJcDfQLQWcWuTjkyvXpwMGD",
+          "block_hash": "AMpAGMbTRybJSqmauwvH3idqvUrsz9McwtU5cTVRzQfQ",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "concurrency/competing-2-transaction.json",
+      "hash": "FNadh5h9esGrSamawrJarnsxSWhtrpbaD9KnaWb7Z2HK",
+      "signer": "agent.concurrency.test.near",
+      "public_key": "ed25519:FMy5CS35Qvp3Pj2WU7XEXcsutm3pFpMndNB7Pfyb6z9K",
+      "nonce": 894000001,
+      "receiver": "vault.concurrency.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "400000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 2,
+        "recipient": "merchant.concurrency.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_BUDGET"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "9fsEhZ7Q4JPSKYyXzwcW7DPzANELXbRYvyvJz3bXiWA6",
+          "block_hash": "FKkdJP7CZVHA6H52zxCHGvNXPNnfTRjntAaLLKXA4Xb4",
+          "executor": "vault.concurrency.test.near",
+          "gas_burnt": 1637133142255,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_BUDGET"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "HQggM5x8Dejfa9is9L2kc9sjJ7N6jXnMBoCt11BdgCms",
+          "block_hash": "AMpAGMbTRybJSqmauwvH3idqvUrsz9McwtU5cTVRzQfQ",
+          "executor": "agent.concurrency.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "expired/rejected-transaction.json",
+      "hash": "G7KRwo183oJ3oykwjqEDHr6HsHV9uyWUhhN7Bgm8fQuv",
+      "signer": "agent.expired.test.near",
+      "public_key": "ed25519:8PJNHgpzELeL4ot84YERNdDxR35ezGJsGfcQyTMhYxXi",
+      "nonce": 327000001,
+      "receiver": "vault.expired.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.expired.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_EXPIRED"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "Bt26cAYMr88spsZ7aXtBYrTipGT9CZAhYGrWJuwzvZYA",
+          "block_hash": "ABWtSrZDgcWjDXn74L9UsPrADgegHrBCEtuzS7tca8cJ",
+          "executor": "vault.expired.test.near",
+          "gas_burnt": 1634787425895,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_EXPIRED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "3gbKmbyPHdYmiibFgxiorfeBdBLdRH9tr9a7aneruw1F",
+          "block_hash": "7R6vq84kqWRqLxJ3uyzRRkef1nNNjTYgWgYPi5DiGUCQ",
+          "executor": "agent.expired.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "failure/failed-nonce-replay-transaction.json",
+      "hash": "Axwg4i1FR8wTdzzQN1zPRp7KMVrPC4bJ6XYqCZRuPSdt",
+      "signer": "agent.failure.test.near",
+      "public_key": "ed25519:FuNu1VKf9buppPooRnGz8BFBwDYwUMffCEBHJQn5c3it",
+      "nonce": 809000002,
+      "receiver": "vault.failure.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "absent.failure.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_NONCE_USED"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "7CBCC8RoE69tChiMNfFGtnnRnqdYtSzKKvwsmPb4akhV",
+          "block_hash": "BMh87UEvTqa1rvp7ARmnRE1CMfj6oRbTPBtrNs4aZ15e",
+          "executor": "vault.failure.test.near",
+          "gas_burnt": 1635625608019,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_NONCE_USED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "6kQkQJj59LE4jkqsZhqA53Wq9xvudETLfLgXRuChzGen",
+          "block_hash": "BHyk252AqQbTjcDLwBqV5CRStg2nRW9uFtjy4uZemaC3",
+          "executor": "agent.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "failure/native-failure-transaction.json",
+      "hash": "A8fAaRZaznmMvgWb8t2gZXVimmmSRePyR7dPeh7eAqYR",
+      "signer": "agent.failure.test.near",
+      "public_key": "ed25519:FuNu1VKf9buppPooRnGz8BFBwDYwUMffCEBHJQn5c3it",
+      "nonce": 809000001,
+      "receiver": "vault.failure.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "absent.failure.test.near"
+      },
+      "status": {
+        "SuccessValue": "ZmFsc2U="
+      },
+      "events": [
+        {
+          "receipt_id": "FLyHjQAS7PAhQv4kcstj7Ki6adS5Kqdt1U3c6n65XwRM",
+          "gas_burnt": 3049399742920,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "absent.failure.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "100000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf",
+          "gas_burnt": 2380352400690,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_failed",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "absent.failure.test.near",
+              "amount": "100000000000000000000000",
+              "available": "1000000000000000000000000",
+              "pending": "0",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "FLyHjQAS7PAhQv4kcstj7Ki6adS5Kqdt1U3c6n65XwRM",
+          "block_hash": "yXaMQKkCpGoZnS6NBMtjVWG5w7YjvzQnTEkFP2E7hTA",
+          "executor": "vault.failure.test.near",
+          "gas_burnt": 3049399742920,
+          "status": {
+            "SuccessReceiptId": "Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf"
+          }
+        },
+        {
+          "id": "EyDQymetb6sPtv3C2SW9zVAui8xz6yUmCtwJLM9dn9DD",
+          "block_hash": "FDjCdvTx4HDGEAGJk4kC47EiP6ytcT9w8SWkwzQPD9Sd",
+          "executor": "absent.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "AccountDoesNotExist": {
+                    "account_id": "absent.failure.test.near"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "CVzNXR9nhfM1EHoN4caufsqSX4GJFqqW8R1z3bTT1RnB",
+          "block_hash": "F5GhPJdBezdiKaPcwxKhWpwGZ7J6aFvvJhED75LLEzyd",
+          "executor": "vault.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "AkzCBWryESAMSN78E6oSi6z85VShF6c4nSk9ijHjLy6k",
+          "block_hash": "F5GhPJdBezdiKaPcwxKhWpwGZ7J6aFvvJhED75LLEzyd",
+          "executor": "agent.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf",
+          "block_hash": "F5GhPJdBezdiKaPcwxKhWpwGZ7J6aFvvJhED75LLEzyd",
+          "executor": "vault.failure.test.near",
+          "gas_burnt": 2380352400690,
+          "status": {
+            "SuccessValue": "ZmFsc2U="
+          }
+        },
+        {
+          "id": "DQt66RsLkziHMuHmxwfpVKbbgJFEMMFXhTVtKU1PivL9",
+          "block_hash": "8wjx42nVnY2kWC6LrToP3oe9Z1JE1NALzAKMyWiKqksr",
+          "executor": "agent.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "7u8KkQeXPUgt9xKqzzsxV1psJwQAS6eiWEnyLdu7MhEv",
+          "block_hash": "FDjCdvTx4HDGEAGJk4kC47EiP6ytcT9w8SWkwzQPD9Sd",
+          "executor": "agent.failure.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "recipient/rejected-transaction.json",
+      "hash": "Am2PS4KZmdLBhP19766zLYRVDHLDnPn9zy5ndEzd927j",
+      "signer": "agent.recipient.test.near",
+      "public_key": "ed25519:88pqCj6eVnLFSqnk9wcFqGdTJMKuF6Jdd67ua96SCKsg",
+      "nonce": 98000001,
+      "receiver": "vault.recipient.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "attacker.recipient.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "ASYscJ3hszGdj3PUyEPd26FsRxnT5rVfDchcxqQ7oRDx",
+          "block_hash": "HkqqTRZkcZzazt5a82fh9yK13sJZ6GTc3b21FQygcKJd",
+          "executor": "vault.recipient.test.near",
+          "gas_burnt": 1635975947459,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "5WQaLuy7wfUHikGm8nFwCmCrarW8tZRZaNxeeHS98qQK",
+          "block_hash": "AFKzzwugsrHMJv6DgF3A85ftksZPY5wwffTTkhoE2bsy",
+          "executor": "agent.recipient.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "replay/first-transaction.json",
+      "hash": "ALQn5caFQcnKQz4LjJCfM9DtJsC6vowZ6V7wMto2psCS",
+      "signer": "agent.replay.test.near",
+      "public_key": "ed25519:9k8n2DZyXF5TWabheqByLsNyRnRdrPg78iX3nTTMWWqp",
+      "nonce": 468000001,
+      "receiver": "vault.replay.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.replay.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "GmCkRA7Bsos2enMnnCzv4U6bf856JRdyYkZ9nj6CKn3u",
+          "gas_burnt": 3051444579821,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.replay.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "100000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "Egta5SAZB89ZPvC995sLp9vS8n95vnEj5dCMwtenwwFp",
+          "gas_burnt": 2400471828624,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.replay.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "0",
+              "spent": "100000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "GmCkRA7Bsos2enMnnCzv4U6bf856JRdyYkZ9nj6CKn3u",
+          "block_hash": "BEgpDpWGYZFqfs63nXLcBEDbWvtDhudVhBkuqdqSumNS",
+          "executor": "vault.replay.test.near",
+          "gas_burnt": 3051444579821,
+          "status": {
+            "SuccessReceiptId": "Egta5SAZB89ZPvC995sLp9vS8n95vnEj5dCMwtenwwFp"
+          }
+        },
+        {
+          "id": "EBwXufCpEVFod5s1vVPEBiBfXpqLyHNc3SUY84zXpFx",
+          "block_hash": "79hNzWKDhv3WFYSqEynfnXBHiJUDc7cv1rcmHk13kQhU",
+          "executor": "merchant.replay.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "Damo8VDry3TooiDfYmYqW7CGJb8oSF4ZjUAj1C74GjGz",
+          "block_hash": "2X3H4iBBU6EhseRk9T6kJimUHhdDY3asGbZRpwcP7jhi",
+          "executor": "agent.replay.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "Egta5SAZB89ZPvC995sLp9vS8n95vnEj5dCMwtenwwFp",
+          "block_hash": "2X3H4iBBU6EhseRk9T6kJimUHhdDY3asGbZRpwcP7jhi",
+          "executor": "vault.replay.test.near",
+          "gas_burnt": 2400471828624,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "6rKZaQFDaQqDMaFCQH4kA4VxxGZpBHdu9WBuJVkB4PFs",
+          "block_hash": "6khcdJEC93QAuZnJTy4Vzv6H7hNDWe8dAzYtYmUWK3yy",
+          "executor": "agent.replay.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "GMeWY3AJXk3exYZW6oBYVR98Kzcf4CykFMK1MXLGgXGF",
+          "block_hash": "79hNzWKDhv3WFYSqEynfnXBHiJUDc7cv1rcmHk13kQhU",
+          "executor": "agent.replay.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "replay/replayed-transaction.json",
+      "hash": "D1AdmDZzMoh6PuK8SW9iAwjczjkxneGdSgKJ7XRWZvPM",
+      "signer": "agent.replay.test.near",
+      "public_key": "ed25519:9k8n2DZyXF5TWabheqByLsNyRnRdrPg78iX3nTTMWWqp",
+      "nonce": 468000002,
+      "receiver": "vault.replay.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.replay.test.near"
+      },
+      "status": {
+        "Failure": {
+          "ActionError": {
+            "index": 0,
+            "kind": {
+              "FunctionCallError": {
+                "ExecutionError": "Smart contract panicked: ERR_NONCE_USED"
+              }
+            }
+          }
+        }
+      },
+      "events": [],
+      "receipts": [
+        {
+          "id": "9aiw1ZQHN9vQ6P96rTMuSNFmh6MBPth9sAjD3xd2ucWC",
+          "block_hash": "6Sa6HXszzkvQB4vnBbbc3SFxpfG9ZeWd8iJkvy8z5sp4",
+          "executor": "vault.replay.test.near",
+          "gas_burnt": 1635345073145,
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_NONCE_USED"
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "id": "EuuNswvRWWRXz8pgtn1PC3vj1piC8iGERP5CpcMwVN3Y",
+          "block_hash": "Hkud9ekc2W4RgxkifjsqsxNQ5tfJmLn9WZ2yE2HcNHhk",
+          "executor": "agent.replay.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    },
+    {
+      "file": "settlement/authorized-transaction.json",
+      "hash": "J4gqpSUUbwV3ohELRNuUb8s9QF7L6hraE5iRi6MPvNgV",
+      "signer": "agent.settlement.test.near",
+      "public_key": "ed25519:xnRDc5Zd9oMnzzCdqTkrbL27bkRSFDQkUDb7pMT1xnX",
+      "nonce": 743000001,
+      "receiver": "vault.settlement.test.near",
+      "method": "execute_payment",
+      "args": {
+        "amount": "100000000000000000000000",
+        "mandate_id": "1",
+        "nonce": 0,
+        "recipient": "merchant.settlement.test.near"
+      },
+      "status": {
+        "SuccessValue": "dHJ1ZQ=="
+      },
+      "events": [
+        {
+          "receipt_id": "7BeW4c59QNtqZJ4nJ16pEfuE3jAms5unJ4peUbgipDqo",
+          "gas_burnt": 3055150407588,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_scheduled",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.settlement.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "100000000000000000000000",
+              "spent": "0",
+              "unallocated": "0"
+            }
+          ]
+        },
+        {
+          "receipt_id": "2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU",
+          "gas_burnt": 2401251349863,
+          "standard": "mandatelock",
+          "version": "1.0.0",
+          "event": "payment_succeeded",
+          "data": [
+            {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.settlement.test.near",
+              "amount": "100000000000000000000000",
+              "available": "900000000000000000000000",
+              "pending": "0",
+              "spent": "100000000000000000000000",
+              "unallocated": "0"
+            }
+          ]
+        }
+      ],
+      "receipts": [
+        {
+          "id": "7BeW4c59QNtqZJ4nJ16pEfuE3jAms5unJ4peUbgipDqo",
+          "block_hash": "4WKRfaWCchffMnbP8QbfQCojbTYoCrCEee36mUp8C6hV",
+          "executor": "vault.settlement.test.near",
+          "gas_burnt": 3055150407588,
+          "status": {
+            "SuccessReceiptId": "2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU"
+          }
+        },
+        {
+          "id": "9HHnaRCNAhXd1xUDHWjhv11qd2sGXYNqpzs3cgKWPJx8",
+          "block_hash": "5VJdNM8HXYb4ok359RQxfSjNyKKqehZ46xJHNCJkabb3",
+          "executor": "merchant.settlement.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "3jg5sZChQbpTDzkdAv2CytBHmYZXvcQcDmssUQAguGdp",
+          "block_hash": "Bbsr2uTGD2zcT9hquzu2UmuXTdXirR1q8jUhgebhiGkf",
+          "executor": "agent.settlement.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU",
+          "block_hash": "Bbsr2uTGD2zcT9hquzu2UmuXTdXirR1q8jUhgebhiGkf",
+          "executor": "vault.settlement.test.near",
+          "gas_burnt": 2401251349863,
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          }
+        },
+        {
+          "id": "4sZfuzzgbjbmDQJCCTYKij3QsoimD7jQ2XiwUgXDehBv",
+          "block_hash": "2c2AQUzxkRtmi2ZGgCDrFrAW1wHBGpfphKG7HrpveooX",
+          "executor": "agent.settlement.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        },
+        {
+          "id": "H4kEJLoG1x2TekiSMT3YVqhRstSJUJYJ3koDg3KjpzHx",
+          "block_hash": "5VJdNM8HXYb4ok359RQxfSjNyKKqehZ46xJHNCJkabb3",
+          "executor": "agent.settlement.test.near",
+          "gas_burnt": 223182562500,
+          "status": {
+            "SuccessValue": ""
+          }
+        }
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "file": "admin/after.json",
+      "height": 572,
+      "timestamp": "1793447455123702399",
+      "vault": "vault.admin.test.near",
+      "physical_near": "11.000092778451711300000000",
+      "required_near": "2.710260000000000000000000",
+      "floor_near": "1.710260000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165930,
+      "balances": {
+        "admin.test.near": "81.969135277866777100000000",
+        "agent.admin.test.near": "4.999873815241822400000000",
+        "attacker.admin.test.near": "0.999808372263207700000000",
+        "merchant.admin.test.near": "1.000000000000000000000000",
+        "vault.admin.test.near": "11.000092778451711300000000"
+      }
+    },
+    {
+      "file": "admin/before.json",
+      "height": 565,
+      "timestamp": "1793447454266666867",
+      "vault": "vault.admin.test.near",
+      "physical_near": "11.000071185681389400000000",
+      "required_near": "2.710260000000000000000000",
+      "floor_near": "1.710260000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165930,
+      "balances": {
+        "admin.test.near": "81.969135277866777100000000",
+        "agent.admin.test.near": "4.999873815241822400000000",
+        "attacker.admin.test.near": "1.000000000000000000000000",
+        "merchant.admin.test.near": "1.000000000000000000000000",
+        "vault.admin.test.near": "11.000071185681389400000000"
+      }
+    },
+    {
+      "file": "admin/fixture-ready.json",
+      "height": 565,
+      "timestamp": "1793447454266666867",
+      "vault": "vault.admin.test.near",
+      "physical_near": "11.000071185681389400000000",
+      "required_near": "2.710260000000000000000000",
+      "floor_near": "1.710260000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165930,
+      "balances": {
+        "admin.test.near": "81.969135277866777100000000",
+        "agent.admin.test.near": "4.999873815241822400000000",
+        "attacker.admin.test.near": "1.000000000000000000000000",
+        "merchant.admin.test.near": "1.000000000000000000000000",
+        "vault.admin.test.near": "11.000071185681389400000000"
+      }
+    },
+    {
+      "file": "authorized/authorized-after.json",
+      "height": 64,
+      "timestamp": "1793447391637131311",
+      "vault": "vault.authorized.test.near",
+      "physical_near": "10.900180441394543000000000",
+      "required_near": "2.610450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "0.900000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.100000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.authorized.test.near": "4.999275771795291200000000",
+        "attacker.authorized.test.near": "1.000000000000000000000000",
+        "authorized.test.near": "81.969137680575827600000000",
+        "merchant.authorized.test.near": "1.100000000000000000000000",
+        "vault.authorized.test.near": "10.900180441394543000000000"
+      }
+    },
+    {
+      "file": "authorized/authorized-before.json",
+      "height": 56,
+      "timestamp": "1793447390649044967",
+      "vault": "vault.authorized.test.near",
+      "physical_near": "11.000070436414474400000000",
+      "required_near": "2.710450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.authorized.test.near": "4.999873815241822400000000",
+        "attacker.authorized.test.near": "1.000000000000000000000000",
+        "authorized.test.near": "81.969137680575827600000000",
+        "merchant.authorized.test.near": "1.000000000000000000000000",
+        "vault.authorized.test.near": "11.000070436414474400000000"
+      }
+    },
+    {
+      "file": "authorized/fixture-ready.json",
+      "height": 55,
+      "timestamp": "1793447390525983251",
+      "vault": "vault.authorized.test.near",
+      "physical_near": "11.000070436414474400000000",
+      "required_near": "2.710450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.authorized.test.near": "4.999873815241822400000000",
+        "attacker.authorized.test.near": "1.000000000000000000000000",
+        "authorized.test.near": "81.969137680575827600000000",
+        "merchant.authorized.test.near": "1.000000000000000000000000",
+        "vault.authorized.test.near": "11.000070436414474400000000"
+      }
+    },
+    {
+      "file": "budget/accepted-0-after.json",
+      "height": 269,
+      "timestamp": "1793447417760449382",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.600180929469630700000000",
+      "required_near": "2.310290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.600000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.400000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.999275691180151600000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.400000000000000000000000",
+        "vault.budget.test.near": "10.600180929469630700000000"
+      }
+    },
+    {
+      "file": "budget/accepted-0-before.json",
+      "height": 260,
+      "timestamp": "1793447416648001084",
+      "vault": "vault.budget.test.near",
+      "physical_near": "11.000070894314662400000000",
+      "required_near": "2.710290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.999873815241822400000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.000000000000000000000000",
+        "vault.budget.test.near": "11.000070894314662400000000"
+      }
+    },
+    {
+      "file": "budget/accepted-1-after.json",
+      "height": 278,
+      "timestamp": "1793447418868649878",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.200291225676441100000000",
+      "required_near": "1.910290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.200000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.800000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.998676696945673900000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.800000000000000000000000",
+        "vault.budget.test.near": "10.200291225676441100000000"
+      }
+    },
+    {
+      "file": "budget/accepted-1-before.json",
+      "height": 269,
+      "timestamp": "1793447417760449382",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.600180929469630700000000",
+      "required_near": "2.310290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.600000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.400000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.999275691180151600000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.400000000000000000000000",
+        "vault.budget.test.near": "10.600180929469630700000000"
+      }
+    },
+    {
+      "file": "budget/accepted-2-after.json",
+      "height": 287,
+      "timestamp": "1793447419983018873",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.000401018120211700000000",
+      "required_near": "1.710290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "1.000000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.998079381921328900000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "2.000000000000000000000000",
+        "vault.budget.test.near": "10.000401018120211700000000"
+      }
+    },
+    {
+      "file": "budget/accepted-2-before.json",
+      "height": 279,
+      "timestamp": "1793447418992087900",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.200291225676441100000000",
+      "required_near": "1.910290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.200000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.800000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.998676696945673900000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.800000000000000000000000",
+        "vault.budget.test.near": "10.200291225676441100000000"
+      }
+    },
+    {
+      "file": "budget/fixture-ready.json",
+      "height": 259,
+      "timestamp": "1793447416524418488",
+      "vault": "vault.budget.test.near",
+      "physical_near": "11.000070894314662400000000",
+      "required_near": "2.710290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.999873815241822400000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "1.000000000000000000000000",
+        "vault.budget.test.near": "11.000070894314662400000000"
+      }
+    },
+    {
+      "file": "budget/over-budget-after.json",
+      "height": 294,
+      "timestamp": "1793447420848971419",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.000423293377405700000000",
+      "required_near": "1.710290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "1.000000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.997885039935385000000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "2.000000000000000000000000",
+        "vault.budget.test.near": "10.000423293377405700000000"
+      }
+    },
+    {
+      "file": "budget/over-budget-before.json",
+      "height": 288,
+      "timestamp": "1793447420105791901",
+      "vault": "vault.budget.test.near",
+      "physical_near": "10.000401018120211700000000",
+      "required_near": "1.710290000000000000000000",
+      "floor_near": "1.710290000000000000000000",
+      "available_near": "0.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "1.000000000000000000000000",
+      "storage_bytes": 165933,
+      "balances": {
+        "agent.budget.test.near": "4.998079381921328900000000",
+        "attacker.budget.test.near": "1.000000000000000000000000",
+        "budget.test.near": "81.969136234113306000000000",
+        "merchant.budget.test.near": "2.000000000000000000000000",
+        "vault.budget.test.near": "10.000401018120211700000000"
+      }
+    },
+    {
+      "file": "callback/after.json",
+      "height": 710,
+      "timestamp": "1793447472127279892",
+      "vault": "vault.callback.test.near",
+      "physical_near": "11.000077828381093500000000",
+      "required_near": "2.710380000000000000000000",
+      "floor_near": "1.710380000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165942,
+      "balances": {
+        "agent.callback.test.near": "4.999873815241822400000000",
+        "attacker.callback.test.near": "0.999858743069964400000000",
+        "callback.test.near": "81.969134496022466500000000",
+        "merchant.callback.test.near": "1.000000000000000000000000",
+        "vault.callback.test.near": "11.000077828381093500000000"
+      }
+    },
+    {
+      "file": "callback/before.json",
+      "height": 704,
+      "timestamp": "1793447471387598701",
+      "vault": "vault.callback.test.near",
+      "physical_near": "11.000071402263609000000000",
+      "required_near": "2.710380000000000000000000",
+      "floor_near": "1.710380000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165942,
+      "balances": {
+        "agent.callback.test.near": "4.999873815241822400000000",
+        "attacker.callback.test.near": "1.000000000000000000000000",
+        "callback.test.near": "81.969134496022466500000000",
+        "merchant.callback.test.near": "1.000000000000000000000000",
+        "vault.callback.test.near": "11.000071402263609000000000"
+      }
+    },
+    {
+      "file": "callback/fixture-ready.json",
+      "height": 703,
+      "timestamp": "1793447471265014328",
+      "vault": "vault.callback.test.near",
+      "physical_near": "11.000071402263609000000000",
+      "required_near": "2.710380000000000000000000",
+      "floor_near": "1.710380000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165942,
+      "balances": {
+        "agent.callback.test.near": "4.999873815241822400000000",
+        "attacker.callback.test.near": "1.000000000000000000000000",
+        "callback.test.near": "81.969134496022466500000000",
+        "merchant.callback.test.near": "1.000000000000000000000000",
+        "vault.callback.test.near": "11.000071402263609000000000"
+      }
+    },
+    {
+      "file": "ceiling/fixture-ready.json",
+      "height": 187,
+      "timestamp": "1793447406867201289",
+      "vault": "vault.ceiling.test.near",
+      "physical_near": "11.000071000765432900000000",
+      "required_near": "2.710330000000000000000000",
+      "floor_near": "1.710330000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165937,
+      "balances": {
+        "agent.ceiling.test.near": "4.999873815241822400000000",
+        "attacker.ceiling.test.near": "1.000000000000000000000000",
+        "ceiling.test.near": "81.969135859309544600000000",
+        "merchant.ceiling.test.near": "1.000000000000000000000000",
+        "vault.ceiling.test.near": "11.000071000765432900000000"
+      }
+    },
+    {
+      "file": "ceiling/rejected-after.json",
+      "height": 200,
+      "timestamp": "1793447408990265802",
+      "vault": "vault.ceiling.test.near",
+      "physical_near": "11.000093438299803700000000",
+      "required_near": "2.710330000000000000000000",
+      "floor_near": "1.710330000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165937,
+      "balances": {
+        "agent.ceiling.test.near": "4.999678812524798300000000",
+        "attacker.ceiling.test.near": "1.000000000000000000000000",
+        "ceiling.test.near": "81.969135859309544600000000",
+        "merchant.ceiling.test.near": "1.000000000000000000000000",
+        "vault.ceiling.test.near": "11.000093438299803700000000"
+      }
+    },
+    {
+      "file": "ceiling/rejected-before.json",
+      "height": 193,
+      "timestamp": "1793447407871383577",
+      "vault": "vault.ceiling.test.near",
+      "physical_near": "11.000071000765432900000000",
+      "required_near": "2.710330000000000000000000",
+      "floor_near": "1.710330000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165937,
+      "balances": {
+        "agent.ceiling.test.near": "4.999873815241822400000000",
+        "attacker.ceiling.test.near": "1.000000000000000000000000",
+        "ceiling.test.near": "81.969135859309544600000000",
+        "merchant.ceiling.test.near": "1.000000000000000000000000",
+        "vault.ceiling.test.near": "11.000071000765432900000000"
+      }
+    },
+    {
+      "file": "concurrency/after.json",
+      "height": 920,
+      "timestamp": "1793447498075257390",
+      "vault": "vault.concurrency.test.near",
+      "physical_near": "10.200314697290728700000000",
+      "required_near": "1.910500000000000000000000",
+      "floor_near": "1.710500000000000000000000",
+      "available_near": "0.200000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.800000000000000000000000",
+      "storage_bytes": 165954,
+      "balances": {
+        "agent.concurrency.test.near": "4.998480577688052200000000",
+        "attacker.concurrency.test.near": "1.000000000000000000000000",
+        "concurrency.test.near": "81.969133729002076300000000",
+        "merchant.concurrency.test.near": "1.800000000000000000000000",
+        "vault.concurrency.test.near": "10.200314697290728700000000"
+      }
+    },
+    {
+      "file": "concurrency/before.json",
+      "height": 910,
+      "timestamp": "1793447496812967747",
+      "vault": "vault.concurrency.test.near",
+      "physical_near": "11.000071614398652500000000",
+      "required_near": "2.710500000000000000000000",
+      "floor_near": "1.710500000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165954,
+      "balances": {
+        "agent.concurrency.test.near": "4.999873815241822400000000",
+        "attacker.concurrency.test.near": "1.000000000000000000000000",
+        "concurrency.test.near": "81.969133729002076300000000",
+        "merchant.concurrency.test.near": "1.000000000000000000000000",
+        "vault.concurrency.test.near": "11.000071614398652500000000"
+      }
+    },
+    {
+      "file": "concurrency/fixture-ready.json",
+      "height": 908,
+      "timestamp": "1793447496557011205",
+      "vault": "vault.concurrency.test.near",
+      "physical_near": "11.000071614398652500000000",
+      "required_near": "2.710500000000000000000000",
+      "floor_near": "1.710500000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165954,
+      "balances": {
+        "agent.concurrency.test.near": "4.999873815241822400000000",
+        "attacker.concurrency.test.near": "1.000000000000000000000000",
+        "concurrency.test.near": "81.969133729002076300000000",
+        "merchant.concurrency.test.near": "1.000000000000000000000000",
+        "vault.concurrency.test.near": "11.000071614398652500000000"
+      }
+    },
+    {
+      "file": "expired/fixture-ready.json",
+      "height": 351,
+      "timestamp": "1793447427912413614",
+      "vault": "vault.expired.test.near",
+      "physical_near": "11.000071036573864400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.expired.test.near": "4.999873815241822400000000",
+        "attacker.expired.test.near": "1.000000000000000000000000",
+        "expired.test.near": "81.969135734956141100000000",
+        "merchant.expired.test.near": "1.000000000000000000000000",
+        "vault.expired.test.near": "11.000071036573864400000000"
+      }
+    },
+    {
+      "file": "expired/rejected-after.json",
+      "height": 435,
+      "timestamp": "1793447438277141725",
+      "vault": "vault.expired.test.near",
+      "physical_near": "11.000093430362278800000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.expired.test.near": "4.999678958344652900000000",
+        "attacker.expired.test.near": "1.000000000000000000000000",
+        "expired.test.near": "81.969135734956141100000000",
+        "merchant.expired.test.near": "1.000000000000000000000000",
+        "vault.expired.test.near": "11.000093430362278800000000"
+      }
+    },
+    {
+      "file": "expired/rejected-before.json",
+      "height": 427,
+      "timestamp": "1793447437267223105",
+      "vault": "vault.expired.test.near",
+      "physical_near": "11.000071036573864400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.expired.test.near": "4.999873815241822400000000",
+        "attacker.expired.test.near": "1.000000000000000000000000",
+        "expired.test.near": "81.969135734956141100000000",
+        "merchant.expired.test.near": "1.000000000000000000000000",
+        "vault.expired.test.near": "11.000071036573864400000000"
+      }
+    },
+    {
+      "file": "failure/failed-nonce-replay-after.json",
+      "height": 851,
+      "timestamp": "1793447489518774815",
+      "vault": "vault.failure.test.near",
+      "physical_near": "11.000203052394307600000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.failure.test.near": "4.999082221974735500000000",
+        "attacker.failure.test.near": "1.000000000000000000000000",
+        "failure.test.near": "81.969135739316747900000000",
+        "merchant.failure.test.near": "1.000000000000000000000000",
+        "vault.failure.test.near": "11.000203052394307600000000"
+      }
+    },
+    {
+      "file": "failure/failed-nonce-replay-before.json",
+      "height": 844,
+      "timestamp": "1793447488641321596",
+      "vault": "vault.failure.test.near",
+      "physical_near": "11.000180633326273400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.failure.test.near": "4.999277153153374400000000",
+        "attacker.failure.test.near": "1.000000000000000000000000",
+        "failure.test.near": "81.969135739316747900000000",
+        "merchant.failure.test.near": "1.000000000000000000000000",
+        "vault.failure.test.near": "11.000180633326273400000000"
+      }
+    },
+    {
+      "file": "failure/fixture-ready.json",
+      "height": 833,
+      "timestamp": "1793447487283920055",
+      "vault": "vault.failure.test.near",
+      "physical_near": "11.000071035265682400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.failure.test.near": "4.999873815241822400000000",
+        "attacker.failure.test.near": "1.000000000000000000000000",
+        "failure.test.near": "81.969135739316747900000000",
+        "merchant.failure.test.near": "1.000000000000000000000000",
+        "vault.failure.test.near": "11.000071035265682400000000"
+      }
+    },
+    {
+      "file": "failure/native-failure-after.json",
+      "height": 843,
+      "timestamp": "1793447488516516868",
+      "vault": "vault.failure.test.near",
+      "physical_near": "11.000180633326273400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.failure.test.near": "4.999277153153374400000000",
+        "attacker.failure.test.near": "1.000000000000000000000000",
+        "failure.test.near": "81.969135739316747900000000",
+        "merchant.failure.test.near": "1.000000000000000000000000",
+        "vault.failure.test.near": "11.000180633326273400000000"
+      }
+    },
+    {
+      "file": "failure/native-failure-before.json",
+      "height": 834,
+      "timestamp": "1793447487408238172",
+      "vault": "vault.failure.test.near",
+      "physical_near": "11.000071035265682400000000",
+      "required_near": "2.710340000000000000000000",
+      "floor_near": "1.710340000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165938,
+      "balances": {
+        "agent.failure.test.near": "4.999873815241822400000000",
+        "attacker.failure.test.near": "1.000000000000000000000000",
+        "failure.test.near": "81.969135739316747900000000",
+        "merchant.failure.test.near": "1.000000000000000000000000",
+        "vault.failure.test.near": "11.000071035265682400000000"
+      }
+    },
+    {
+      "file": "recipient/fixture-ready.json",
+      "height": 122,
+      "timestamp": "1793447398817382705",
+      "vault": "vault.recipient.test.near",
+      "physical_near": "11.000070839158041000000000",
+      "required_near": "2.710420000000000000000000",
+      "floor_near": "1.710420000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165946,
+      "balances": {
+        "agent.recipient.test.near": "4.999873815241822400000000",
+        "attacker.recipient.test.near": "1.000000000000000000000000",
+        "merchant.recipient.test.near": "1.000000000000000000000000",
+        "recipient.test.near": "81.969136353073166700000000",
+        "vault.recipient.test.near": "11.000070839158041000000000"
+      }
+    },
+    {
+      "file": "recipient/rejected-after.json",
+      "height": 130,
+      "timestamp": "1793447399816187448",
+      "vault": "vault.recipient.test.near",
+      "physical_near": "11.000093268467946300000000",
+      "required_near": "2.710420000000000000000000",
+      "floor_near": "1.710420000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165946,
+      "balances": {
+        "agent.recipient.test.near": "4.999678829955753500000000",
+        "attacker.recipient.test.near": "1.000000000000000000000000",
+        "merchant.recipient.test.near": "1.000000000000000000000000",
+        "recipient.test.near": "81.969136353073166700000000",
+        "vault.recipient.test.near": "11.000093268467946300000000"
+      }
+    },
+    {
+      "file": "recipient/rejected-before.json",
+      "height": 123,
+      "timestamp": "1793447398940331469",
+      "vault": "vault.recipient.test.near",
+      "physical_near": "11.000070839158041000000000",
+      "required_near": "2.710420000000000000000000",
+      "floor_near": "1.710420000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165946,
+      "balances": {
+        "agent.recipient.test.near": "4.999873815241822400000000",
+        "attacker.recipient.test.near": "1.000000000000000000000000",
+        "merchant.recipient.test.near": "1.000000000000000000000000",
+        "recipient.test.near": "81.969136353073166700000000",
+        "vault.recipient.test.near": "11.000070839158041000000000"
+      }
+    },
+    {
+      "file": "replay/first-after.json",
+      "height": 501,
+      "timestamp": "1793447446390828696",
+      "vault": "vault.replay.test.near",
+      "physical_near": "10.900181391181011800000000",
+      "required_near": "2.610300000000000000000000",
+      "floor_near": "1.710300000000000000000000",
+      "available_near": "0.900000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.100000000000000000000000",
+      "storage_bytes": 165934,
+      "balances": {
+        "agent.replay.test.near": "4.999274931958519400000000",
+        "attacker.replay.test.near": "1.000000000000000000000000",
+        "merchant.replay.test.near": "1.100000000000000000000000",
+        "replay.test.near": "81.969135449305036500000000",
+        "vault.replay.test.near": "10.900181391181011800000000"
+      }
+    },
+    {
+      "file": "replay/first-before.json",
+      "height": 492,
+      "timestamp": "1793447445285343555",
+      "vault": "vault.replay.test.near",
+      "physical_near": "11.000071128259553800000000",
+      "required_near": "2.710300000000000000000000",
+      "floor_near": "1.710300000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165934,
+      "balances": {
+        "agent.replay.test.near": "4.999873815241822400000000",
+        "attacker.replay.test.near": "1.000000000000000000000000",
+        "merchant.replay.test.near": "1.000000000000000000000000",
+        "replay.test.near": "81.969135449305036500000000",
+        "vault.replay.test.near": "11.000071128259553800000000"
+      }
+    },
+    {
+      "file": "replay/fixture-ready.json",
+      "height": 492,
+      "timestamp": "1793447445285343555",
+      "vault": "vault.replay.test.near",
+      "physical_near": "11.000071128259553800000000",
+      "required_near": "2.710300000000000000000000",
+      "floor_near": "1.710300000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165934,
+      "balances": {
+        "agent.replay.test.near": "4.999873815241822400000000",
+        "attacker.replay.test.near": "1.000000000000000000000000",
+        "merchant.replay.test.near": "1.000000000000000000000000",
+        "replay.test.near": "81.969135449305036500000000",
+        "vault.replay.test.near": "11.000071128259553800000000"
+      }
+    },
+    {
+      "file": "replay/replayed-after.json",
+      "height": 508,
+      "timestamp": "1793447447248570918",
+      "vault": "vault.replay.test.near",
+      "physical_near": "10.900203801765921700000000",
+      "required_near": "2.610300000000000000000000",
+      "floor_near": "1.710300000000000000000000",
+      "available_near": "0.900000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.100000000000000000000000",
+      "storage_bytes": 165934,
+      "balances": {
+        "agent.replay.test.near": "4.999080024064996400000000",
+        "attacker.replay.test.near": "1.000000000000000000000000",
+        "merchant.replay.test.near": "1.100000000000000000000000",
+        "replay.test.near": "81.969135449305036500000000",
+        "vault.replay.test.near": "10.900203801765921700000000"
+      }
+    },
+    {
+      "file": "replay/replayed-before.json",
+      "height": 501,
+      "timestamp": "1793447446390828696",
+      "vault": "vault.replay.test.near",
+      "physical_near": "10.900181391181011800000000",
+      "required_near": "2.610300000000000000000000",
+      "floor_near": "1.710300000000000000000000",
+      "available_near": "0.900000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.100000000000000000000000",
+      "storage_bytes": 165934,
+      "balances": {
+        "agent.replay.test.near": "4.999274931958519400000000",
+        "attacker.replay.test.near": "1.000000000000000000000000",
+        "merchant.replay.test.near": "1.100000000000000000000000",
+        "replay.test.near": "81.969135449305036500000000",
+        "vault.replay.test.near": "10.900181391181011800000000"
+      }
+    },
+    {
+      "file": "restricted/after.json",
+      "height": 646,
+      "timestamp": "1793447464234827014",
+      "vault": "vault.restricted.test.near",
+      "physical_near": "11.000071577725818300000000",
+      "required_near": "2.710460000000000000000000",
+      "floor_near": "1.710460000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165950,
+      "balances": {
+        "agent.restricted.test.near": "4.999873815241822400000000",
+        "attacker.restricted.test.near": "1.000000000000000000000000",
+        "merchant.restricted.test.near": "1.000000000000000000000000",
+        "restricted.test.near": "81.969133871212716500000000",
+        "vault.restricted.test.near": "11.000071577725818300000000"
+      }
+    },
+    {
+      "file": "restricted/before.json",
+      "height": 629,
+      "timestamp": "1793447462138979246",
+      "vault": "vault.restricted.test.near",
+      "physical_near": "11.000071577725818300000000",
+      "required_near": "2.710460000000000000000000",
+      "floor_near": "1.710460000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165950,
+      "balances": {
+        "agent.restricted.test.near": "4.999873815241822400000000",
+        "attacker.restricted.test.near": "1.000000000000000000000000",
+        "merchant.restricted.test.near": "1.000000000000000000000000",
+        "restricted.test.near": "81.969133871212716500000000",
+        "vault.restricted.test.near": "11.000071577725818300000000"
+      }
+    },
+    {
+      "file": "restricted/fixture-ready.json",
+      "height": 629,
+      "timestamp": "1793447462138979246",
+      "vault": "vault.restricted.test.near",
+      "physical_near": "11.000071577725818300000000",
+      "required_near": "2.710460000000000000000000",
+      "floor_near": "1.710460000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165950,
+      "balances": {
+        "agent.restricted.test.near": "4.999873815241822400000000",
+        "attacker.restricted.test.near": "1.000000000000000000000000",
+        "merchant.restricted.test.near": "1.000000000000000000000000",
+        "restricted.test.near": "81.969133871212716500000000",
+        "vault.restricted.test.near": "11.000071577725818300000000"
+      }
+    },
+    {
+      "file": "settlement/authorized-after.json",
+      "height": 776,
+      "timestamp": "1793447480252400973",
+      "vault": "vault.settlement.test.near",
+      "physical_near": "10.900181509577243000000000",
+      "required_near": "2.610450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "0.900000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.100000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.settlement.test.near": "4.999274464350132800000000",
+        "attacker.settlement.test.near": "1.000000000000000000000000",
+        "merchant.settlement.test.near": "1.100000000000000000000000",
+        "settlement.test.near": "81.969135427411985600000000",
+        "vault.settlement.test.near": "10.900181509577243000000000"
+      }
+    },
+    {
+      "file": "settlement/authorized-before.json",
+      "height": 767,
+      "timestamp": "1793447479147179961",
+      "vault": "vault.settlement.test.near",
+      "physical_near": "11.000071112363627000000000",
+      "required_near": "2.710450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.settlement.test.near": "4.999873815241822400000000",
+        "attacker.settlement.test.near": "1.000000000000000000000000",
+        "merchant.settlement.test.near": "1.000000000000000000000000",
+        "settlement.test.near": "81.969135427411985600000000",
+        "vault.settlement.test.near": "11.000071112363627000000000"
+      }
+    },
+    {
+      "file": "settlement/fixture-ready.json",
+      "height": 767,
+      "timestamp": "1793447479147179961",
+      "vault": "vault.settlement.test.near",
+      "physical_near": "11.000071112363627000000000",
+      "required_near": "2.710450000000000000000000",
+      "floor_near": "1.710450000000000000000000",
+      "available_near": "1.000000000000000000000000",
+      "pending_near": "0.000000000000000000000000",
+      "spent_near": "0.000000000000000000000000",
+      "storage_bytes": 165949,
+      "balances": {
+        "agent.settlement.test.near": "4.999873815241822400000000",
+        "attacker.settlement.test.near": "1.000000000000000000000000",
+        "merchant.settlement.test.near": "1.000000000000000000000000",
+        "settlement.test.near": "81.969135427411985600000000",
+        "vault.settlement.test.near": "11.000071112363627000000000"
+      }
+    }
+  ],
+  "expiry": {
+    "policy_ns": "1793447437173942498",
+    "before_payment_ns": "1793447437267223105",
+    "delta_ns": "93280607"
+  },
+  "concurrency": {
+    "accepted": 2,
+    "budget_rejections": 1,
+    "distinct_transactions": [
+      "Dw4CyEBYAm86QkHzTtN7yAtge5HBoAWUKJRKmwzF3KBn",
+      "FNadh5h9esGrSamawrJarnsxSWhtrpbaD9KnaWb7Z2HK",
+      "HrM5is7PPkNAknb1mHbBdgJJaTD1EcEspJkHjg42mTvT"
+    ],
+    "fee_upper_bound": "1393237553770200000000",
+    "independent_keys": [
+      "ed25519:7aY1BjsoqSQPdUkcEbhj6QtTsozKTbfPzbFK6N5mvKxb",
+      "ed25519:DV6pDou3bp989rP5gQ2d5amEG5VGJVrFKLTYeZdfZMtb",
+      "ed25519:FMy5CS35Qvp3Pj2WU7XEXcsutm3pFpMndNB7Pfyb6z9K"
+    ],
+    "pending_overlap": "PASS",
+    "residual": "243082892076200000000"
+  }
+}

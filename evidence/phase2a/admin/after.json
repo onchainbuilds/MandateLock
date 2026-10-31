@@ -1,0 +1,471 @@
+{
+  "accounting": {
+    "account_balance": "11000092778451711300000000",
+    "available": "1000000000000000000000000",
+    "budget": "1000000000000000000000000",
+    "last_mandate_id": "1",
+    "owner_id": "admin.test.near",
+    "pending": "0",
+    "spent": "0",
+    "storage_and_operating_floor": "1710260000000000000000000",
+    "unallocated": "0"
+  },
+  "accounts": {
+    "admin.test.near": {
+      "amount": "81969135277866777100000000",
+      "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+      "block_height": 572,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "agent.admin.test.near": {
+      "amount": "4999873815241822400000000",
+      "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+      "block_height": 572,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 623
+    },
+    "attacker.admin.test.near": {
+      "amount": "999808372263207700000000",
+      "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+      "block_height": 572,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "merchant.admin.test.near": {
+      "amount": "1000000000000000000000000",
+      "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+      "block_height": 572,
+      "code_hash": "11111111111111111111111111111111",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 182
+    },
+    "vault.admin.test.near": {
+      "amount": "11000092778451711300000000",
+      "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+      "block_height": 572,
+      "code_hash": "4nRwHxMiEdVEMQ6ZXMtjwFADje84qNngDWK7CmxZSKdG",
+      "locked": "0",
+      "storage_paid_at": 0,
+      "storage_usage": 165930
+    }
+  },
+  "block_hash": "5p1o9r2huSy23dQVa6PfriCqgM3hdgmeRjMNua4387Re",
+  "block_height": 572,
+  "block_timestamp_ns": "1793447455123702399",
+  "payments": [
+    {
+      "amount": "0",
+      "nonce": 0,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 1,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 2,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 3,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 4,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 5,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 6,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 7,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 8,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 9,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 10,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 11,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 12,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 13,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 14,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 15,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 16,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 17,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 18,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 19,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 20,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 21,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 22,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 23,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 24,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 25,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 26,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 27,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 28,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 29,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 30,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 31,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 32,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 33,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 34,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 35,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 36,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 37,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 38,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 39,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 40,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 41,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 42,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 43,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 44,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 45,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 46,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 47,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 48,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 49,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 50,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 51,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 52,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 53,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 54,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 55,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 56,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 57,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 58,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 59,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 60,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 61,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 62,
+      "recipient": "",
+      "status": "Unused"
+    },
+    {
+      "amount": "0",
+      "nonce": 63,
+      "recipient": "",
+      "status": "Unused"
+    }
+  ],
+  "physically_backed": true,
+  "policy": {
+    "agent_id": "agent.admin.test.near",
+    "agent_keys": [
+      "ed25519:Ggx6Tp423b7pomLLkVsyh6nsGsAutVVASp9n2sWRUzPc",
+      "ed25519:DAKtJt9MM7ohRtfgrnnfcPfMqyn9FvirSoEG7LTRH24K",
+      "ed25519:79BLd6jhUaRnmLTkNQeRsTe5UzfZW86MF91jm4RwUiNA"
+    ],
+    "allowed_recipients": [
+      "merchant.admin.test.near",
+      "absent.admin.test.near"
+    ],
+    "budget": "1000000000000000000000000",
+    "expires_at_ns": "1793448053529204478",
+    "mandate_id": "1",
+    "owner_id": "admin.test.near",
+    "paused": false,
+    "per_transaction_limit": "400000000000000000000000",
+    "request_capacity": 64,
+    "revoked": false
+  },
+  "required_liquid_backing": "2710260000000000000000000"
+}

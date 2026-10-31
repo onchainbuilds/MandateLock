@@ -1,0 +1,7 @@
+{
+  "progress": {
+    "stage": "broadcasting_independent_transactions"
+  },
+  "status": "PASS",
+  "test": "12 independent competing requests"
+}

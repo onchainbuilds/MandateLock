@@ -1,0 +1,68 @@
+{
+  "setup_configurations_final": 12,
+  "validated_final_snapshots": 46,
+  "target_transactions_final": 18,
+  "callbacks": [
+    {
+      "transaction": "ELK5LSL7eUPFisCR4JjMxnwLtb2k8M1a7bFrBMXyL2x5",
+      "receipt": "D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ",
+      "outcome": true,
+      "gas": 2394705073755
+    },
+    {
+      "transaction": "Ey2wYnj24e6NZkR7B46mGJF71zr6fbupYQnuH4W1bLjE",
+      "receipt": "4pM7NkiaFk2QMtDxBDP4hLpFXc7d4V8z4LhgvgiXqxEC",
+      "outcome": true,
+      "gas": 2396684770779
+    },
+    {
+      "transaction": "BEEkrnCJWcQN6wBeJeBKhBv1n8eHWpr72uEgNn1f6ymP",
+      "receipt": "CNeXdJVAmqZC8cHgfRd7dALtRbvW3q88ACce2ELfzvE4",
+      "outcome": true,
+      "gas": 2396723440311
+    },
+    {
+      "transaction": "FtciYsaqWrDBuKCqMpHeJnU4Sm4jCJ7PFPP5oKWLS3Wf",
+      "receipt": "9E7GXEBUJmGFwfL7A3CyJH8WvoByMhMUDdZo3RMDzdvC",
+      "outcome": true,
+      "gas": 2388531868065
+    },
+    {
+      "transaction": "HrM5is7PPkNAknb1mHbBdgJJaTD1EcEspJkHjg42mTvT",
+      "receipt": "8T4dRKW9vf2ZCRpyLb4rszFPS126fvvmJVM46Jk9n9HH",
+      "outcome": true,
+      "gas": 2386907082321
+    },
+    {
+      "transaction": "Dw4CyEBYAm86QkHzTtN7yAtge5HBoAWUKJRKmwzF3KBn",
+      "receipt": "BRC1Wg3Mcy5n1PUmncLSGRhBeRDVhNBjWbxTU8QnR6zn",
+      "outcome": true,
+      "gas": 2416230832134
+    },
+    {
+      "transaction": "A8fAaRZaznmMvgWb8t2gZXVimmmSRePyR7dPeh7eAqYR",
+      "receipt": "Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf",
+      "outcome": false,
+      "gas": 2380352400690
+    },
+    {
+      "transaction": "ALQn5caFQcnKQz4LjJCfM9DtJsC6vowZ6V7wMto2psCS",
+      "receipt": "Egta5SAZB89ZPvC995sLp9vS8n95vnEj5dCMwtenwwFp",
+      "outcome": true,
+      "gas": 2400471828624
+    },
+    {
+      "transaction": "J4gqpSUUbwV3ohELRNuUb8s9QF7L6hraE5iRi6MPvNgV",
+      "receipt": "2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU",
+      "outcome": true,
+      "gas": 2401251349863
+    }
+  ],
+  "callback_min_gas": 2380352400690,
+  "callback_max_gas": 2416230832134,
+  "concurrency_same_vault_execution_block": "FKkdJP7CZVHA6H52zxCHGvNXPNnfTRjntAaLLKXA4Xb4",
+  "concurrency_independent_keys": 3,
+  "concurrency_pending_overlap_near": "0.8",
+  "genuine_native_failure": true,
+  "failed_slot_consumed": true
+}

@@ -1,0 +1,4 @@
+{
+  "diagnostic": "Error { repr: Custom { kind: Rpc(BroadcastTxFailure), error: ServerError(HandlerError(InvalidTransaction { context: InvalidAccessKeyError(MethodNameMismatch { method_name: \"revoke\" }) })) } }",
+  "receipt_expected": false
+}

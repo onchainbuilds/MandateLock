@@ -1,0 +1,3 @@
+# Phase 2A evidence
+
+These are unmodified selected JSON records from successful sandbox run 41198135753 at commit a539ef3b4a243afb7376067b40b052645d5f1111. The twelve mandatory scenarios passed. Transaction IDs refer to synthetic local sandbox transactions, not a public explorer. Original archive metadata and every local file hash are preserved in full-local-archive-manifest.json. Setup transactions, repetitive RPC journals, build logs and compiled binaries remain in the complete local archive. Evidence analysis is derived; per-case *-transaction.json and snapshots are raw observations. Keys and signatures here are public; no signing secret is included.

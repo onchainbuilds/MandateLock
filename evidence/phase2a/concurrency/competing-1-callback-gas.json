@@ -1,0 +1,10 @@
+[
+  {
+    "executor": "vault.concurrency.test.near",
+    "gas_burnt": 2416230832134,
+    "receipt_id": "BRC1Wg3Mcy5n1PUmncLSGRhBeRDVhNBjWbxTU8QnR6zn",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    }
+  }
+]

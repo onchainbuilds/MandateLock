@@ -1,0 +1,10 @@
+[
+  {
+    "executor": "vault.replay.test.near",
+    "gas_burnt": 2400471828624,
+    "receipt_id": "Egta5SAZB89ZPvC995sLp9vS8n95vnEj5dCMwtenwwFp",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    }
+  }
+]

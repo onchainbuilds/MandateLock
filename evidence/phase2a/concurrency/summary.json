@@ -1,0 +1,17 @@
+{
+  "accepted": 2,
+  "budget_rejections": 1,
+  "distinct_transactions": [
+    "Dw4CyEBYAm86QkHzTtN7yAtge5HBoAWUKJRKmwzF3KBn",
+    "FNadh5h9esGrSamawrJarnsxSWhtrpbaD9KnaWb7Z2HK",
+    "HrM5is7PPkNAknb1mHbBdgJJaTD1EcEspJkHjg42mTvT"
+  ],
+  "fee_upper_bound": "1393237553770200000000",
+  "independent_keys": [
+    "ed25519:7aY1BjsoqSQPdUkcEbhj6QtTsozKTbfPzbFK6N5mvKxb",
+    "ed25519:DV6pDou3bp989rP5gQ2d5amEG5VGJVrFKLTYeZdfZMtb",
+    "ed25519:FMy5CS35Qvp3Pj2WU7XEXcsutm3pFpMndNB7Pfyb6z9K"
+  ],
+  "pending_overlap": "PASS",
+  "residual": "243082892076200000000"
+}

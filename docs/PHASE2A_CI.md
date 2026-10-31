@@ -1,3 +1,5 @@
+> Historical preparation report. The corrected run subsequently passed all twelve scenarios. See PHASE2A.md and PHASE2B.md for authoritative current status. New work targets only onchainbuilds/MandateLock.
+
 # Phase 2A scenario coverage
 
 The first Ubuntu run recorded twelve failed scenario functions. Eleven stopped

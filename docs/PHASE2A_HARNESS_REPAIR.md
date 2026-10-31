@@ -1,5 +1,14 @@
 # Phase 2A harness repair — local approval package
 
+**Execution update:** The six-file correction was subsequently approved and pushed
+as `a539ef3b4a243afb7376067b40b052645d5f1111`. The single corrected
+[workflow run](https://github.com/shadehook/MandateLock/actions/runs/41198135753)
+succeeded: 12/12 sandbox scenarios, 44/44 native tests and 4/4 harness regressions.
+See [PHASE2A.md](PHASE2A.md) for actual receipts, balances, expiry timestamps,
+independent concurrency evidence and unresolved security gates. The following
+approval package is preserved as historical preparation; its pending-run wording
+describes the state before that approval.
+
 The corrected harness is prepared locally. No GitHub API, push, workflow dispatch,
 Docker/WSL operation, public-chain transaction or token expenditure was performed
 during this repair. Production contract code is unchanged. Another private push

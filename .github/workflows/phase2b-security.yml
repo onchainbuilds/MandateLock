@@ -1,0 +1,112 @@
+# Preferred fallback: private repository, prepared locally only.
+# Creating/uploading to a repository and activating this workflow need user approval.
+name: MandateLock Phase 2B security (manual)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  real-sandbox:
+    if: ${{ github.event.repository.private == true && github.repository == 'onchainbuilds/MandateLock' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      CARGO_TERM_COLOR: never
+      RUST_BACKTRACE: 1
+      MANDATELOCK_WASM: ${{ github.workspace }}/target/near/mandatelock.wasm
+      MANDATELOCK_EVIDENCE_DIR: ${{ github.workspace }}/artifacts/phase2a
+    steps:
+      - name: Checkout approved source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Initialize evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase2a
+          printf '%s\n' "$GITHUB_SHA" > artifacts/phase2a/commit-sha.txt
+          printf '%s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > artifacts/phase2a/workflow-url.txt
+      - name: Prepare ephemeral Linux build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          exec > >(tee artifacts/phase2a/prerequisites.log) 2>&1
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libssl-dev cmake
+          rustup toolchain install 1.93.0 --profile minimal --component rustfmt --component clippy --target wasm32-unknown-unknown
+          rustup default 1.93.0
+          curl --fail --location --proto '=https' --tlsv1.2 \
+            https://github.com/near/cargo-near/releases/download/cargo-near-v0.22.0/cargo-near-installer.sh \
+            --output /tmp/mandatelock-cargo-near-installer.sh
+          CARGO_NEAR_DISABLE_UPDATE=1 sh /tmp/mandatelock-cargo-near-installer.sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+      - name: Record versions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase2a
+          { uname -a; rustc --version --verbose; cargo --version; cargo near --version; node --version; } \
+            | tee artifacts/phase2a/toolchain.txt
+      - name: Native regression, formatting and lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          exec > >(tee artifacts/phase2a/native-checks.log) 2>&1
+          cargo fmt --all -- --check
+          cargo fmt --manifest-path integration-tests/Cargo.toml --all -- --check
+          cargo test --locked 2>&1 | tee artifacts/phase2a/native-tests.log
+          cargo clippy --all-targets --locked -- -D warnings
+          cargo near check --clippy --locked
+          cargo test --manifest-path integration-tests/Cargo.toml --lib --locked 2>&1 | tee artifacts/phase2a/harness-regressions.log
+          cargo clippy --manifest-path integration-tests/Cargo.toml --all-targets --locked -- -D warnings
+      - name: Build and validate actual contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo near build non-reproducible-wasm --no-abi --locked 2>&1 | tee artifacts/phase2a/build.log
+          node scripts/verify-wasm.mjs | tee artifacts/phase2a/wasm-validation.log
+          cp docs/phase1b-wasm.json artifacts/phase2a/wasm-metadata.json
+          cp target/near/mandatelock.wasm artifacts/phase2a/mandatelock.wasm
+      - name: Execute real local sandbox scenarios
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked \
+            --test sandbox -- --nocapture 2>&1 | tee artifacts/phase2a/sandbox-tests.log
+      - name: Build labeled fault artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase2b
+          node scripts/prepare-phase2b-fixtures.mjs | tee artifacts/phase2b/fixture-generation.log
+          cp target/phase2b-fixtures/manifest.json artifacts/phase2b/fixture-source-manifest.json
+          for variant in lowgas duplicate; do
+            cargo build --manifest-path "target/phase2b-fixtures/$variant/Cargo.toml" \
+              --target wasm32-unknown-unknown --release --locked \
+              --target-dir "target/phase2b-$variant-build" 2>&1 | tee "artifacts/phase2b/$variant-build.log"
+            cp "target/phase2b-$variant-build/wasm32-unknown-unknown/release/mandatelock.wasm" "artifacts/phase2b/TEST-ONLY-$variant.wasm"
+          done
+      - name: Execute additional Phase 2B security cases
+        if: ${{ success() && !cancelled() }}
+        shell: bash
+        env:
+          MANDATELOCK_EVIDENCE_DIR: ${{ github.workspace }}/artifacts/phase2b
+          MANDATELOCK_LOWGAS_WASM: ${{ github.workspace }}/artifacts/phase2b/TEST-ONLY-lowgas.wasm
+          MANDATELOCK_DUPLICATE_WASM: ${{ github.workspace }}/artifacts/phase2b/TEST-ONLY-duplicate.wasm
+        run: |
+          set -euo pipefail
+          cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked \
+            --test sandbox phase2b_security_gaps -- --ignored --nocapture 2>&1 | tee artifacts/phase2b/sandbox-tests.log
+      - name: Preserve evidence even after failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mandatelock-phase2b-evidence
+          path: |
+            artifacts/phase2a/
+            artifacts/phase2b/
+          retention-days: 14
+          if-no-files-found: warn

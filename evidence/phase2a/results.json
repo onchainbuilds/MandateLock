@@ -1,0 +1,101 @@
+{
+  "failures": 0,
+  "tests": [
+    {
+      "progress": {
+        "label": "authorized",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "01 authorized payment"
+    },
+    {
+      "progress": {
+        "label": "rejected",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "02 unauthorized recipient"
+    },
+    {
+      "progress": {
+        "label": "rejected",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "03 transaction ceiling"
+    },
+    {
+      "progress": {
+        "label": "over-budget",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "04 total budget"
+    },
+    {
+      "progress": {
+        "label": "rejected",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "05 expired authorization"
+    },
+    {
+      "progress": {
+        "label": "replayed",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "06 replay"
+    },
+    {
+      "progress": {
+        "method": "revoke",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "07 unauthorized administration"
+    },
+    {
+      "progress": {
+        "method": "revoke",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "08 restricted key"
+    },
+    {
+      "progress": {
+        "method": "on_payment_result",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "09 forged callback"
+    },
+    {
+      "progress": {
+        "label": "authorized",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "10 async successful settlement"
+    },
+    {
+      "progress": {
+        "label": "failed-nonce-replay",
+        "stage": "target_submission"
+      },
+      "status": "PASS",
+      "test": "11 genuine native failure"
+    },
+    {
+      "progress": {
+        "stage": "broadcasting_independent_transactions"
+      },
+      "status": "PASS",
+      "test": "12 independent competing requests"
+    }
+  ],
+  "unverified": 0
+}

@@ -1,0 +1,8 @@
+{
+  "progress": {
+    "label": "authorized",
+    "stage": "target_submission"
+  },
+  "status": "PASS",
+  "test": "01 authorized payment"
+}

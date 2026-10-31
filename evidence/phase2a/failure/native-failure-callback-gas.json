@@ -1,0 +1,10 @@
+[
+  {
+    "executor": "vault.failure.test.near",
+    "gas_burnt": 2380352400690,
+    "receipt_id": "Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf",
+    "status": {
+      "SuccessValue": "ZmFsc2U="
+    }
+  }
+]

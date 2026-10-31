@@ -1,0 +1,10 @@
+[
+  {
+    "executor": "vault.settlement.test.near",
+    "gas_burnt": 2401251349863,
+    "receipt_id": "2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    }
+  }
+]

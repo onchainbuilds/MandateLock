@@ -1,6 +1,11 @@
 /target/
 /.phase2a-reference/
 /integration-tests/target/
-/artifacts/phase2a/
+/artifacts/
 /.phase1a-smoke/
 /.phase2a-publish/
+/.migration/
+/.env
+/.env.*
+/*.key
+/*.pem

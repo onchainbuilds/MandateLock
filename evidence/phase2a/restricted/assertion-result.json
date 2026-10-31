@@ -1,0 +1,8 @@
+{
+  "progress": {
+    "method": "revoke",
+    "stage": "target_submission"
+  },
+  "status": "PASS",
+  "test": "08 restricted key"
+}

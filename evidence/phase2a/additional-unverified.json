@@ -1,0 +1,6 @@
+{
+  "duplicate_genuine_private_callback": "UNVERIFIED: native-model idempotency is not real duplicate delivery",
+  "exact_gas_reward_breakdown": "UNVERIFIED: residual bounded by actual fee totals, not exact reward decomposition",
+  "missing_callback_fault": "UNVERIFIED: requires separately labeled receipt/fault control",
+  "solvency_every_intermediate_receipt": "UNVERIFIED: snapshots are pinned before/after finality, not every receipt"
+}

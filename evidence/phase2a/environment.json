@@ -1,0 +1,41 @@
+{
+  "framework": "near-workspaces 0.23.0",
+  "network": "disposable local sandbox only",
+  "status": {
+    "chain_id": "test-chain-sENAI",
+    "genesis_hash": "9Djaf5jy6yXtwPi1qcxDFDapEu1EegLXh6g3A4BoQbSz",
+    "latest_protocol_version": 86,
+    "node_key": "ed25519:6FbpcRWWsJUattCbFbjZA15bdCVihhQn9eQh1dMwh5Ug",
+    "node_public_key": "ed25519:67Th8FrfkEGkobyNPi7u3ULwAvzzajD6JRN7kr7AGvVe",
+    "protocol_version": 86,
+    "rpc_addr": "0.0.0.0:3030",
+    "sync_info": {
+      "earliest_block_hash": "9Djaf5jy6yXtwPi1qcxDFDapEu1EegLXh6g3A4BoQbSz",
+      "earliest_block_height": 0,
+      "earliest_block_time": "2026-10-31T11:49:43.363748419Z",
+      "epoch_id": "11111111111111111111111111111111",
+      "epoch_start_height": 0,
+      "latest_block_hash": "9Djaf5jy6yXtwPi1qcxDFDapEu1EegLXh6g3A4BoQbSz",
+      "latest_block_height": 0,
+      "latest_block_time": "2026-10-31T11:49:43.363748419Z",
+      "latest_state_root": "GZ6zu5dLRNxRUxiEdRz3dskJtBBhTwumBp4Z8ebUgTDo",
+      "syncing": false
+    },
+    "uptime_sec": 0,
+    "validator_account_id": "test.near",
+    "validator_public_key": "ed25519:6FbpcRWWsJUattCbFbjZA15bdCVihhQn9eQh1dMwh5Ug",
+    "validators": [
+      {
+        "account_id": "test.near"
+      }
+    ],
+    "version": {
+      "build": "2.13.4",
+      "commit": "44f7ae6cd7ef08bab604e20a473bf77e35d4c993",
+      "rustc_version": "1.93.0",
+      "version": "2.13.4"
+    }
+  },
+  "wasm_bytes": 159542,
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87"
+}

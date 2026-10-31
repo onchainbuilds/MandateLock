@@ -1,0 +1,10 @@
+[
+  {
+    "executor": "vault.budget.test.near",
+    "gas_burnt": 2396723440311,
+    "receipt_id": "CNeXdJVAmqZC8cHgfRd7dALtRbvW3q88ACce2ELfzvE4",
+    "status": {
+      "SuccessValue": "dHJ1ZQ=="
+    }
+  }
+]

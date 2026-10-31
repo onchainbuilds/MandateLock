@@ -19,6 +19,9 @@ use std::time::Duration;
 use tokio::sync::Barrier;
 
 const N: u128 = 1_000_000_000_000_000_000_000_000;
+#[path = "support/phase2b.rs"]
+mod phase2b;
+
 const GAS: Gas = Gas::from_tgas(100);
 static RPC_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 const SCENARIOS: [(&str, &str); 12] = [

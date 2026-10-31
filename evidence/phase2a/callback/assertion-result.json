@@ -1,0 +1,8 @@
+{
+  "progress": {
+    "method": "on_payment_result",
+    "stage": "target_submission"
+  },
+  "status": "PASS",
+  "test": "09 forged callback"
+}
