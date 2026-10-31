@@ -1,0 +1,6 @@
+/target/
+/.phase2a-reference/
+/integration-tests/target/
+/artifacts/phase2a/
+/.phase1a-smoke/
+/.phase2a-publish/
