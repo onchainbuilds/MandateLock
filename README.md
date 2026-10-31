@@ -2,8 +2,11 @@
 
 Private, manual Linux sandbox validation of a NEAR spending-policy prototype.
 The production Rust sources and native tests are unchanged from Phase 1B.
-The latest local native run passed 44 tests; all twelve real sandbox scenarios
-remain UNVERIFIED until this workflow executes and its evidence is reviewed.
+The first Ubuntu run passed all 44 native tests and deployed the actual Wasm.
+Its twelve scenario functions failed: eleven before target calls at snapshot
+setup, and one at an expiry assertion whose precondition was not verified.
+One real payment and callback succeeded. The corrected harness has not yet run
+in the sandbox; security validation remains incomplete and Phase 2B is NO-GO.
 
 ## Execution
 
@@ -25,3 +28,4 @@ raw transaction/receipt outcomes, balances, callback gas and concurrency evidenc
 Setup failures are not contract-test passes. Missing evidence remains UNVERIFIED.
 
 See [scenario coverage and limitations](docs/PHASE2A_CI.md).
+See [local harness repair and proposed rerun](docs/PHASE2A_HARNESS_REPAIR.md).

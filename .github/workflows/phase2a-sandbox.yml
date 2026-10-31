@@ -60,6 +60,8 @@ jobs:
           cargo test --lib --locked 2>&1 | tee artifacts/phase2a/native-tests.log
           cargo clippy --all-targets --locked -- -D warnings
           cargo near check --clippy --locked
+          cargo test --manifest-path integration-tests/Cargo.toml --lib --locked 2>&1 | tee artifacts/phase2a/harness-regressions.log
+          cargo clippy --manifest-path integration-tests/Cargo.toml --all-targets --locked -- -D warnings
       - name: Build and validate actual contract
         shell: bash
         run: |

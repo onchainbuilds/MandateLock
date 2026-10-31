@@ -1,6 +1,9 @@
 # Phase 2A scenario coverage
 
-All scenarios currently UNVERIFIED: none has executed in a real sandbox yet.
+The first Ubuntu run recorded twelve failed scenario functions. Eleven stopped
+before their target transactions; the expiry case executed a successful payment
+without establishing that expiry had passed. The corrected harness awaits an
+approved rerun. The required behaviors below remain unverified as a complete suite.
 
 1. Authorized payment and exact recipient balance increase.
 2. Unauthorized recipient rejection.
@@ -19,6 +22,13 @@ All scenarios currently UNVERIFIED: none has executed in a real sandbox yet.
 The harness checks final accounting, physical backing, receipt outcomes and
 callback gas. It never treats access-key nonce conflicts as budget enforcement.
 If a genuine transfer failure cannot be established, that scenario is UNVERIFIED.
+
+Setup now records every transaction and waits for FINAL before reading initialized
+state. Raw RPC responses are saved before assertions. The expiry case waits for
+a finalized timestamp strictly beyond its stored deadline, checked again in the
+pre-payment snapshot. Concurrency uses three distinct approved keys; it records
+all broadcasts before awaiting completion and requires three unique hashes and
+actual vault receipts. A nonce conflict cannot count as a budget rejection.
 
 ## Remaining security limits
 
@@ -42,6 +52,7 @@ then run from the repository root:
 ```bash
 set -euo pipefail
 cargo test --lib --locked
+cargo test --manifest-path integration-tests/Cargo.toml --lib --locked
 cargo near build non-reproducible-wasm --no-abi --locked
 node scripts/verify-wasm.mjs
 cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked --test sandbox -- --nocapture

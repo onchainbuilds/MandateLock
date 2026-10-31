@@ -2,6 +2,9 @@
 use anyhow::{Context, Result, bail, ensure};
 use base64::{Engine, engine::general_purpose::STANDARD};
 use mandatelock::model::{PaymentStatus, VaultState};
+use mandatelock_sandbox_tests::{
+    require_competing_call, require_expired, require_final_transaction,
+};
 use near_workspaces::network::Sandbox;
 use near_workspaces::operations::Function;
 use near_workspaces::result::ExecutionFinalResult;
@@ -11,11 +14,36 @@ use serde_json::{Value, json};
 use sha2::{Digest, Sha256};
 use std::path::PathBuf;
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::Duration;
 use tokio::sync::Barrier;
 
 const N: u128 = 1_000_000_000_000_000_000_000_000;
 const GAS: Gas = Gas::from_tgas(100);
+static RPC_SEQUENCE: AtomicU64 = AtomicU64::new(0);
+const SCENARIOS: [(&str, &str); 12] = [
+    ("01 authorized payment", "authorized"),
+    ("02 unauthorized recipient", "recipient"),
+    ("03 transaction ceiling", "ceiling"),
+    ("04 total budget", "budget"),
+    ("05 expired authorization", "expired"),
+    ("06 replay", "replay"),
+    ("07 unauthorized administration", "admin"),
+    ("08 restricted key", "restricted"),
+    ("09 forged callback", "callback"),
+    ("10 async successful settlement", "settlement"),
+    ("11 genuine native failure", "failure"),
+    ("12 independent competing requests", "concurrency"),
+];
+
+fn save_results(rows: &[Value]) -> Result<()> {
+    save(
+        "results.json",
+        &json!({"tests":rows,
+        "failures":rows.iter().filter(|r|r["status"]=="FAIL").count(),
+        "unverified":rows.iter().filter(|r|r["status"]=="UNVERIFIED").count()}),
+    )
+}
 
 #[derive(Debug)]
 struct Unverified(&'static str);
@@ -45,19 +73,86 @@ async fn rpc(worker: &Worker<Sandbox>, method: &str, params: Value) -> Result<Va
         url.starts_with("http://127.0.0.1:") || url.starts_with("http://localhost:"),
         "nonlocal RPC refused: {url}"
     );
-    let response: Value = reqwest::Client::new()
-        .post(url)
-        .timeout(Duration::from_secs(120))
-        .json(&json!({"jsonrpc":"2.0","id":"mandatelock-phase2a","method":method,"params":params}))
-        .send()
-        .await?
-        .error_for_status()?
-        .json()
-        .await?;
+    let sequence = RPC_SEQUENCE.fetch_add(1, Ordering::Relaxed);
+    let path = format!("rpc/{sequence:06}-{method}.json");
+    let request = json!({"jsonrpc":"2.0","id":sequence,"method":method,"params":params});
+    save(&path, &json!({"request":request,"status":"sending"}))?;
+    let response = async {
+        reqwest::Client::new()
+            .post(url)
+            .timeout(Duration::from_secs(120))
+            .json(&request)
+            .send()
+            .await?
+            .error_for_status()?
+            .json::<Value>()
+            .await
+    }
+    .await;
+    let response = match response {
+        Ok(response) => response,
+        Err(error) => {
+            save(
+                &path,
+                &json!({"request":request,"transport_error":error.to_string()}),
+            )?;
+            return Err(error.into());
+        }
+    };
+    // Save every raw response before parsing or asserting, including RPC failures.
+    save(&path, &json!({"request":request,"response":response}))?;
     if response.get("error").is_some() {
         bail!("RPC {method}: {}", response["error"]);
     }
-    Ok(response["result"].clone())
+    response
+        .get("result")
+        .cloned()
+        .context("RPC response missing result")
+}
+
+async fn final_transaction(
+    worker: &Worker<Sandbox>,
+    path: &str,
+    actor: &AccountId,
+    result: &ExecutionFinalResult,
+) -> Result<Value> {
+    let hash = result.outcome().transaction_hash.to_string();
+    save(
+        &format!("{path}-execution.json"),
+        &json!({"tx_hash":hash,
+        "sender":actor,"optimistic_execution":format!("{result:?}")}),
+    )?;
+    let raw = rpc(
+        worker,
+        "tx",
+        json!({"tx_hash":hash,"sender_account_id":actor,"wait_until":"FINAL"}),
+    )
+    .await?;
+    save(&format!("{path}-transaction.json"), &raw)?;
+    require_final_transaction(&raw, &hash, actor.as_str())?;
+    Ok(raw)
+}
+
+async fn create_account(
+    worker: &Worker<Sandbox>,
+    parent: &Account,
+    name: &str,
+    balance: u128,
+    case: &str,
+) -> Result<Account> {
+    let execution = parent
+        .create_subaccount(name)
+        .initial_balance(NearToken::from_near(balance))
+        .transact()
+        .await?;
+    final_transaction(
+        worker,
+        &format!("{case}/setup-create-{name}"),
+        parent.id(),
+        &execution.details,
+    )
+    .await?;
+    Ok(execution.into_result()?)
 }
 
 fn number(value: &Value, field: &str) -> Result<u128> {
@@ -104,21 +199,27 @@ struct Fixture {
     restricted: Vec<Account>,
     absent: AccountId,
     case: String,
+    expires_at_ns: u64,
 }
 
 impl Fixture {
     async fn new(worker: &Worker<Sandbox>, wasm: &[u8], case: &str) -> Result<Self> {
+        Self::prepare(worker, wasm, case)
+            .await
+            .context("fixture setup")
+    }
+
+    async fn prepare(worker: &Worker<Sandbox>, wasm: &[u8], case: &str) -> Result<Self> {
+        save(
+            &format!("{case}/progress.json"),
+            &json!({"stage":"fixture_setup"}),
+        )?;
         let root = worker.root_account()?;
-        let owner = root
-            .create_subaccount(case)
-            .initial_balance(NearToken::from_near(100))
-            .transact()
-            .await?
-            .into_result()?;
+        let owner = create_account(worker, &root, case, 100, case).await?;
         let vault_id: AccountId = format!("vault.{}", owner.id()).parse()?;
         let vault_key = SecretKey::from_random(KeyType::ED25519);
         // Create, fund, add trusted fixture key, deploy and initialize in one receipt.
-        owner
+        let deployment = owner
             .batch(&vault_id)
             .create_account()
             .transfer(NearToken::from_near(10))
@@ -130,35 +231,27 @@ impl Fixture {
                     .gas(GAS),
             )
             .transact()
-            .await?
-            .into_result()?;
+            .await?;
+        final_transaction(
+            worker,
+            &format!("{case}/setup-deploy"),
+            owner.id(),
+            &deployment,
+        )
+        .await?;
+        deployment.into_result()?;
         let vault = Contract::from_secret_key(vault_id, vault_key, worker);
         ensure!(
             vault.view_code().await? == wasm,
             "deployed code differs from actual artifact"
         );
-        let agent = owner
-            .create_subaccount("agent")
-            .initial_balance(NearToken::from_near(5))
-            .transact()
-            .await?
-            .into_result()?;
-        let merchant = owner
-            .create_subaccount("merchant")
-            .initial_balance(NearToken::from_near(1))
-            .transact()
-            .await?
-            .into_result()?;
-        let attacker = owner
-            .create_subaccount("attacker")
-            .initial_balance(NearToken::from_near(1))
-            .transact()
-            .await?
-            .into_result()?;
+        let agent = create_account(worker, &owner, "agent", 5, case).await?;
+        let merchant = create_account(worker, &owner, "merchant", 1, case).await?;
+        let attacker = create_account(worker, &owner, "attacker", 1, case).await?;
         let mut restricted = Vec::new();
-        for _ in 0..3 {
+        for index in 0..3 {
             let sk = SecretKey::from_random(KeyType::ED25519);
-            agent
+            let installed = agent
                 .batch(agent.id())
                 .add_key(
                     sk.public_key(),
@@ -169,12 +262,19 @@ impl Fixture {
                     ),
                 )
                 .transact()
-                .await?
-                .into_result()?;
+                .await?;
+            final_transaction(
+                worker,
+                &format!("{case}/setup-key-{index}"),
+                agent.id(),
+                &installed,
+            )
+            .await?;
+            installed.into_result()?;
             restricted.push(Account::from_secret_key(agent.id().clone(), sk, worker));
         }
         let absent = format!("absent.{}", owner.id()).parse()?;
-        let f = Self {
+        let mut f = Self {
             worker: worker.clone(),
             owner,
             vault,
@@ -184,26 +284,82 @@ impl Fixture {
             restricted,
             absent,
             case: case.into(),
+            expires_at_ns: 0,
         };
-        f.owner
+        let funding = f
+            .owner
             .call(f.vault.id(), "fund")
             .deposit(NearToken::from_near(1))
             .gas(GAS)
             .transact()
-            .await?
-            .into_result()?;
+            .await?;
+        final_transaction(
+            worker,
+            &format!("{case}/setup-fund"),
+            f.owner.id(),
+            &funding,
+        )
+        .await?;
+        funding.into_result()?;
         let block = rpc(worker, "block", json!({"finality":"final"})).await?;
         let now: u64 = block["header"]["timestamp_nanosec"]
             .as_str()
             .context("timestamp")?
             .parse()?;
-        f.owner.call(f.vault.id(), "create_mandate").args_json(json!({
+        // The expiry case observes real finalized timestamps; no blocks-to-seconds assumption.
+        let lifetime_ns = if case == "expired" {
+            10_000_000_000
+        } else {
+            600_000_000_000
+        };
+        f.expires_at_ns = now.checked_add(lifetime_ns).context("expiry overflow")?;
+        let policy_args = json!({
             "agent_id":f.agent.id(),
             "agent_keys":f.restricted.iter().map(|a|a.secret_key().public_key().to_string()).collect::<Vec<_>>(),
             "allowed_recipients":[f.merchant.id(), &f.absent],
             "budget":N.to_string(), "per_transaction_limit":(N*4/10).to_string(),
-            "expires_at_ns":(now+600_000_000_000).to_string()
-        })).gas(GAS).transact().await?.into_result()?;
+            "expires_at_ns":f.expires_at_ns.to_string()
+        });
+        save(&format!("{case}/setup-policy-input.json"), &policy_args)?;
+        let configured = f
+            .owner
+            .call(f.vault.id(), "create_mandate")
+            .args_json(policy_args.clone())
+            .gas(GAS)
+            .transact()
+            .await?;
+        final_transaction(
+            worker,
+            &format!("{case}/setup-configure"),
+            f.owner.id(),
+            &configured,
+        )
+        .await?;
+        configured.into_result()?;
+        let ready = f.snapshot("fixture-ready").await?;
+        for field in [
+            "agent_id",
+            "agent_keys",
+            "allowed_recipients",
+            "budget",
+            "per_transaction_limit",
+            "expires_at_ns",
+        ] {
+            ensure!(
+                ready["policy"][field] == policy_args[field],
+                "configured policy mismatch: {field}"
+            );
+        }
+        ensure!(
+            ready["policy"]["owner_id"] == f.owner.id().as_str()
+                && ready["policy"]["mandate_id"] == "1",
+            "initialized owner/mandate mismatch"
+        );
+        ledger(&ready, N, 0, 0)?;
+        ensure!(
+            ready["physically_backed"] == true,
+            "fixture funding insufficient"
+        );
         save(
             &format!("{case}/keys.json"),
             &json!({
@@ -212,6 +368,10 @@ impl Fixture {
                 "vault_keys":format!("{:?}",f.vault.view_access_keys().await?),
                 "trusted_full_access_vault_key_retained":true
             }),
+        )?;
+        save(
+            &format!("{case}/progress.json"),
+            &json!({"stage":"fixture_ready"}),
         )?;
         Ok(f)
     }
@@ -242,6 +402,8 @@ impl Fixture {
             "method_name":"get_accounting","args_base64":"e30=","block_id":hash}),
         )
         .await?;
+        let policy_view = rpc(&self.worker, "query", json!({"request_type":"call_function",
+            "account_id":self.vault.id(),"method_name":"get_policy","args_base64":"e30=","block_id":hash})).await?;
         let bytes: Vec<u8> = serde_json::from_value(view["result"].clone())?;
         let accounting: Value = serde_json::from_slice(&bytes)?;
         let raw = rpc(
@@ -251,6 +413,14 @@ impl Fixture {
             "prefix_base64":"","block_id":hash}),
         )
         .await?;
+        save(
+            &format!("{}/{label}-raw.json", self.case),
+            &json!({"block":block,
+            "accounts":balances,"accounting_response":view,"policy_response":policy_view,"state_response":raw}),
+        )?;
+        let policy: Value = serde_json::from_slice(&serde_json::from_value::<Vec<u8>>(
+            policy_view["result"].clone(),
+        )?)?;
         let state_value = raw["values"]
             .as_array()
             .context("state values")?
@@ -260,7 +430,15 @@ impl Fixture {
         let state: VaultState = borsh::from_slice(
             &STANDARD.decode(state_value["value"].as_str().context("state bytes")?)?,
         )?;
-        let m = state.mandate.as_ref().context("mandate")?;
+        let m = state
+            .mandate
+            .as_ref()
+            .context("finalized snapshot has no mandate after setup finality barrier")?;
+        ensure!(
+            number(&policy, "expires_at_ns")? == u128::from(m.expires_at)
+                && number(&policy, "mandate_id")? == u128::from(m.id),
+            "policy/raw state disagree"
+        );
         ensure!(
             m.available
                 .checked_add(m.pending)
@@ -303,7 +481,8 @@ impl Fixture {
             number(&accounting, "account_balance")? == physical,
             "view/raw vault balance mismatch"
         );
-        let result = json!({"block_hash":hash,"block_height":block["header"]["height"],"accounting":accounting,
+        let result = json!({"block_hash":hash,"block_height":block["header"]["height"],
+            "block_timestamp_ns":block["header"]["timestamp_nanosec"],"policy":policy,"accounting":accounting,
             "accounts":balances,"required_liquid_backing":required.to_string(),"physically_backed":physical>=required,
             "payments":m.payments.iter().enumerate().map(|(nonce,p)|json!({"nonce":nonce,"status":format!("{:?}",p.status),
                 "amount":p.amount.to_string(),"recipient":p.recipient()})).collect::<Vec<_>>()});
@@ -317,20 +496,20 @@ impl Fixture {
         actor: &Account,
         result: &ExecutionFinalResult,
     ) -> Result<Value> {
-        let raw = rpc(
+        let raw = final_transaction(
             &self.worker,
-            "tx",
-            json!({"tx_hash":result.outcome().transaction_hash.to_string(),
-            "sender_account_id":actor.id(),"wait_until":"FINAL"}),
+            &format!("{}/{label}", self.case),
+            actor.id(),
+            result,
         )
         .await?;
-        ensure!(
-            raw["final_execution_status"] == "FINAL",
-            "not all receipts final"
-        );
         let callback_receipts:Vec<Value> = raw["receipts_outcome"].as_array().context("receipts")?.iter()
             .filter(|r|r["outcome"]["logs"].as_array().into_iter().flatten().any(|l|l.as_str().is_some_and(|s|s.contains("payment_succeeded")||s.contains("payment_failed"))))
             .map(|r|json!({"receipt_id":r["id"],"executor":r["outcome"]["executor_id"],"gas_burnt":r["outcome"]["gas_burnt"],"status":r["outcome"]["status"]})).collect();
+        save(
+            &format!("{}/{label}-callback-gas.json", self.case),
+            &json!(callback_receipts),
+        )?;
         for receipt in &callback_receipts {
             let burnt = receipt["gas_burnt"].as_u64().context("callback gas")?;
             ensure!(
@@ -338,11 +517,6 @@ impl Fixture {
                 "callback exceeds allocation"
             );
         }
-        save(&format!("{}/{label}-transaction.json", self.case), &raw)?;
-        save(
-            &format!("{}/{label}-callback-gas.json", self.case),
-            &json!(callback_receipts),
-        )?;
         Ok(raw)
     }
 
@@ -354,6 +528,16 @@ impl Fixture {
         amount: u128,
     ) -> Result<(ExecutionFinalResult, Value, Value, Value)> {
         let before = self.snapshot(&format!("{label}-before")).await?;
+        if self.case == "expired" {
+            require_expired(
+                number(&before, "block_timestamp_ns")?,
+                number(&before["policy"], "expires_at_ns")?,
+            )?;
+        }
+        save(
+            &format!("{}/progress.json", self.case),
+            &json!({"stage":"target_submission","label":label}),
+        )?;
         let actor = &self.restricted[0];
         let result = actor
             .call(self.vault.id(), "execute_payment")
@@ -361,13 +545,33 @@ impl Fixture {
             .gas(GAS)
             .transact()
             .await?;
-        let raw = self.capture(label, actor, &result).await?;
-        let after = self.snapshot(&format!("{label}-after")).await?;
+        let captured = self.capture(label, actor, &result).await;
+        // Attempt the balance read even if callback/result validation failed.
+        let after = self.snapshot(&format!("{label}-after")).await;
+        let raw = captured?;
+        let after = after?;
         ensure!(
             after["physically_backed"] == true,
             "unbacked after all refunds finalized"
         );
         Ok((result, raw, before, after))
+    }
+
+    async fn wait_past_expiry(&self) -> Result<()> {
+        tokio::time::timeout(Duration::from_secs(60), async {
+            loop {
+                let block = rpc(&self.worker, "block", json!({"finality":"final"})).await?;
+                let timestamp = number(&block["header"], "timestamp_nanosec")?;
+                save(&format!("{}/expiry-wait.json",self.case), &json!({"block":block,
+                    "expires_at_ns":self.expires_at_ns.to_string(),"strictly_past_expiry":timestamp>u128::from(self.expires_at_ns)}))?;
+                if timestamp > u128::from(self.expires_at_ns) {
+                    require_expired(timestamp, u128::from(self.expires_at_ns))?;
+                    return Ok::<_,anyhow::Error>(());
+                }
+                tokio::time::sleep(Duration::from_millis(250)).await;
+            }
+        }).await.context("expiry precondition timed out; no payment submitted")??;
+        Ok(())
     }
 }
 
@@ -442,7 +646,7 @@ async fn success(worker: &Worker<Sandbox>, wasm: &[u8], case: &str) -> Result<()
 async fn rejection(worker: &Worker<Sandbox>, wasm: &[u8], case: &str, kind: &str) -> Result<()> {
     let f = Fixture::new(worker, wasm, case).await?;
     if kind == "expiry" {
-        worker.fast_forward(1200).await?;
+        f.wait_past_expiry().await?;
     }
     let recipient = if kind == "recipient" {
         f.attacker.id()
@@ -529,6 +733,10 @@ async fn replay(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
 async fn authority(worker: &Worker<Sandbox>, wasm: &[u8], case: &str, method: &str) -> Result<()> {
     let f = Fixture::new(worker, wasm, case).await?;
     let before = f.snapshot("before").await?;
+    save(
+        &format!("{case}/progress.json"),
+        &json!({"stage":"target_submission","method":method}),
+    )?;
     let args = if method == "on_payment_result" {
         json!({"mandate_id":"1","nonce":0})
     } else {
@@ -542,13 +750,13 @@ async fn authority(worker: &Worker<Sandbox>, wasm: &[u8], case: &str, method: &s
         .transact()
         .await?;
     let raw = f.capture("forgery", &f.attacker, &r).await?;
+    let after = f.snapshot("after").await?;
     ensure!(r.is_failure(), "unauthorized call succeeded");
     let text = format!("{r:?}");
     ensure!(
         text.contains("ERR_OWNER") || text.contains("private") || text.contains("ERR_PRIVATE"),
         "unrelated failure: {text}"
     );
-    let after = f.snapshot("after").await?;
     ledger(&after, N, 0, 0)?;
     vault_delta(&f, &before, &after, 0, &raw)
 }
@@ -556,6 +764,10 @@ async fn authority(worker: &Worker<Sandbox>, wasm: &[u8], case: &str, method: &s
 async fn restricted_key(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
     let f = Fixture::new(worker, wasm, "restricted").await?;
     let before = f.snapshot("before").await?;
+    save(
+        "restricted/progress.json",
+        &json!({"stage":"target_submission","method":"revoke"}),
+    )?;
     let result = f.restricted[0]
         .call(f.vault.id(), "revoke")
         .gas(GAS)
@@ -564,21 +776,20 @@ async fn restricted_key(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
     let diagnostic = match result {
         Err(e) => format!("{e:?}"),
         Ok(r) => {
-            ensure!(r.is_failure(), "restricted method succeeded");
+            f.capture("unexpected-execution", &f.restricted[0], &r)
+                .await?;
             format!("{r:?}")
         }
     };
-    ensure!(
-        diagnostic.contains("MethodNameMismatch")
-            || diagnostic.contains("AccessKey")
-            || diagnostic.contains("access key"),
-        "not key-permission rejection: {diagnostic}"
-    );
     save(
         "restricted/protocol-rejection.json",
         &json!({"diagnostic":diagnostic,"receipt_expected":false}),
     )?;
     let after = f.snapshot("after").await?;
+    ensure!(
+        diagnostic.contains("MethodNameMismatch"),
+        "not method-permission rejection: {diagnostic}"
+    );
     ledger(&after, N, 0, 0)?;
     ensure!(
         balance(&after, f.vault.id())? == balance(&before, f.vault.id())?,
@@ -627,7 +838,12 @@ async fn failed_transfer(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
 async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
     let f = Fixture::new(worker, wasm, "concurrency").await?;
     let before = f.snapshot("before").await?;
+    save(
+        "concurrency/progress.json",
+        &json!({"stage":"broadcasting_independent_transactions"}),
+    )?;
     let barrier = Arc::new(Barrier::new(3));
+    let started = std::time::Instant::now();
     let mut tasks = Vec::new();
     for (nonce, actor) in f.restricted.iter().cloned().enumerate() {
         let barrier = barrier.clone();
@@ -635,48 +851,95 @@ async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
         let recipient = f.merchant.id().clone();
         tasks.push(tokio::spawn(async move {
             barrier.wait().await;
+            let submitted_at_ns = started.elapsed().as_nanos().to_string();
             let pending = actor
                 .call(&vault, "execute_payment")
                 .args_json(payment_args(nonce as u8, &recipient, N * 4 / 10))
                 .gas(GAS)
                 .transact_async()
-                .await?;
-            Ok::<_, anyhow::Error>((actor, pending))
+                .await;
+            match pending {
+                Ok(pending) => {
+                    save(&format!("concurrency/broadcast-{nonce}.json"), &json!({
+                        "slot":nonce,"public_key":actor.secret_key().public_key().to_string(),
+                        "sender":actor.id(),"tx_hash":pending.hash().to_string(),
+                        "started_at_elapsed_ns":submitted_at_ns,"broadcast_returned_elapsed_ns":started.elapsed().as_nanos().to_string()}))?;
+                    Ok::<_, anyhow::Error>((nonce, actor, pending))
+                }
+                Err(error) => {
+                    save(&format!("concurrency/broadcast-{nonce}.json"), &json!({"slot":nonce,
+                        "public_key":actor.secret_key().public_key().to_string(),"error":format!("{error:?}")}))?;
+                    Err(error.into())
+                }
+            }
         }));
     }
     // Join all broadcast tasks BEFORE awaiting any transaction's completion.
     let mut pending = Vec::new();
+    let mut errors = Vec::new();
     for task in tasks {
-        pending.push(task.await??);
+        match task.await {
+            Ok(Ok(submitted)) => pending.push(submitted),
+            Ok(Err(error)) => errors.push(format!("broadcast: {error:#}")),
+            Err(error) => errors.push(format!("broadcast task: {error}")),
+        }
     }
+    save(
+        "concurrency/broadcasts-complete.json",
+        &json!({"submitted":pending.len(),"errors":errors,
+        "all_broadcast_tasks_joined_before_waiting_for_execution":true,
+        "elapsed_ns":started.elapsed().as_nanos().to_string()}),
+    )?;
+    // Collect every obtainable outcome before checking acceptance/rejection counts.
+    let mut completed = Vec::new();
+    for (index, actor, status) in pending {
+        let result = tokio::time::timeout(Duration::from_secs(120), async { status.await }).await;
+        match result {
+            Ok(Ok(result)) => match f
+                .capture(&format!("competing-{index}"), &actor, &result)
+                .await
+            {
+                Ok(raw) => completed.push((index, actor, result, raw)),
+                Err(error) => errors.push(format!("capture {index}: {error:#}")),
+            },
+            Ok(Err(error)) => errors.push(format!("execution {index}: {error:?}")),
+            Err(error) => errors.push(format!("execution {index} timed out: {error}")),
+        }
+    }
+    save(
+        "concurrency/collection.json",
+        &json!({"completed":completed.len(),"errors":errors}),
+    )?;
+    let after = f.snapshot("after").await?;
+    ensure!(
+        errors.is_empty() && completed.len() == 3,
+        "incomplete competing execution evidence: {errors:?}"
+    );
     let mut accepted = 0;
     let mut rejected = 0;
     let mut pending_overlap = false;
     let mut total_fees = 0u128;
     let mut keys = std::collections::BTreeSet::new();
-    for (index, (actor, status)) in pending.into_iter().enumerate() {
-        let result = status.await?;
-        let raw = f
-            .capture(&format!("competing-{index}"), &actor, &result)
-            .await?;
-        ensure!(
-            raw["transaction"]["signer_id"] == f.agent.id().as_str(),
-            "wrong signer account"
+    let mut hashes = std::collections::BTreeSet::new();
+    for (index, actor, result, raw) in completed {
+        require_competing_call(
+            &raw,
+            f.agent.id().as_str(),
+            f.vault.id().as_str(),
+            &actor.secret_key().public_key().to_string(),
+            &payment_args(index as u8, f.merchant.id(), N * 4 / 10),
+        )?;
+        hashes.insert(
+            raw["transaction"]["hash"]
+                .as_str()
+                .context("transaction hash")?
+                .to_owned(),
         );
         keys.insert(
             raw["transaction"]["public_key"]
                 .as_str()
                 .context("signing key")?
                 .to_owned(),
-        );
-        let receipts = raw["receipts_outcome"]
-            .as_array()
-            .context("receipt outcomes")?;
-        ensure!(
-            receipts
-                .iter()
-                .any(|r| r["outcome"]["executor_id"] == f.vault.id().as_str()),
-            "transaction never reached executor"
         );
         let scheduled = events(&raw, "payment_scheduled");
         if result.is_success() {
@@ -691,7 +954,17 @@ async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
             accepted += 1;
         } else {
             ensure!(
-                format!("{result:?}").contains("ERR_BUDGET"),
+                raw["receipts_outcome"]
+                    .as_array()
+                    .context("receipts")?
+                    .iter()
+                    .any(
+                        |receipt| receipt["outcome"]["executor_id"] == f.vault.id().as_str()
+                            && receipt["outcome"]["status"]["Failure"]
+                                .to_string()
+                                .contains("ERR_BUDGET")
+                    )
+                    && scheduled.is_empty(),
                 "nonce/transport/other failure is NOT budget enforcement"
             );
             rejected += 1;
@@ -709,10 +982,9 @@ async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
             .context("fees overflow")?;
     }
     ensure!(
-        keys.len() == 3 && accepted == 2 && rejected == 1,
+        keys.len() == 3 && hashes.len() == 3 && accepted == 2 && rejected == 1,
         "invalid competition evidence"
     );
-    let after = f.snapshot("after").await?;
     ledger(&after, N / 5, 0, N * 8 / 10)?;
     ensure!(
         balance(&after, f.merchant.id())? == balance(&before, f.merchant.id())? + N * 8 / 10,
@@ -728,7 +1000,7 @@ async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
     );
     save(
         "concurrency/summary.json",
-        &json!({"independent_keys":keys,"accepted":accepted,"budget_rejections":rejected,
+        &json!({"independent_keys":keys,"distinct_transactions":hashes,"accepted":accepted,"budget_rejections":rejected,
         "pending_overlap":if pending_overlap {"PASS"} else {"UNVERIFIED"},
         "residual":residual.to_string(),"fee_upper_bound":total_fees.to_string()}),
     )
@@ -736,6 +1008,23 @@ async fn concurrency(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 4)]
 async fn real_sandbox_security_suite() -> Result<()> {
+    let mut rows: Vec<Value> = SCENARIOS
+        .iter()
+        .map(|(name, _)| {
+            json!({
+        "test":name,"status":"UNVERIFIED","stage":"not_started","error":"not executed"})
+        })
+        .collect();
+    save_results(&rows)?;
+    save(
+        "additional-unverified.json",
+        &json!({
+            "missing_callback_fault":"UNVERIFIED: requires separately labeled receipt/fault control",
+            "duplicate_genuine_private_callback":"UNVERIFIED: native-model idempotency is not real duplicate delivery",
+            "solvency_every_intermediate_receipt":"UNVERIFIED: snapshots are pinned before/after finality, not every receipt",
+            "exact_gas_reward_breakdown":"UNVERIFIED: residual bounded by actual fee totals, not exact reward decomposition"
+        }),
+    )?;
     ensure!(
         cfg!(target_os = "linux"),
         "Run on supported Linux; Windows is not sandbox evidence"
@@ -755,17 +1044,22 @@ async fn real_sandbox_security_suite() -> Result<()> {
         &json!({"wasm_sha256":hash,"wasm_bytes":wasm.len(),"framework":"near-workspaces 0.23.0",
         "network":"disposable local sandbox only","status":rpc(&worker,"status",json!([])).await?}),
     )?;
-    let mut rows = Vec::new();
     let mut failures = 0;
     let mut unverified = 0;
     macro_rules! case {
         ($name:expr,$future:expr)=>{{
-            match $future.await {
-                Ok(())=>{println!("PASS {}",$name);rows.push(json!({"test":$name,"status":"PASS"}));}
-                Err(e) if e.downcast_ref::<Unverified>().is_some()=>{eprintln!("UNVERIFIED {}: {e:#}",$name);unverified+=1;rows.push(json!({"test":$name,"status":"UNVERIFIED","error":format!("{e:#}")}));}
-                Err(e)=>{eprintln!("FAIL {}: {e:#}",$name);failures+=1;rows.push(json!({"test":$name,"status":"FAIL","error":format!("{e:#}")}));}
-            }
-            save("results.json",&json!({"tests":rows,"failures":failures,"unverified":unverified}))?;
+            let index = SCENARIOS.iter().position(|(name,_)|*name==$name).context("unknown scenario")?;
+            let mut row = match $future.await {
+                Ok(())=>{println!("PASS {}",$name);json!({"test":$name,"status":"PASS"})}
+                Err(e) if e.downcast_ref::<Unverified>().is_some()=>{eprintln!("UNVERIFIED {}: {e:#}",$name);unverified+=1;json!({"test":$name,"status":"UNVERIFIED","error":format!("{e:#}")})}
+                Err(e)=>{eprintln!("FAIL {}: {e:#}",$name);failures+=1;json!({"test":$name,"status":"FAIL","error":format!("{e:#}")})}
+            };
+            let folder = SCENARIOS[index].1;
+            row["progress"] = std::fs::read(evidence_dir().join(format!("{folder}/progress.json")))
+                .ok().and_then(|bytes|serde_json::from_slice::<Value>(&bytes).ok()).unwrap_or(Value::Null);
+            save(&format!("{folder}/assertion-result.json"), &row)?;
+            rows[index] = row;
+            save_results(&rows)?;
         }};
     }
     case!(
@@ -804,15 +1098,6 @@ async fn real_sandbox_security_suite() -> Result<()> {
         "12 independent competing requests",
         concurrency(&worker, &wasm)
     );
-    save(
-        "additional-unverified.json",
-        &json!({
-            "missing_callback_fault":"UNVERIFIED: requires separately labeled receipt/fault control",
-            "duplicate_genuine_private_callback":"UNVERIFIED: native-model idempotency is not real duplicate delivery",
-            "solvency_every_intermediate_receipt":"UNVERIFIED: snapshots are pinned before/after finality, not every receipt",
-            "exact_gas_reward_breakdown":"UNVERIFIED: residual bounded by actual fee totals, not exact reward decomposition"
-        }),
-    )?;
     ensure!(
         failures == 0 && unverified == 0,
         "{failures} scenarios failed and {unverified} unverified; inspect artifacts"
