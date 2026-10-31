@@ -310,7 +310,7 @@ impl Fixture {
             .context("timestamp")?
             .parse()?;
         // The expiry case observes real finalized timestamps; no blocks-to-seconds assumption.
-        let lifetime_ns = if case == "expired" {
+        let lifetime_ns = if matches!(case, "expired" | "b-paidfault" | "b-refundfault") {
             10_000_000_000
         } else {
             600_000_000_000

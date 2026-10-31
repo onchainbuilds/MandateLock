@@ -17,6 +17,7 @@ async fn admin(f: &Fixture, label: &str, method: &str) -> Result<ExecutionFinalR
 // Capture each distinct receipt block and retain that limitation explicitly.
 async fn receipt_blocks(f: &Fixture, label: &str, raw: &Value) -> Result<()> {
     let mut blocks = std::collections::BTreeSet::new();
+    let mut violations = Vec::new();
     for r in raw["receipts_outcome"].as_array().context("receipts")? {
         blocks.insert(
             r["block_hash"]
@@ -43,6 +44,37 @@ async fn receipt_blocks(f: &Fixture, label: &str, raw: &Value) -> Result<()> {
         .await?;
         let a: Value =
             serde_json::from_slice(&serde_json::from_value::<Vec<u8>>(view["result"].clone())?)?;
+        let block = rpc(&f.worker, "block", json!({"block_id":hash})).await?;
+        let stored = rpc(
+            &f.worker,
+            "query",
+            json!({"request_type":"view_state",
+            "account_id":f.vault.id(),"prefix_base64":"","block_id":hash}),
+        )
+        .await?;
+        let state_entry = stored["values"]
+            .as_array()
+            .context("state values")?
+            .iter()
+            .find(|e| e["key"] == "U1RBVEU=")
+            .context("STATE")?;
+        let state: VaultState = borsh::from_slice(
+            &STANDARD.decode(state_entry["value"].as_str().context("state bytes")?)?,
+        )?;
+        let journal_valid = state.mandate.as_ref().map_or_else(
+            || {
+                ["available", "pending", "spent", "budget"]
+                    .iter()
+                    .all(|field| number(&a, field).ok() == Some(0))
+            },
+            |m| {
+                m.check_invariants().is_ok()
+                    && number(&a, "available").ok() == Some(m.available)
+                    && number(&a, "pending").ok() == Some(m.pending)
+                    && number(&a, "spent").ok() == Some(m.spent)
+                    && number(&a, "budget").ok() == Some(m.budget)
+            },
+        );
         let floor = number(&a, "storage_and_operating_floor")?;
         let protected = floor
             .checked_add(number(&a, "unallocated")?)
@@ -54,23 +86,28 @@ async fn receipt_blocks(f: &Fixture, label: &str, raw: &Value) -> Result<()> {
         save(
             &format!("{}/{label}-receipt-block-{index}.json", f.case),
             &json!({
-            "block_hash":hash,"account":account,"accounting":a,
+            "block_hash":hash,"block_height":block["header"]["height"],
+            "block_timestamp_ns":block["header"]["timestamp_nanosec"],
+            "transaction_hash":raw["transaction"]["hash"],
+            "receipt_ids":raw["receipts_outcome"].as_array().context("receipts")?.iter()
+                .filter(|r|r["block_hash"] == hash.as_str()).map(|r|r["id"].clone()).collect::<Vec<_>>(),
+            "account":account,"accounting":a,"raw_state":stored,"journal_valid":journal_valid,
             "protected_reserve":protected.to_string(),"required_liquid_backing":required.to_string(),
             "physically_backed":physical>=required,"reserve_intact":physical>=protected,
             "coverage":"end-of-receipt-block only; intra-block receipt states UNVERIFIED"}),
         )?;
-        ensure!(
-            physical >= protected,
-            "storage/unallocated reserve breached at observed block"
-        );
-        ensure!(
-            number(&a, "available")?
-                .checked_add(number(&a, "pending")?)
-                .and_then(|v| v.checked_add(number(&a, "spent").ok()?))
-                == Some(number(&a, "budget")?),
-            "block ledger"
-        );
+        if physical < protected
+            || !journal_valid
+            || number(&a, "unallocated")? != state.unallocated
+            || number(&a, "account_balance")? != physical
+        {
+            violations.push(hash.clone());
+        }
     }
+    ensure!(
+        violations.is_empty(),
+        "receipt-block reserve/journal mismatch: {violations:?}"
+    );
     Ok(())
 }
 
@@ -175,7 +212,112 @@ async fn maximum_state(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
         maximum_gas > 0 && maximum_gas < 10_000_000_000_000,
         "callback margin below five Tgas"
     );
+    retire_settled(&f).await?;
     Ok(())
+}
+
+// Positive control: retirement is possible once every actual transfer has settled.
+// Fixture::snapshot intentionally requires an active mandate, so capture the empty
+// post-retirement state explicitly instead of weakening Phase 2A's setup barrier.
+async fn retire_settled(f: &Fixture) -> Result<()> {
+    admin(f, "settled-revoke", "revoke").await?.into_result()?;
+    let before = f.snapshot("before-settled-retirement").await?;
+    let result = f
+        .owner
+        .call(f.vault.id(), "retire_mandate")
+        .gas(GAS)
+        .transact()
+        .await?;
+    let captured = f.capture("settled-retirement", &f.owner, &result).await;
+    let block = rpc(&f.worker, "block", json!({"finality":"final"})).await?;
+    let hash = &block["header"]["hash"];
+    let state_response = rpc(
+        &f.worker,
+        "query",
+        json!({"request_type":"view_state",
+        "account_id":f.vault.id(),"prefix_base64":"","block_id":hash}),
+    )
+    .await?;
+    let account = rpc(
+        &f.worker,
+        "query",
+        json!({"request_type":"view_account",
+        "account_id":f.vault.id(),"block_id":hash}),
+    )
+    .await?;
+    let mut views = serde_json::Map::new();
+    for method in ["get_policy", "get_accounting"] {
+        let response = rpc(
+            &f.worker,
+            "query",
+            json!({"request_type":"call_function",
+            "account_id":f.vault.id(),"method_name":method,"args_base64":"e30=","block_id":hash}),
+        )
+        .await?;
+        views.insert(method.to_owned(), response);
+    }
+    save(
+        &format!("{}/after-settled-retirement.json", f.case),
+        &json!({
+        "block":block,"account":account,"state":state_response,"views":views}),
+    )?;
+    let raw = captured?;
+    let blocks = receipt_blocks(f, "settled-retirement", &raw).await;
+    result.into_result()?;
+    let entry = state_response["values"]
+        .as_array()
+        .context("state")?
+        .iter()
+        .find(|e| e["key"] == "U1RBVEU=")
+        .context("STATE")?;
+    let state: VaultState =
+        borsh::from_slice(&STANDARD.decode(entry["value"].as_str().context("state bytes")?)?)?;
+    let accounting: Value = serde_json::from_slice(&serde_json::from_value::<Vec<u8>>(
+        views["get_accounting"]["result"].clone(),
+    )?)?;
+    let policy: Value = serde_json::from_slice(&serde_json::from_value::<Vec<u8>>(
+        views["get_policy"]["result"].clone(),
+    )?)?;
+    ensure!(
+        state.mandate.is_none() && policy.is_null(),
+        "settled mandate not retired"
+    );
+    ensure!(
+        events(&raw, "mandate_retired").len() == 1,
+        "missing retirement event"
+    );
+    let expected = number(&before["accounting"], "unallocated")?
+        .checked_add(number(&before["accounting"], "available")?)
+        .context("unallocated overflow")?;
+    ensure!(
+        state.unallocated == expected && number(&accounting, "unallocated")? == expected,
+        "retirement did not preserve remaining principal"
+    );
+    ensure!(
+        number(&accounting, "last_mandate_id")?
+            == number(&before["accounting"], "last_mandate_id")?,
+        "retirement reset mandate counter"
+    );
+    for field in ["available", "pending", "spent", "budget"] {
+        ensure!(number(&accounting, field)? == 0, "retired ledger not empty");
+    }
+    let physical = number(&account, "amount")?;
+    ensure!(
+        physical == number(&accounting, "account_balance")?
+            && physical
+                >= number(&accounting, "storage_and_operating_floor")?
+                    .checked_add(expected)
+                    .context("reserve overflow")?,
+        "retired vault reserve/backing"
+    );
+    let residual = physical
+        .checked_sub(balance(&before, f.vault.id())?)
+        .context("retirement lost principal")?;
+    ensure!(
+        residual <= fees(&raw)?,
+        "retirement unexplained balance increase"
+    );
+    blocks
 }
 
 async fn custody(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
@@ -239,7 +381,10 @@ async fn duplicate(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
                 .await?;
             let label = format!("repeat-{nonce}-{index}");
             let raw = f.capture(&label, f.vault.as_account(), &result).await?;
-            let after = f.snapshot(&format!("{label}-after")).await?;
+            let after = f.snapshot(&format!("{label}-after")).await;
+            let blocks = receipt_blocks(&f, &label, &raw).await;
+            let after = after?;
+            blocks?;
             ensure!(
                 result.is_success() && !result.json::<bool>()?,
                 "duplicate must return false normally"
@@ -297,114 +442,213 @@ async fn duplicate(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
     Ok(())
 }
 
-async fn missing(worker: &Worker<Sandbox>, wasm: &[u8]) -> Result<()> {
-    // This fresh worker's case name supplies a short expiry without changing production.
-    let f = Fixture::new(worker, wasm, "expired").await?;
+// Save state and receipt-block evidence before making rejection assertions.
+async fn rejected_probe(
+    f: &Fixture,
+    label: &str,
+    actor: &Account,
+    method: &str,
+    args: Value,
+) -> Result<()> {
+    let before = f.snapshot(&format!("{label}-before")).await?;
+    let result = actor
+        .call(f.vault.id(), method)
+        .args_json(args)
+        .gas(GAS)
+        .transact()
+        .await?;
+    let captured = f.capture(label, actor, &result).await;
+    let after = f.snapshot(&format!("{label}-after")).await;
+    let raw = captured?;
+    let blocks = receipt_blocks(f, label, &raw).await;
+    let after = after?;
+    mandatelock_sandbox_tests::phase2b::require_rejected_without_state_change(
+        &raw,
+        f.vault.id().as_str(),
+        &before,
+        &after,
+    )?;
+    ensure!(result.is_failure(), "rejected operation succeeded");
+    ensure!(
+        events(&raw, "mandate_retired").is_empty()
+            && events(&raw, "payment_scheduled").is_empty()
+            && events(&raw, "payment_succeeded").is_empty()
+            && events(&raw, "payment_failed").is_empty(),
+        "rejected operation emitted a committed transition"
+    );
+    for account in [f.merchant.id(), f.attacker.id()] {
+        ensure!(
+            balance(&before, account)? == balance(&after, account)?,
+            "rejected operation paid recipient"
+        );
+    }
+    // Self-signed probes pay gas from the vault; owner probes can credit execution rewards.
+    let delta = balance(&before, f.vault.id())?.abs_diff(balance(&after, f.vault.id())?);
+    save(
+        &format!("{}/{label}-balance-check.json", f.case),
+        &json!({
+        "absolute_vault_delta":delta.to_string(),"fee_bound":fees(&raw)?.to_string(),
+        "principal_transfer_expected":"0","post_state_unchanged":true}),
+    )?;
+    ensure!(
+        delta <= fees(&raw)?,
+        "unexplained principal movement on rejection"
+    );
+    ensure!(after["physically_backed"] == true, "post-rejection backing");
+    blocks
+}
+
+async fn callback_fault(worker: &Worker<Sandbox>, wasm: &[u8], paid: bool) -> Result<()> {
+    let case = if paid { "b-paidfault" } else { "b-refundfault" };
+    let f = Fixture::new(worker, wasm, case).await?;
     let before = f.snapshot("before-fault").await?;
     ensure!(
         number(&before, "block_timestamp_ns")? < u128::from(f.expires_at_ns),
         "fault setup already expired"
     );
+    let target = if paid { f.merchant.id() } else { &f.absent };
     let result = f.restricted[0]
         .call(f.vault.id(), "execute_payment")
-        .args_json(payment_args(0, f.merchant.id(), N / 10))
+        .args_json(payment_args(0, target, N / 10))
         .gas(GAS)
         .transact()
         .await?;
-    let raw = f
+    let captured = f
         .capture("callback-out-of-gas", &f.restricted[0], &result)
-        .await?;
-    let after = f.snapshot("after-failed-callback").await?;
-    let is_gas_failure = |status: &Value| {
-        let error = status["Failure"].to_string();
-        error.contains("GasExceeded") || error.contains("Exceeded the prepaid gas")
-    };
-    ensure!(result.is_failure(), "callback did not fail");
-    let failed_callback = raw["receipts_outcome"]
-        .as_array()
-        .context("receipts")?
+        .await;
+    let after = f.snapshot("after-failed-callback").await;
+    let raw = captured?;
+    // Attempt all intermediate reads even if the later lifecycle assertion fails.
+    let blocks = receipt_blocks(&f, "fault", &raw).await;
+    let after = after?;
+    let receipts = raw["receipts_outcome"].as_array().context("receipts")?;
+    let failed_callback = receipts
         .iter()
         .find(|r| {
+            let error = r["outcome"]["status"]["Failure"].to_string();
             r["outcome"]["executor_id"] == f.vault.id().as_str()
-                && is_gas_failure(&r["outcome"]["status"])
+                && (error.contains("GasExceeded") || error.contains("Exceeded the prepaid gas"))
         })
         .context("vault callback gas failure receipt")?;
-    save("expired/failed-callback-receipt.json", failed_callback)?;
+    let transfer = receipts
+        .iter()
+        .find(|r| r["outcome"]["executor_id"] == target.as_str())
+        .context("native transfer receipt")?;
+    save(
+        &format!("{case}/fault-receipts.json"),
+        &json!({
+        "transaction_hash":raw["transaction"]["hash"],"transfer":transfer,"callback":failed_callback,
+        "callback_static_gas":1_000_000_000_000_u64,
+        "whole_receipt_gas_includes_overhead":true}),
+    )?;
+    ensure!(result.is_failure(), "callback did not fail");
     ensure!(
         events(&raw, "payment_scheduled").len() == 1
-            && events(&raw, "payment_succeeded").is_empty(),
+            && events(&raw, "payment_succeeded").is_empty()
+            && events(&raw, "payment_failed").is_empty(),
         "wrong lifecycle"
     );
+    if paid {
+        ensure!(
+            transfer["outcome"]["status"]["SuccessValue"] == "",
+            "native transfer did not succeed"
+        );
+    } else {
+        ensure!(
+            transfer["outcome"]["status"]["Failure"]
+                .to_string()
+                .contains("AccountDoesNotExist"),
+            "genuine native failure not reproduced"
+        );
+    }
+    let outgoing = if paid { N / 10 } else { 0 };
     ensure!(
-        balance(&after, f.merchant.id())? == balance(&before, f.merchant.id())? + N / 10,
-        "recipient was not paid"
+        balance(&after, f.merchant.id())? == balance(&before, f.merchant.id())? + outgoing,
+        "recipient physical balance"
     );
+    vault_delta(&f, &before, &after, outgoing, &raw)?;
     ledger(&after, N * 9 / 10, N / 10, 0)?;
-    f.wait_past_expiry().await?;
-    admin(&f, "revoke-after-fault", "revoke")
-        .await?
-        .into_result()?;
-    let retired = admin(&f, "retire-after-fault", "retire_mandate").await?;
     ensure!(
-        retired.is_failure() && format!("{retired:?}").contains("ERR_NOT_RETIRABLE"),
-        "stranded pending was retired"
+        after["payments"][0]["status"] == "Pending" && after["physically_backed"] == true,
+        "failed callback released slot or left insufficient liquid backing"
     );
-    let frozen = f.snapshot("after-expiry-revoke-retire").await?;
+    blocks?;
+    f.wait_past_expiry().await?;
+    let revoked = admin(&f, "revoke-after-fault", "revoke").await;
+    let frozen = f.snapshot("after-expiry-revoke").await;
+    revoked?.into_result()?;
+    let frozen = frozen?;
     ledger(&frozen, N * 9 / 10, N / 10, 0)?;
     ensure!(
-        frozen["payments"][0]["status"] == "Pending",
-        "missing callback released nonce"
+        frozen["policy"]["revoked"] == true && frozen["payments"] == after["payments"],
+        "revocation changed pending journal"
     );
-    receipt_blocks(&f, "fault", &raw).await?;
+    require_expired(
+        number(&frozen, "block_timestamp_ns")?,
+        u128::from(f.expires_at_ns),
+    )?;
+    rejected_probe(
+        &f,
+        "retire-after-fault",
+        &f.owner,
+        "retire_mandate",
+        json!({}),
+    )
+    .await?;
+    // Neither owner authority nor a direct self-call supplies the original promise result.
+    for (label, actor) in [
+        ("owner-cannot-recover", &f.owner),
+        ("self-call-no-result", f.vault.as_account()),
+    ] {
+        rejected_probe(
+            &f,
+            label,
+            actor,
+            "on_payment_result",
+            json!({"mandate_id":"1","nonce":0}),
+        )
+        .await?;
+    }
+    rejected_probe(
+        &f,
+        "no-second-payment",
+        &f.restricted[0],
+        "execute_payment",
+        payment_args(0, target, N / 10),
+    )
+    .await?;
+    Ok(())
+}
 
-    // The opposite physical outcome: transfer fails and principal is refunded,
-    // but failed settlement must still keep P. A balance increase is not authority.
-    let refunded = Fixture::new(worker, wasm, "b-refundfault").await?;
-    let before = refunded.snapshot("before-refund-fault").await?;
-    let result = refunded.restricted[0]
-        .call(refunded.vault.id(), "execute_payment")
-        .args_json(payment_args(0, &refunded.absent, N / 10))
-        .gas(GAS)
-        .transact()
-        .await?;
-    let raw = refunded
-        .capture("refunded-but-unsettled", &refunded.restricted[0], &result)
-        .await?;
-    let after = refunded.snapshot("after-refund-fault").await?;
+async fn missing(wasm: &[u8]) -> Result<()> {
+    // Both physical outcomes run independently, even if one branch fails setup/assertions.
+    let mut rows = vec![
+        json!({"test":"paid transfer + failed callback","status":"UNVERIFIED"}),
+        json!({"test":"refunded transfer + failed callback","status":"UNVERIFIED"}),
+    ];
+    save("phase2b/fault-branches.json", &json!({"tests":rows}))?;
+    for (index, paid) in [true, false].into_iter().enumerate() {
+        let result = async {
+            let worker = near_workspaces::sandbox_with_version("2.13.4").await?;
+            save(
+                &format!("phase2b/fault-runtime-{index}.json"),
+                &rpc(&worker, "status", json!([])).await?,
+            )?;
+            callback_fault(&worker, wasm, paid).await
+        }
+        .await;
+        rows[index]["status"] = json!(if result.is_ok() { "PASS" } else { "FAIL" });
+        if let Err(e) = result {
+            rows[index]["error"] = json!(format!("{e:#}"));
+        }
+        println!("{}", rows[index]);
+        save("phase2b/fault-branches.json", &json!({"tests":rows}))?;
+    }
     ensure!(
-        result.is_failure() && raw.to_string().contains("AccountDoesNotExist"),
-        "native failure not reproduced"
+        rows.iter().all(|r| r["status"] == "PASS"),
+        "fault branch failures; inspect independent branch evidence"
     );
-    let failed_callback = raw["receipts_outcome"]
-        .as_array()
-        .context("receipts")?
-        .iter()
-        .find(|r| {
-            r["outcome"]["executor_id"] == refunded.vault.id().as_str()
-                && is_gas_failure(&r["outcome"]["status"])
-        })
-        .context("refunded transfer callback did not fail for gas")?;
-    save(
-        "b-refundfault/failed-callback-receipt.json",
-        failed_callback,
-    )?;
-    ledger(&after, N * 9 / 10, N / 10, 0)?;
-    vault_delta(&refunded, &before, &after, 0, &raw)?;
-    admin(&refunded, "revoke-refund-fault", "revoke")
-        .await?
-        .into_result()?;
-    let retired = admin(&refunded, "retire-refund-fault", "retire_mandate").await?;
-    ensure!(
-        retired.is_failure() && format!("{retired:?}").contains("ERR_NOT_RETIRABLE"),
-        "refund restored budget without callback"
-    );
-    ledger(
-        &refunded.snapshot("refund-remains-pending").await?,
-        N * 9 / 10,
-        N / 10,
-        0,
-    )?;
-    receipt_blocks(&refunded, "refund-fault", &raw).await
+    Ok(())
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 4)]
@@ -455,7 +699,7 @@ async fn phase2b_security_gaps() -> Result<()> {
                 0 => maximum_state(&worker, &production).await,
                 1 => custody(&worker, &production).await,
                 2 => duplicate(&worker, &duplicates).await,
-                _ => missing(&worker, &lowgas).await,
+                _ => missing(&lowgas).await,
             }
         }
         .await;

@@ -5,6 +5,8 @@ use anyhow::{Context, Result, ensure};
 use base64::{Engine, engine::general_purpose::STANDARD};
 use serde_json::Value;
 
+pub mod phase2b;
+
 /// Optimistic execution must never be used as a final-state setup barrier.
 pub fn require_final_transaction(raw: &Value, hash: &str, signer: &str) -> Result<()> {
     ensure!(

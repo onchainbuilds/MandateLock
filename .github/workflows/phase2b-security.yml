@@ -84,11 +84,14 @@ jobs:
           node scripts/prepare-phase2b-fixtures.mjs | tee artifacts/phase2b/fixture-generation.log
           cp target/phase2b-fixtures/manifest.json artifacts/phase2b/fixture-source-manifest.json
           for variant in lowgas duplicate; do
-            cargo build --manifest-path "target/phase2b-fixtures/$variant/Cargo.toml" \
-              --target wasm32-unknown-unknown --release --locked \
-              --target-dir "target/phase2b-$variant-build" 2>&1 | tee "artifacts/phase2b/$variant-build.log"
-            cp "target/phase2b-$variant-build/wasm32-unknown-unknown/release/mandatelock.wasm" "artifacts/phase2b/TEST-ONLY-$variant.wasm"
+            cargo near build non-reproducible-wasm --no-abi --locked \
+              --manifest-path "target/phase2b-fixtures/$variant/Cargo.toml" \
+              --out-dir "target/phase2b-$variant-output" 2>&1 | tee "artifacts/phase2b/$variant-build.log"
+            cp "target/phase2b-$variant-output/mandatelock.wasm" "artifacts/phase2b/TEST-ONLY-$variant.wasm"
           done
+          node scripts/verify-phase2b-fixtures.mjs target/near/mandatelock.wasm \
+            artifacts/phase2b/TEST-ONLY-lowgas.wasm artifacts/phase2b/TEST-ONLY-duplicate.wasm \
+            artifacts/phase2b/fixture-build-validation.json
       - name: Execute additional Phase 2B security cases
         if: ${{ success() && !cancelled() }}
         shell: bash
