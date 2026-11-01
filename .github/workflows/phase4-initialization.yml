@@ -1,0 +1,100 @@
+name: MandateLock Phase 4 initialization sandbox (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  initialization-validation:
+    if: ${{ github.event.repository.private == true && github.repository == 'onchainbuilds/MandateLock' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      CARGO_TERM_COLOR: never
+      RUST_BACKTRACE: 1
+      MANDATELOCK_WASM: ${{ github.workspace }}/target/frozen/phase2a/mandatelock.wasm
+      MANDATELOCK_INIT_EVIDENCE_DIR: ${{ github.workspace }}/artifacts/phase4-initialization
+    steps:
+      - name: Checkout approved source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Record provenance and enforce source freeze
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase4-initialization
+          printf '%s\n' "$GITHUB_SHA" > artifacts/phase4-initialization/commit-sha.txt
+          printf '%s/%s/actions/runs/%s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" > artifacts/phase4-initialization/workflow-url.txt
+          git diff --exit-code 75051c2fc7ecff6390c49fa67274d70d275d07c8 -- src Cargo.toml Cargo.lock rust-toolchain.toml integration-tests/Cargo.toml integration-tests/Cargo.lock integration-tests/src integration-tests/tests/sandbox.rs integration-tests/tests/support tests/phase2b_model.rs
+      - name: Retrieve exact previously validated artifacts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          exec > >(tee artifacts/phase4-initialization/artifact-provenance.log) 2>&1
+          gh api repos/onchainbuilds/MandateLock/actions/artifacts/13044059219 > artifacts/phase4-initialization/source-artifact.json
+          jq -e '.expired == false and .workflow_run.id == 41205116391 and .workflow_run.head_sha == "75051c2fc7ecff6390c49fa67274d70d275d07c8" and .digest == "sha256:fa6f6470af9e214cbfd43dd1b19632816b59667fc3e0bcd8691b3cbf7903b6ef"' artifacts/phase4-initialization/source-artifact.json
+          mkdir -p target/frozen
+          gh api repos/onchainbuilds/MandateLock/actions/artifacts/13044059219/zip > target/frozen.zip
+          echo 'fa6f6470af9e214cbfd43dd1b19632816b59667fc3e0bcd8691b3cbf7903b6ef  target/frozen.zip' | sha256sum --check
+          unzip -q target/frozen.zip -d target/frozen
+          echo '3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87  target/frozen/phase2a/mandatelock.wasm' | sha256sum --check
+          echo '951f0864e4102cde5f8bb56cd6cd4603fe75abb599d1c47451cb0c5991b6e944  target/frozen/phase2b/TEST-ONLY-lowgas.wasm' | sha256sum --check
+          echo '3f815f555aba93fd9b894a63e72d75b39e758c79e7bafaa25725e2003f2f6ec6  target/frozen/phase2b/TEST-ONLY-duplicate.wasm' | sha256sum --check
+          sha256sum "$MANDATELOCK_WASM" > artifacts/phase4-initialization/production-wasm.sha256
+      - name: Prepare ephemeral Ubuntu toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          exec > >(tee artifacts/phase4-initialization/prerequisites.log) 2>&1
+          sudo apt-get update
+          sudo apt-get install -y build-essential pkg-config libssl-dev cmake
+          rustup toolchain install 1.93.0 --profile minimal --component rustfmt --component clippy
+          rustup default 1.93.0
+          { uname -a; rustc --version; cargo --version; } > artifacts/phase4-initialization/toolchain.txt
+      - name: Native security and harness regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo fmt --all -- --check
+          cargo fmt --manifest-path integration-tests/Cargo.toml --all -- --check
+          cargo test --locked 2>&1 | tee artifacts/phase4-initialization/native-tests.log
+          cargo test --manifest-path integration-tests/Cargo.toml --lib --locked 2>&1 | tee artifacts/phase4-initialization/harness-tests.log
+          cargo clippy --manifest-path integration-tests/Cargo.toml --test initialization_repair --locked -- -D warnings 2>&1 | tee artifacts/phase4-initialization/clippy.log
+      - name: Execute six frozen-Wasm initialization cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked --test initialization_repair -- --nocapture 2>&1 | tee artifacts/phase4-initialization/runtime.log
+      - name: Recheck all twelve Phase 2A scenarios
+        shell: bash
+        env:
+          MANDATELOCK_EVIDENCE_DIR: ${{ github.workspace }}/artifacts/phase2a-regression
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase2a-regression
+          cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked --test sandbox -- --nocapture 2>&1 | tee artifacts/phase2a-regression/runtime.log
+      - name: Recheck existing Phase 2B accounting scenarios
+        shell: bash
+        env:
+          MANDATELOCK_EVIDENCE_DIR: ${{ github.workspace }}/artifacts/phase2b-regression
+          MANDATELOCK_LOWGAS_WASM: ${{ github.workspace }}/target/frozen/phase2b/TEST-ONLY-lowgas.wasm
+          MANDATELOCK_DUPLICATE_WASM: ${{ github.workspace }}/target/frozen/phase2b/TEST-ONLY-duplicate.wasm
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/phase2b-regression
+          cargo test --manifest-path integration-tests/Cargo.toml --features sandbox-install --locked --test sandbox phase2b_security_gaps -- --ignored --nocapture 2>&1 | tee artifacts/phase2b-regression/runtime.log
+      - name: Preserve evidence after success or failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: mandatelock-phase4-initialization-evidence
+          path: |
+            artifacts/phase4-initialization/
+            artifacts/phase2a-regression/
+            artifacts/phase2b-regression/
+          retention-days: 14
+          if-no-files-found: warn
