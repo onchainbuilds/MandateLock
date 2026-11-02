@@ -1,0 +1,8 @@
+{
+  "name": "mandatelock-testnet-preparation",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.22.2" },
+  "dependencies": { "near-api-js": "7.4.0" },
+  "scripts": { "test": "node --test test/*.test.mjs", "plan": "node prepare.mjs" }
+}

@@ -1,0 +1,14 @@
+{
+  "network": "testnet",
+  "rpc": "https://rpc.testnet.near.org",
+  "accounts": {
+    "owner": "ml-demo-20261031.testnet",
+    "vault": "vault.ml-demo-20261031.testnet",
+    "agent": "agent.ml-demo-20261031.testnet",
+    "recipient": "merchant.ml-demo-20261031.testnet",
+    "attacker": "attacker.ml-demo-20261031.testnet"
+  },
+  "publicKeys": { "owner": null, "vault": null, "agentAdmin": null, "recipient": null, "attacker": null, "agents": [] },
+  "expiresAtNs": null,
+  "wasm": "artifacts/phase2b-closure-run/evidence/phase2a/mandatelock.wasm"
+}

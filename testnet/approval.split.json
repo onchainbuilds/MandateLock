@@ -1,0 +1,567 @@
+{
+  "approved": false,
+  "execution_ready": false,
+  "required_gate": "Safe stop after transaction 9 uncertain; read-only reconcile existing hash; separate approval required",
+  "network": "testnet",
+  "rpc": "https://rpc.testnet.fastnear.com",
+  "config_sha256": "1da47b4799bb1b2e39449d7fde086b229b7c2d1ad02f253614b4c33bba2100e7",
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "dependency_lock_sha256": "0920f50173b086d97b0fbe6b19822f1178a7167a83461f2ad73f74b5666702eb",
+  "plan_sha256": "ca065b31cc8bb9f42044e470aa0cd7cd38cef8118424b689d75c910853888493",
+  "historical_hashes": [
+    "5fRzq57MiNqMjkNiAsmTcrofEuUcp4roL1XCNYTpTDtV",
+    "4mxWFevbqohTK4RERAsHPHYKu4dB7eARq8JdHuqeMKrk",
+    "FbM4BTPborSUWLL6GVbsJ75csqTz3o3bANwmuMmWjyH4",
+    "J6sMAMgiGzuf6ZkGxZYtDe9813fvp6mWBPsqw8yqyzqM",
+    "7drvA54gJDQcBBMbY7qfygwbzNTJZSRcBTgNmktP7e3b"
+  ],
+  "incurred_yocto": "5229789454582483600000000",
+  "max_aggregate_outgoing_near": "8",
+  "remaining_fee_bound": "166300000000000000000000",
+  "remaining_outgoing_bound": "2566300000000000000000000",
+  "aggregate_bound": "7796089454582483600000000",
+  "latest_start_at": "2026-11-01T14:30:00Z",
+  "latest_submission_at": "2026-11-01T14:50:00Z",
+  "expires_at": "2026-11-01T15:00:00Z",
+  "mandate_expiry_ns": "1793548800000000000",
+  "operations": [
+    {
+      "id": "deploy-only",
+      "label": "5A",
+      "signer": "vault.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "actions": [
+        {
+          "type": "DeployContract",
+          "sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87"
+        }
+      ]
+    },
+    {
+      "id": "initialize-owner",
+      "label": "5B",
+      "signer": "ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "new",
+          "args": {
+            "owner_id": "ml-demo-20261031.testnet"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ]
+    },
+    {
+      "id": "install-agent-keys",
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "agent.ml-demo-20261031.testnet",
+      "actions": [
+        {
+          "type": "AddFunctionCallKey",
+          "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+          "receiver": "vault.ml-demo-20261031.testnet",
+          "methods": [
+            "execute_payment"
+          ],
+          "allowance": "100000000000000000000000"
+        },
+        {
+          "type": "AddFunctionCallKey",
+          "publicKey": "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+          "receiver": "vault.ml-demo-20261031.testnet",
+          "methods": [
+            "execute_payment"
+          ],
+          "allowance": "100000000000000000000000"
+        },
+        {
+          "type": "AddFunctionCallKey",
+          "publicKey": "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay",
+          "receiver": "vault.ml-demo-20261031.testnet",
+          "methods": [
+            "execute_payment"
+          ],
+          "allowance": "100000000000000000000000"
+        }
+      ],
+      "label": "6"
+    },
+    {
+      "id": "fund",
+      "signer": "ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "fund",
+          "args": {},
+          "gas": "100000000000000",
+          "deposit": "1000000000000000000000000"
+        }
+      ],
+      "label": "7"
+    },
+    {
+      "id": "mandate",
+      "signer": "ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "create_mandate",
+          "args": {
+            "agent_id": "agent.ml-demo-20261031.testnet",
+            "agent_keys": [
+              "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+              "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+              "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+            ],
+            "allowed_recipients": [
+              "merchant.ml-demo-20261031.testnet"
+            ],
+            "budget": "1000000000000000000000000",
+            "per_transaction_limit": "400000000000000000000000",
+            "expires_at_ns": "1793548800000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "8"
+    },
+    {
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "execute_payment",
+          "args": {
+            "mandate_id": "1",
+            "nonce": 0,
+            "recipient": "merchant.ml-demo-20261031.testnet",
+            "amount": "100000000000000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "9"
+    },
+    {
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "execute_payment",
+          "args": {
+            "mandate_id": "1",
+            "nonce": 1,
+            "recipient": "attacker.ml-demo-20261031.testnet",
+            "amount": "100000000000000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "10"
+    },
+    {
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "execute_payment",
+          "args": {
+            "mandate_id": "1",
+            "nonce": 2,
+            "recipient": "merchant.ml-demo-20261031.testnet",
+            "amount": "400000000000000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "11"
+    },
+    {
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "publicKey": "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "execute_payment",
+          "args": {
+            "mandate_id": "1",
+            "nonce": 3,
+            "recipient": "merchant.ml-demo-20261031.testnet",
+            "amount": "400000000000000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "12"
+    },
+    {
+      "signer": "agent.ml-demo-20261031.testnet",
+      "receiver": "vault.ml-demo-20261031.testnet",
+      "publicKey": "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay",
+      "actions": [
+        {
+          "type": "FunctionCall",
+          "method": "execute_payment",
+          "args": {
+            "mandate_id": "1",
+            "nonce": 4,
+            "recipient": "merchant.ml-demo-20261031.testnet",
+            "amount": "400000000000000000000000"
+          },
+          "gas": "100000000000000",
+          "deposit": "0"
+        }
+      ],
+      "label": "13"
+    }
+  ],
+  "note": "Planning package only; not accepted by the old deploy/run entry points. Preserve all five original journals. No account recreation, combined deploy-init retry or automatic refund.",
+  "reviewed_at": "2026-11-01T01:21:27.748Z",
+  "public_vault_code_absent": true,
+  "public_vault_state_empty": true,
+  "sandbox_gate": "PASS — run 41259151981",
+  "review_result": "LOCAL ADAPTER VALIDATION PASS; AWAITING EXPLICIT EXECUTION APPROVAL",
+  "public_keys": {
+    "owner": "ed25519:uuukiCHdpBwSHGzoxGTQBZLJt4mLo8xaQZWW2uM1no4",
+    "vault": "ed25519:HNbuxCPLJDP7NdVzC9nfRnH3CXYE4GxSECPMVm1fstUD",
+    "agentAdmin": "ed25519:CT9t96mxq34JXQVi8wwn91uxrg2zwwF7dZ97afh4gmcE",
+    "recipient": "ed25519:7ANwdL5Ydro9N5fFrXLij71sDQLZC6HecJMEW8DfdbM1",
+    "attacker": "ed25519:FXDtEpmVTLyyNBma3v9cjzsSr2Sa8eCXsoeK82zYUf8S",
+    "agents": [
+      "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+      "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+      "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+    ]
+  },
+  "transaction_limits": [
+    {
+      "number": 1,
+      "call": {
+        "id": "deploy-only",
+        "label": "5A",
+        "signer": "vault.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "actions": [
+          {
+            "type": "DeployContract",
+            "sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87"
+          }
+        ]
+      },
+      "attached": "0",
+      "gas_fee_bound": "3700000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "3700000000000000000000",
+      "requested_payout": "0",
+      "safe_stop": "Stop if historical outcomes, keys, balances or empty code/STATE differ; after deployment require FINAL, exact downloaded Wasm hash and empty STATE."
+    },
+    {
+      "number": 2,
+      "call": {
+        "id": "initialize-owner",
+        "label": "5B",
+        "signer": "ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "new",
+            "args": {
+              "owner_id": "ml-demo-20261031.testnet"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ]
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "0",
+      "safe_stop": "Require verified 5A; stop on non-owner signer/predecessor, deposit/gas mismatch, wrong code, existing STATE, failed/missing receipts, wrong owner or nonzero accounting."
+    },
+    {
+      "number": 3,
+      "call": {
+        "id": "install-agent-keys",
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "agent.ml-demo-20261031.testnet",
+        "actions": [
+          {
+            "type": "AddFunctionCallKey",
+            "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+            "receiver": "vault.ml-demo-20261031.testnet",
+            "methods": [
+              "execute_payment"
+            ],
+            "allowance": "100000000000000000000000"
+          },
+          {
+            "type": "AddFunctionCallKey",
+            "publicKey": "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+            "receiver": "vault.ml-demo-20261031.testnet",
+            "methods": [
+              "execute_payment"
+            ],
+            "allowance": "100000000000000000000000"
+          },
+          {
+            "type": "AddFunctionCallKey",
+            "publicKey": "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay",
+            "receiver": "vault.ml-demo-20261031.testnet",
+            "methods": [
+              "execute_payment"
+            ],
+            "allowance": "100000000000000000000000"
+          }
+        ],
+        "label": "6"
+      },
+      "attached": "0",
+      "gas_fee_bound": "200000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "200000000000000000000",
+      "requested_payout": "0",
+      "safe_stop": "Require verified 5B; stop on existing/unexpected keys or any permission/receiver/method/allowance mismatch after FINAL."
+    },
+    {
+      "number": 4,
+      "call": {
+        "id": "fund",
+        "signer": "ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "fund",
+            "args": {},
+            "gas": "100000000000000",
+            "deposit": "1000000000000000000000000"
+          }
+        ],
+        "label": "7"
+      },
+      "attached": "1000000000000000000000000",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "0",
+      "safe_stop": "Require verified key installation and zero initial principal; after FINAL require exactly 1 NEAR unallocated principal and adequate reserves."
+    },
+    {
+      "number": 5,
+      "call": {
+        "id": "mandate",
+        "signer": "ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "create_mandate",
+            "args": {
+              "agent_id": "agent.ml-demo-20261031.testnet",
+              "agent_keys": [
+                "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+                "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+                "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+              ],
+              "allowed_recipients": [
+                "merchant.ml-demo-20261031.testnet"
+              ],
+              "budget": "1000000000000000000000000",
+              "per_transaction_limit": "400000000000000000000000",
+              "expires_at_ns": "1793548800000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "8"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "0",
+      "safe_stop": "Require verified funding, fresh expiry and no prior mandate; after FINAL require exact policy, available 1, pending/spent 0."
+    },
+    {
+      "number": 6,
+      "call": {
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "execute_payment",
+            "args": {
+              "mandate_id": "1",
+              "nonce": 0,
+              "recipient": "merchant.ml-demo-20261031.testnet",
+              "amount": "100000000000000000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "9"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "100000000000000000000000",
+      "safe_stop": "Require verified mandate and ALLOW; require recipient +0.1, terminal success callback, pending 0, spent 0.1."
+    },
+    {
+      "number": 7,
+      "call": {
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "execute_payment",
+            "args": {
+              "mandate_id": "1",
+              "nonce": 1,
+              "recipient": "attacker.ml-demo-20261031.testnet",
+              "amount": "100000000000000000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "10"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "100000000000000000000000",
+      "safe_stop": "Require verified transaction 9; expect exact ERR_RECIPIENT with vault execution receipt, unchanged recipient/attacker and accounting; unexpected success stops."
+    },
+    {
+      "number": 8,
+      "call": {
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "publicKey": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "execute_payment",
+            "args": {
+              "mandate_id": "1",
+              "nonce": 2,
+              "recipient": "merchant.ml-demo-20261031.testnet",
+              "amount": "400000000000000000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "11"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "400000000000000000000000",
+      "safe_stop": "Require verified transaction 10 and untouched nonces 2–4; submit one independent three-key batch only; unexpected/uncertain outcomes stop continuation."
+    },
+    {
+      "number": 9,
+      "call": {
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "publicKey": "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "execute_payment",
+            "args": {
+              "mandate_id": "1",
+              "nonce": 3,
+              "recipient": "merchant.ml-demo-20261031.testnet",
+              "amount": "400000000000000000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "12"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "400000000000000000000000",
+      "safe_stop": "Same approved three-key batch; no nonce-conflict substitution. Require FINAL receipts for all three before evaluating budget enforcement."
+    },
+    {
+      "number": 10,
+      "call": {
+        "signer": "agent.ml-demo-20261031.testnet",
+        "receiver": "vault.ml-demo-20261031.testnet",
+        "publicKey": "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay",
+        "actions": [
+          {
+            "type": "FunctionCall",
+            "method": "execute_payment",
+            "args": {
+              "mandate_id": "1",
+              "nonce": 4,
+              "recipient": "merchant.ml-demo-20261031.testnet",
+              "amount": "400000000000000000000000"
+            },
+            "gas": "100000000000000",
+            "deposit": "0"
+          }
+        ],
+        "label": "13"
+      },
+      "attached": "0",
+      "gas_fee_bound": "20300000000000000000000",
+      "creation_count": 0,
+      "creation_charge_total": "0",
+      "fee": "20300000000000000000000",
+      "requested_payout": "400000000000000000000000",
+      "safe_stop": "Same batch; exactly two successes, one ERR_BUDGET, merchant total gain 0.9, attacker gain zero, available 0.1/pending 0/spent 0.9."
+    }
+  ],
+  "runtime_evidence_path": "artifacts/phase4-initialization-ci/evidence/phase4-initialization/results.json",
+  "runtime_evidence_sha256": "95fca55550cc7bc35f2a177c0574a05823b7673ce2d3890df9d92b40d4cfe9bd",
+  "initial_state_path": "artifacts/phase4-adapter-review/review.json",
+  "initial_state_sha256": "448600159253c428962d8cd229205bd0b40b3e50716822bd2579502e8683bfa4"
+}

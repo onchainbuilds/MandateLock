@@ -1,0 +1,17 @@
+{
+  "scope": "Finalized public testnet observations, captured 2026-11-02. Reports are byte-identical. Raw exports retain all RPC responses and receipts, with just the four embedded Wasm byte strings replaced by verified lengths and SHA-256. Step states are extracts of the original journal.",
+  "originals": {
+    "before-raw.json": "6110d36596d14602f0a92ddd7ed48b5c54cdc2b74cbcd5104f8c892acebf5561",
+    "before-report.json": "efafdfeb645b549eb46170a81ee3b2bf6899f155d013fdec4a145638f58e6402",
+    "after-raw.json": "7b29f02cf062dcc25bbb3013fc41d26e16b2879fca3f330d4e18759937455bae",
+    "after-report.json": "866f354c247790776a491a796db0b4264da30c4084b77795a3e1938f9a911255",
+    "sequence.jsonl": "c29fc806df24137848aa7c4e352e036cbb2ebe2191dc142325493da76dfb827d"
+  },
+  "files": {
+    "before-raw.json": "a24bd2a325a582add1baa0dab1e91fa1f4d5404cf7b510136ffd339a0fd298ae",
+    "before-report.json": "efafdfeb645b549eb46170a81ee3b2bf6899f155d013fdec4a145638f58e6402",
+    "after-raw.json": "1d414d24fd3448a3e13e2cc71a0087c83d1fe5d980ad015f66f4d25449f1a91d",
+    "after-report.json": "866f354c247790776a491a796db0b4264da30c4084b77795a3e1938f9a911255",
+    "step-states.json": "de5418df43bbd781a1089d396c3e00e9255fd4bfbfa9f2e52d46110cf7d35b3b"
+  }
+}

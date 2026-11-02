@@ -1,0 +1,29 @@
+{
+  "approved": false,
+  "network": "testnet",
+  "config_sha256": "a900b86f3eca441451a63e55e81c7cd17c29b58a16007d935b5904f5ca25059a",
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "expires_at": "2026-11-01T15:00:00Z",
+  "operations": [
+    "create-vault",
+    "create-agent",
+    "create-recipient",
+    "create-attacker",
+    "deploy-init",
+    "install-agent-keys",
+    "fund",
+    "mandate",
+    "authorized",
+    "direct-rejection",
+    "concurrency"
+  ],
+  "dependency_lock_sha256": "0920f50173b086d97b0fbe6b19822f1178a7167a83461f2ad73f74b5666702eb",
+  "note": "Revised review copy only. Bootstrap already FINAL with 10 NEAR; no additional funding authorized. Eight setup and five agent transactions require new explicit approval. Aggregate outgoing cap includes all requested payouts and conservative fees.",
+  "bootstrap_transaction_hash": "HhF51drrwKbaauC1MQLqpPjFUcHXHzvCvX9qzAvvoAjQ",
+  "authorized_starting_balance_near": "10",
+  "max_aggregate_outgoing_near": "8",
+  "max_fees_yocto": "173000000000000000000000",
+  "plan_sha256": "c690ae71c36dc58b026546167949110889b20f284d372e1d04de562fecb182ab",
+  "latest_start_at": "2026-11-01T14:30:00Z",
+  "latest_submission_at": "2026-11-01T14:50:00Z"
+}

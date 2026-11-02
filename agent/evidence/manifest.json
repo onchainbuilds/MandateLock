@@ -1,0 +1,133 @@
+{
+  "workflow": "https://github.com/onchainbuilds/MandateLock/actions/runs/41205116391",
+  "commit": "75051c2fc7ecff6390c49fa67274d70d275d07c8",
+  "scope": "Selected byte-identical original records except explicitly derived fee reference. Recorded evidence, not new execution.",
+  "files": {
+    "replay-before.json": {
+      "sha256": "05c673dbcee8ca932d75c205973abe2043ec6ff2f3541bda6f01a149a08039bb",
+      "bytes": 9358,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/replay/replayed-before.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "replay-after.json": {
+      "sha256": "1707b45bb06b0e4ee432577e13fe4bbc2e4f0b4c6ad93450b2ce9e352d226442",
+      "bytes": 9358,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/replay/replayed-after.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "replay-transaction.json": {
+      "sha256": "028f35c43ba3182ef1aae75b331d020323f0ba06a1811a5c86344b5ed30d913f",
+      "bytes": 6255,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/replay/replayed-transaction.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "expiry-before.json": {
+      "sha256": "ed09419be315891d69aff5b4f0521c64e29ffabc44c6e25e869e7e0d953e2ee7",
+      "bytes": 9295,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/expired/rejected-before.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "expiry-after.json": {
+      "sha256": "b3f87a7ffe0ab22ce40bc167d708076d91f905801b9f886dceeec01dc3287eb8",
+      "bytes": 9295,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/expired/rejected-after.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "expiry-transaction.json": {
+      "sha256": "deb59f45dc0c4738ffd70174608ed4134c78bffeb9f7bd452b95346b944d3558",
+      "bytes": 6255,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/expired/rejected-transaction.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "failure-before.json": {
+      "sha256": "5bd9e0e74ed085020fe2b5270bb73019248bdc04612faf9eafb52556c372e0e3",
+      "bytes": 9296,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/failure/native-failure-before.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "failure-after.json": {
+      "sha256": "97b529dde15f2711c8ea8ff4e0188c78f2849382e010f10c334bae82a45cf502",
+      "bytes": 9343,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/failure/native-failure-after.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "failure-transaction.json": {
+      "sha256": "e044410936fbf4108cad34df7a745c8ef827769900ab7236514255d997f5d7e8",
+      "bytes": 17386,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/failure/native-failure-transaction.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "expiry-wait.json": {
+      "sha256": "30fa5211431e4a4ebc1248c05235e862875f4a5629766984b8d421b0195a50c8",
+      "bytes": 3413,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2a/expired/expiry-wait.json",
+      "kind": "recorded-production-sandbox"
+    },
+    "paid-callback-before.json": {
+      "sha256": "b06eeb6cb31a9a8fa31185e447d9d0c8ffa112f45fab16e924634d26a19d3144",
+      "bytes": 9330,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-paidfault/before-fault.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "paid-callback-after.json": {
+      "sha256": "e2d52073ac014a3e2ac9c1590a3bb986e685e72b4215862b4b869f6062908e45",
+      "bytes": 9406,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-paidfault/after-failed-callback.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "paid-callback-transaction.json": {
+      "sha256": "1e1106cca5bb1729f838d08177fe6b1f2a40b94f6a2cfeb12b6b5e7389e21fe6",
+      "bytes": 15757,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-paidfault/callback-out-of-gas-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "paid-callback-retry.json": {
+      "sha256": "345f5d9015e1edc9dd036f416bc549a752f1b681770fc6b87485991873f375b5",
+      "bytes": 6282,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-paidfault/no-second-payment-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "paid-callback-retire.json": {
+      "sha256": "44c632fdf9ced0750107ca04065306acdd9a7bac46efefeb67cf7245f9708ec1",
+      "bytes": 6131,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-paidfault/retire-after-fault-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "refunded-callback-before.json": {
+      "sha256": "759801c90fdb77325cddcff4fbc79d360c44931e58091c8a51d75f5abafff588",
+      "bytes": 9349,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-refundfault/before-fault.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "refunded-callback-after.json": {
+      "sha256": "339412e37fabe36a9692d626805373dfec5860a0fe954726df1dfb9e5fb336f5",
+      "bytes": 9425,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-refundfault/after-failed-callback.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "refunded-callback-transaction.json": {
+      "sha256": "bb2f4118c181840c2253d037a474a88539def38da3915e8b24feade5103f05ca",
+      "bytes": 17040,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-refundfault/callback-out-of-gas-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "refunded-callback-retry.json": {
+      "sha256": "9fa858c598d2b03066375c00692eb86f70f1c0c6f334d017ddb49f554bb2f990",
+      "bytes": 6291,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-refundfault/no-second-payment-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "refunded-callback-retire.json": {
+      "sha256": "0c960d5a6443389ae6787b4755d96e1e1a53ce7114b6924ca3b717fd6237a8c4",
+      "bytes": 6141,
+      "source": "artifacts/phase2b-closure-run/evidence/phase2b/b-refundfault/retire-after-fault-transaction.json",
+      "kind": "recorded-diagnostic-sandbox"
+    },
+    "fee-reference.json": {
+      "sha256": "e652d57dc56a8d5eeaa046d1037cfeaf334b90617a70c23c6a27632ab5789c39",
+      "bytes": 14397,
+      "kind": "derived-public-fee-reference",
+      "source": "artifacts/key-remediation/2026-11-01T19-49-27.918Z/snapshot.json"
+    }
+  }
+}

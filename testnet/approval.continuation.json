@@ -1,0 +1,29 @@
+{
+  "approved": false,
+  "network": "testnet",
+  "config_sha256": "1da47b4799bb1b2e39449d7fde086b229b7c2d1ad02f253614b4c33bba2100e7",
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "expires_at": "2026-11-01T15:00:00Z",
+  "operations": [
+    "create-attacker",
+    "deploy-init",
+    "install-agent-keys",
+    "fund",
+    "mandate",
+    "authorized",
+    "direct-rejection",
+    "concurrency"
+  ],
+  "dependency_lock_sha256": "0920f50173b086d97b0fbe6b19822f1178a7167a83461f2ad73f74b5666702eb",
+  "note": "Preparation only. Separate execution approval required; preserve original journals and resume at transaction 4.",
+  "bootstrap_transaction_hash": "HhF51drrwKbaauC1MQLqpPjFUcHXHzvCvX9qzAvvoAjQ",
+  "authorized_starting_balance_near": "10",
+  "max_aggregate_outgoing_near": "8",
+  "max_fees_yocto": "201000000000000000000000",
+  "plan_sha256": "c690ae71c36dc58b026546167949110889b20f284d372e1d04de562fecb182ab",
+  "latest_start_at": "2026-11-01T14:30:00Z",
+  "latest_submission_at": "2026-11-01T14:50:00Z",
+  "fee_model_version": 2,
+  "account_creation_charge": "7000000000000000000000",
+  "continuation_sha256": "ba82a7345f3419eb7908291832d04c892e31af3ed633a4d2867dd8709c8acf2e"
+}

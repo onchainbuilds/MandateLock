@@ -1,5 +1,3 @@
-> Preserved historical report; local path prefixes redacted for migration. Current status: PHASE2B.md. Some local diagnostic log links are excluded from the upload.
-
 # MandateLock — Phase 2A sandbox validation status
 
 Updated: October 31, 2026. **The corrected approved Ubuntu run succeeded: all twelve mandatory sandbox scenarios PASS, 44 native tests PASS, four harness regressions PASS. GO for the tested Phase 2A sandbox scope. Full security validation and Phase 2B remain NO-GO pending the additional gates below.**
@@ -10,7 +8,7 @@ Updated: October 31, 2026. **The corrected approved Ubuntu run succeeded: all tw
 - Commit: [`a539ef3b4a243afb7376067b40b052645d5f1111`](https://github.com/shadehook/MandateLock/commit/a539ef3b4a243afb7376067b40b052645d5f1111).
 - Workflow: [41198135753, attempt 1](https://github.com/shadehook/MandateLock/actions/runs/41198135753), **SUCCESS**; job ran October 31, 11:45:03–11:51:42 UTC (6m39s).
 - [Evidence artifact 13041995627](https://github.com/shadehook/MandateLock/actions/runs/41198135753/artifacts/13041995627): 1,225,674 bytes; SHA-256 digest `a19e2992f0b53a179d6dfe057c0d7f1407aeaf5d1d89d5f3195323a01001f5c0`; retention until November 14, 2026, 11:51:38 UTC.
-- Downloaded evidence: `artifacts/phase2a-corrected/evidence/`; [full workflow log](../evidence/phase2a/workflow.log), [raw results](../evidence/phase2a/results.json), [independent evidence analysis](../evidence/phase2a/evidence-analysis.json), [verification summary](../evidence/phase2a/verification-summary.json).
+- Downloaded evidence: `artifacts/phase2a-corrected/evidence/`; full workflow log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), raw results (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), independent evidence analysis (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), verification summary (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 Exactly the six reviewed files were committed/pushed after their hashes, content scan and scope were rechecked. Exactly one corrected workflow was dispatched. The earlier failed run is the only other repository run; neither was rerun. Production source/test hashes remain unchanged. No Docker/WSL attempt, public-chain transaction, repository publication, X post, frontend development or Phase 2B work occurred. This result report is a local update, not an additional push.
 
@@ -43,7 +41,7 @@ Additional sequence hashes: budget accepts `Ey2wYnj24e6NZkR7B46mGJF71zr6fbupYQnu
 
 ### Expiry timestamps
 
-The finalized pre-payment snapshot at block **427** recorded stored expiry **1793447437173942498 ns** and observed block timestamp **1793447437267223105 ns**. The observed timestamp is **93,280,607 ns later**, strictly beyond expiry. The deadline and timestamp were read together before payment submission; the contract returned ERR_EXPIRED, left the slot unused, and left recipient/principal unchanged. Evidence: [expiry observation](../evidence/phase2a/expired/expiry-wait.json), [pre-payment snapshot](../evidence/phase2a/expired/rejected-before.json), [transaction](../evidence/phase2a/expired/rejected-transaction.json).
+The finalized pre-payment snapshot at block **427** recorded stored expiry **1793447437173942498 ns** and observed block timestamp **1793447437267223105 ns**. The observed timestamp is **93,280,607 ns later**, strictly beyond expiry. The deadline and timestamp were read together before payment submission; the contract returned ERR_EXPIRED, left the slot unused, and left recipient/principal unchanged. Evidence: expiry observation (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), pre-payment snapshot (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), transaction (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 ### Independently submitted concurrency transactions
 
@@ -55,13 +53,13 @@ All calls used signer `agent.concurrency.test.near`, three different approved fu
 | 1 / 889000001 | `ed25519:DV6pDou3bp989rP5gQ2d5amEG5VGJVrFKLTYeZdfZMtb` | `Dw4CyEBYAm86QkHzTtN7yAtge5HBoAWUKJRKmwzF3KBn` | Success; callback true |
 | 2 / 894000001 | `ed25519:FMy5CS35Qvp3Pj2WU7XEXcsutm3pFpMndNB7Pfyb6z9K` | `FNadh5h9esGrSamawrJarnsxSWhtrpbaD9KnaWb7Z2HK` | Vault receipt ERR_BUDGET |
 
-Vault execution receipt IDs are respectively `DDA3MeVRw21wrpR37VgQGKzP3xH6wxNoheq8W672ZNiY`, `2ivnMaU5gn2ukNvaArumbBmMQekVoXG95qU4bokBChHa`, and `9fsEhZ7Q4JPSKYyXzwcW7DPzANELXbRYvyvJz3bXiWA6`. Scheduling logs show pending rose from .40 to **.80 while spent was still zero**. Both transfers later settled, leaving A=.20/P=0/S=.80 and recipient +.80. [Broadcast completion](../evidence/phase2a/concurrency/broadcasts-complete.json), [summary](../evidence/phase2a/concurrency/summary.json), [all three raw transactions](../evidence/phase2a/evidence-analysis.json).
+Vault execution receipt IDs are respectively `DDA3MeVRw21wrpR37VgQGKzP3xH6wxNoheq8W672ZNiY`, `2ivnMaU5gn2ukNvaArumbBmMQekVoXG95qU4bokBChHa`, and `9fsEhZ7Q4JPSKYyXzwcW7DPzANELXbRYvyvJz3bXiWA6`. Scheduling logs show pending rose from .40 to **.80 while spent was still zero**. Both transfers later settled, leaving A=.20/P=0/S=.80 and recipient +.80. Broadcast completion (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), summary (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), all three raw transactions (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 ### Genuine failure and callback evidence
 
-The receiver `absent.failure.test.near` was verified absent. Native transfer receipt `EyDQymetb6sPtv3C2SW9zVAui8xz6yUmCtwJLM9dn9DD` failed with **AccountDoesNotExist**. Callback receipt `Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf` then succeeded normally, returned **false**, emitted payment_failed and burned **2.380352400690 Tgas**. Slot 0 remained Failed and could not be replayed; available budget returned to 1 with no pending/spent balance. Final physical balance shows no loss of the .10 principal. This is a real transfer failure, not a simulated callback outcome. [Raw failed-transfer transaction](../evidence/phase2a/failure/native-failure-transaction.json).
+The receiver `absent.failure.test.near` was verified absent. Native transfer receipt `EyDQymetb6sPtv3C2SW9zVAui8xz6yUmCtwJLM9dn9DD` failed with **AccountDoesNotExist**. Callback receipt `Fdbeyv3a3CsTsAnAmwpogbZNwYJUPAinwxDgfGv5LaPf` then succeeded normally, returned **false**, emitted payment_failed and burned **2.380352400690 Tgas**. Slot 0 remained Failed and could not be replayed; available budget returned to 1 with no pending/spent balance. Final physical balance shows no loss of the .10 principal. This is a real transfer failure, not a simulated callback outcome. Raw failed-transfer transaction (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
-The authorized payment's callback `D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ` returned **true**, burning **2.394705073755 Tgas**. The dedicated settlement callback `2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU` returned **true**, burning **2.401251349863 Tgas**. Across all **nine terminal callbacks**, eight returned true and one false; measured gas ranged **2.380352400690–2.416230832134 Tgas**, below the allocated 15 Tgas. Every callback result and receipt is retained in the [verification summary](../evidence/phase2a/verification-summary.json). This is not a worst-case input/state gas proof.
+The authorized payment's callback `D9YW7pkDmTCQVAsGb6vzF11mXTPLanP2vipqrjiumAfJ` returned **true**, burning **2.394705073755 Tgas**. The dedicated settlement callback `2a2FSqw5u6ZNEYNaLonHSKbWHuTUjQ4328u4G1b1E8mU` returned **true**, burning **2.401251349863 Tgas**. Across all **nine terminal callbacks**, eight returned true and one false; measured gas ranged **2.380352400690–2.416230832134 Tgas**, below the allocated 15 Tgas. Every callback result and receipt is retained in the verification summary (historical local-only reference; excluded from public snapshot; result retained without inventing evidence). This is not a worst-case input/state gas proof.
 
 ### Physical vault balances and accounting
 
@@ -73,7 +71,7 @@ Independent post-download checks confirmed **46 final-block snapshots** satisfy 
 | Genuine failed .10 | 11.0000710352656824 | 11.0001806333262734 | 2.71034 | Absent account; transfer failed | 1/0/0 |
 | Three competing .40 | 11.0000716143986525 | 10.2003146972907287 | 1.91050 | 1 → 1.8 | .2/0/.8 |
 
-Storage/operating floors for these fixtures were respectively 1.71045, 1.71034 and 1.71050 NEAR; storage usage was 165,949, 165,938 and 165,954 bytes. The budget-exhaustion case ended with recipient balance 2 NEAR and A/P/S=0/0/1. Expected gas rewards mean vault balances are not exact principal-only round numbers; residuals were bounded by recorded fee totals. [All balance snapshots and derived checks](../evidence/phase2a/evidence-analysis.json).
+Storage/operating floors for these fixtures were respectively 1.71045, 1.71034 and 1.71050 NEAR; storage usage was 165,949, 165,938 and 165,954 bytes. The budget-exhaustion case ended with recipient balance 2 NEAR and A/P/S=0/0/1. Expected gas rewards mean vault balances are not exact principal-only round numbers; residuals were bounded by recorded fee totals. All balance snapshots and derived checks (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 These are finality-pinned endpoint measurements. They do **not** prove physical solvency after every intervening receipt, or independently decompose each refund/reward amount. Pending reservation overlap was observed through contract logs, not a physical-balance measurement at each reservation.
 
@@ -89,7 +87,7 @@ The previous failures were harness failures: the finality repair allowed all twe
 - **UNVERIFIED:** worst-case callback gas/storage profiling across maximum-size policy inputs.
 - Retained full-access vault keys can bypass contract policy, and owner-account delegated administrative keys retain owner authority. Those trust limitations are unchanged; stranded-fund/recovery limitations remain.
 
-The [additional-unverified artifact](../evidence/phase2a/additional-unverified.json) preserves the fault/solvency limits even though the mandatory suite is green. No additional run or Phase 2B action was taken.
+The additional-unverified artifact (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) preserves the fault/solvency limits even though the mandatory suite is green. No additional run or Phase 2B action was taken.
 
 ### Reproduction and executed actions
 
@@ -111,12 +109,12 @@ for the root cause, exact changes, expiry methodology and six-file proposed comm
 Local verification passed: 44 existing native tests, four new harness guard
 regressions, root/integration formatting, strict native/integration Clippy,
 integration type-check and full Windows integration executable compilation with
-`--no-run`. Logs: [native tests](phase2a-repair-native-tests.log),
-[native Clippy](phase2a-repair-native-clippy.log),
-[type-check](phase2a-repair-check.log),
-[harness regressions](phase2a-repair-harness-tests.log),
-[integration Clippy](phase2a-repair-harness-clippy.log),
-[integration executable build](phase2a-repair-integration-build.log).
+`--no-run`. Logs: native tests (historical local-only reference; excluded from public snapshot; result retained without inventing evidence),
+native Clippy (historical local-only reference; excluded from public snapshot; result retained without inventing evidence),
+type-check (historical local-only reference; excluded from public snapshot; result retained without inventing evidence),
+harness regressions (historical local-only reference; excluded from public snapshot; result retained without inventing evidence),
+integration Clippy (historical local-only reference; excluded from public snapshot; result retained without inventing evidence),
+integration executable build (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 No remote action, Docker/WSL retry or token expenditure occurred in this repair.
 The corrected suite has not run on Linux. All twelve corrected scenario results
@@ -141,7 +139,7 @@ The runner built the actual source into a **159,542-byte Wasm**, SHA-256 `383664
 
 ### Twelve scenario results
 
-The raw [results.json](../artifacts/phase2a-github/evidence/results.json) reports **0 PASS, 12 FAIL, 0 UNVERIFIED**. All twelve case functions were attempted. Eleven stopped during the pre-action snapshot and never submitted their intended security-test transaction. Their contract behavior therefore remains **UNVERIFIED**, despite a FAIL result for the test harness. Case 5 submitted a real payment, but its expiry precondition was not established.
+The raw results.json (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) reports **0 PASS, 12 FAIL, 0 UNVERIFIED**. All twelve case functions were attempted. Eleven stopped during the pre-action snapshot and never submitted their intended security-test transaction. Their contract behavior therefore remains **UNVERIFIED**, despite a FAIL result for the test harness. Case 5 submitted a real payment, but its expiry precondition was not established.
 
 | # | Scenario | Recorded test result | Actual execution / security conclusion |
 | --- | --- | --- | --- |
@@ -162,7 +160,7 @@ These failures must not be relabeled as twelve contract vulnerabilities or twelv
 
 ### Actual transaction, callback and balances
 
-Raw evidence: [transaction and receipts](../artifacts/phase2a-github/evidence/expired/rejected-transaction.json), [before](../artifacts/phase2a-github/evidence/expired/rejected-before.json), [after](../artifacts/phase2a-github/evidence/expired/rejected-after.json), [callback gas](../artifacts/phase2a-github/evidence/expired/rejected-callback-gas.json), [derived arithmetic](../artifacts/phase2a-github/observed-payment-analysis.json).
+Raw evidence: transaction and receipts (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), before (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), after (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), callback gas (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), derived arithmetic (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 - Transaction `EBh6r3HvY4oQucV6d5Sd13LpeHLAmjxc9KrdZwN8JAkG`: `agent.expired.test.near` called `vault.expired.test.near.execute_payment`, nonce slot 0, amount 0.10 NEAR, zero attached deposit. RPC returned **FINAL** and callback result `true`.
 - Scheduling receipt `ABhPPmHPZQftaPd1rFLQ7KJo8NworbYFv5uenjaA1XPK` emitted `payment_scheduled`: A=.90, P=.10, S=0.
@@ -212,7 +210,7 @@ gh run download 41197070066 --repo shadehook/MandateLock --name mandatelock-phas
 gh run view 41197070066 --repo shadehook/MandateLock --log
 ```
 
-Additional read-only `gh run view/list`, commit lookup and artifact metadata calls verified run status, remote SHA, private visibility and the single dispatch. Local manifest hashes were checked before staging; staged paths were compared against the exact allowlist. Full workflow step commands/output are in [workflow.log](../artifacts/phase2a-github/workflow.log). No global Git settings changed.
+Additional read-only `gh run view/list`, commit lookup and artifact metadata calls verified run status, remote SHA, private visibility and the single dispatch. Local manifest hashes were checked before staging; staged paths were compared against the exact allowlist. Full workflow step commands/output are in workflow.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence). No global Git settings changed.
 
 ## Historical preparation and Docker records (superseded by the run above)
 
@@ -225,7 +223,7 @@ privacy exclusions and workflow checks. No remote action has occurred; repositor
 creation, push and manual dispatch await explicit approval. All twelve scenarios
 remain UNVERIFIED. Docker and WSL troubleshooting remains stopped.
 
-At the user's request, executed `docker pull alpine:3.20` **exactly once**. It exited **1** with `failed to copy: httpReadSeeker: failed open: failed to do request: Get "https://production.cloudfront.docker.com/...": EOF`. The complete, unabridged output (including the returned temporary signed blob URL) is recorded in [phase2a-docker-pull-alpine320.log](phase2a-docker-pull-alpine320.log).
+At the user's request, executed `docker pull alpine:3.20` **exactly once**. It exited **1** with `failed to copy: httpReadSeeker: failed open: failed to do request: Get "https://production.cloudfront.docker.com/...": EOF`. The complete, unabridged output (including the returned temporary signed blob URL) is recorded in phase2a-docker-pull-alpine320.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 The download failed, so `docker run --rm alpine:3.20 echo OK` was **not executed**. Docker troubleshooting stopped. No further image pulls, Docker reinstall/reset, network changes or contract edits were performed. **Zero of twelve sandbox scenarios executed; all twelve remain UNVERIFIED**, as individually listed below. There are no transaction receipts, callback outcomes, measured sandbox balances or concurrency evidence from this attempt. Native tests were not rerun; their latest execution remains 44 passed.
 
@@ -284,7 +282,7 @@ Windows Rust/Cargo 1.93.0 and the Phase 1B Wasm were available. A normal-process
 
 ```text
 starting services: initializing Inference manager:
-listening on unix://<user-profile>/AppData/Local/Docker/run/dockerInference:
+listening on unix://<USER_HOME>/AppData/Local/Docker/run/dockerInference:
 The file cannot be accessed by the system.
 (listener: The filename, directory name, or volume label syntax is incorrect.)
 ```
@@ -293,10 +291,10 @@ Source: existing Docker backend startup log, read during this phase. No factory 
 
 | Executed local check | Result | Evidence |
 | --- | --- | --- |
-| Existing native suite | **PASS: 44 passed, 0 failed, 0 ignored** | [phase2a-native-tests.log](phase2a-native-tests.log) |
+| Existing native suite | **PASS: 44 passed, 0 failed, 0 ignored** | phase2a-native-tests.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) |
 | Integration dependency resolution | **PASS**, separate Cargo.lock generated | [integration lockfile](../integration-tests/Cargo.lock) |
-| Integration Rust type-check on Windows | **PASS**; does not start a node | [phase2a-integration-check.log](phase2a-integration-check.log) |
-| Integration strict Clippy | **PASS**, `-D warnings` | [phase2a-integration-clippy.log](phase2a-integration-clippy.log) |
+| Integration Rust type-check on Windows | **PASS**; does not start a node | phase2a-integration-check.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) |
+| Integration strict Clippy | **PASS**, `-D warnings` | phase2a-integration-clippy.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) |
 | Root/integration formatting | **PASS** | Commands below |
 | Local Linux engine startup | **FAIL: infrastructure**, not a contract test failure | Error above |
 | Linux compilation, sandbox startup and all real transactions | **UNVERIFIED / not executed** | No transaction or receipt IDs exist |

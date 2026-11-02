@@ -1,0 +1,3 @@
+// Read-only hash verification of selected original records, never executes a transaction.
+import {readFileSync} from 'node:fs';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+export function loadPack(){const manifest=JSON.parse(readFileSync(new URL('evidence/manifest.json',import.meta.url))),files={};for(const [name,meta]of Object.entries(manifest.files)){assert(/^[a-z0-9-]+\.json$/.test(name));const b=readFileSync(new URL('evidence/'+name,import.meta.url));assert.equal(createHash('sha256').update(b).digest('hex'),meta.sha256,name);files[name]=JSON.parse(b);}return {manifest,files};}

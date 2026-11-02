@@ -1,0 +1,77 @@
+[
+  {
+    "source": "https://near-testnet.drpc.org",
+    "method": "query",
+    "params": {
+      "request_type": "view_account",
+      "account_id": "vault.ml-demo-20261031.testnet",
+      "block_id": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3"
+    },
+    "requested_at": "2026-11-01T19:05:25.347Z",
+    "http_status": 200,
+    "raw": {
+      "id": "read-only-final",
+      "jsonrpc": "2.0",
+      "result": {
+        "amount": "4997473032905705800000000",
+        "block_hash": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3",
+        "block_height": 275790037,
+        "code_hash": "4nRwHxMiEdVEMQ6ZXMtjwFADje84qNngDWK7CmxZSKdG",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 165931
+      }
+    },
+    "completed_at": "2026-11-01T19:05:25.744Z"
+  },
+  {
+    "source": "https://near-testnet.drpc.org",
+    "method": "query",
+    "params": {
+      "request_type": "view_account",
+      "account_id": "agent.ml-demo-20261031.testnet",
+      "block_id": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3"
+    },
+    "requested_at": "2026-11-01T19:05:25.744Z",
+    "http_status": 200,
+    "raw": {
+      "id": "read-only-final",
+      "jsonrpc": "2.0",
+      "result": {
+        "amount": "999917039041822400000000",
+        "block_hash": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3",
+        "block_height": 275790037,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 650
+      }
+    },
+    "completed_at": "2026-11-01T19:05:25.940Z"
+  },
+  {
+    "source": "https://near-testnet.drpc.org",
+    "method": "query",
+    "params": {
+      "request_type": "view_account",
+      "account_id": "merchant.ml-demo-20261031.testnet",
+      "block_id": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3"
+    },
+    "requested_at": "2026-11-01T19:05:25.940Z",
+    "http_status": 200,
+    "raw": {
+      "id": "read-only-final",
+      "jsonrpc": "2.0",
+      "result": {
+        "amount": "100000000000000000000000",
+        "block_hash": "3nEUEaN8cTrGzyJxgE6W9CKwaKbC4be39wsdBKo3f2k3",
+        "block_height": 275790037,
+        "code_hash": "11111111111111111111111111111111",
+        "locked": "0",
+        "storage_paid_at": 0,
+        "storage_usage": 182
+      }
+    },
+    "completed_at": "2026-11-01T19:05:26.143Z"
+  }
+]

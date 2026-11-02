@@ -1,0 +1,8 @@
+{
+  "broadcast_returned_elapsed_ns": "3346248",
+  "public_key": "ed25519:6D1Wup5bcKBsMvKXkAuYhbz4b1AjfekePNPqwj1gg58A",
+  "sender": "agent.concurrency.test.near",
+  "slot": 0,
+  "started_at_elapsed_ns": "568051",
+  "tx_hash": "8HtK9FveyKaQV9Qind6Dz6Nzvv8EQTUYj9VRqvQ1yN1K"
+}

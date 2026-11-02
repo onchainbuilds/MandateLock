@@ -1,0 +1,17 @@
+{
+  "source_commit": "75051c2fc7ecff6390c49fa67274d70d275d07c8",
+  "files": {
+    "src/lib.rs": "73793e17051437ec091f2cebbe85dca2978fceb712588973d07defa789a0ff4c",
+    "src/contract.rs": "c8f98036eb77841296c08965754a2a743ecd0d8baff265a35d62abb1fb42fb5d",
+    "src/model.rs": "c56941fe26cc10a3b771019e650e51817c4a1f11986185a98b6ccfe33adc681e",
+    "src/tests.rs": "7ee928704d7d578ecd73c4fe442ffbc87ac472e1856a1668632868cdad665a2d",
+    "tests/phase2b_model.rs": "5e4ed1668336c42b227daebd2ab561415141344f61cbfea86211cb61f181811a",
+    "Cargo.toml": "5ec9cd0a1e38ed560e20fc4ec621c8af16590ceb576f4a6dd1c78deb9bee27f0",
+    "Cargo.lock": "2b94d41e4acf7c6b44c331f6e1281d3887c3edac6e6dfe33aca72af7382344fd",
+    "rust-toolchain.toml": "9f45d01f133b0f303673a421dde1ac43459926ad0910f988d8d1a1a595aa0478",
+    "integration-tests/Cargo.toml": "00eb14d2124b5232ad9f3b113e3475356909365d1d5dc16fa5271dcd0c019187",
+    "integration-tests/Cargo.lock": "884a5fbf1df68822afe87f5e99185fb0d22e66ae625996383fd3c0a9f89bc730"
+  },
+  "linux_wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "windows_wasm_sha256": "eeded7009d4e56c460744ba7bdf17a52cc04a3d41fa1997903bf7622fb102bb3"
+}

@@ -1,5 +1,86 @@
 # MandateLock Phase 2B — security validation
 
+## Corrected approved execution — October 31, 2026
+
+**Workflow SUCCESS. 75 PASS / 0 FAIL: 59 native/model/harness tests + 12 original Phase 2A scenarios + four Phase 2B aggregate scenarios.** Both independently executed fault branches also PASS; they are subcases of the fourth aggregate and are not counted twice. All corrected runtime cases executed. **GO for the scoped Phase 2B sandbox-validation milestone with documented limitations. NO-GO for unrestricted production custody or an unconditional security/solvency guarantee.** No next phase is started or approved by this assessment.
+
+- Private official repository and ownership verified in Chrome; GitHub CLI authenticated as **onchainbuilds**. Seven working-tree files, then all seven staged blobs, matched the approved SHA-256 manifest exactly. Sensitive-string/path scan and reviewed scope passed. Production sources, original tests, manifests/lockfiles and local production Wasm remained unchanged. The official remote was still at the expected parent before pushing.
+- Exactly **one normal push and one manual Chrome dispatch** under this approval. Commit [75051c2fc7ecff6390c49fa67274d70d275d07c8](https://github.com/onchainbuilds/MandateLock/commit/75051c2fc7ecff6390c49fa67274d70d275d07c8), parent d80992baaa41b860c4eadcbf2c6f584293a7d4b4. [Workflow 41205116391, run #2](https://github.com/onchainbuilds/MandateLock/actions/runs/41205116391), manually triggered by onchainbuilds at 09:20 EDT; duration **9m44s**, Ubuntu job **9m40s**. No rerun, production modification, visibility change or public deployment.
+- Ubuntu 24.04; Rust/Cargo 1.93.0, cargo-near 0.22.0, SDK 5.29.1, near-workspaces 0.23.0, sandbox 2.13.4, protocol 86. Formatting, strict Clippy, all builds and static artifact/provenance checks PASS. Production Linux Wasm SHA-256 **3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87**, unchanged from proven Phase 2A. The corrected diagnostic pipeline selected onchain host functions and preserved production/shared source inputs; the private duplicate helper and lowgas allocation remain explicitly test-only modifications.
+- [Artifact 13044059219](https://github.com/onchainbuilds/MandateLock/actions/runs/41205116391/artifacts/13044059219), downloaded through Chrome: **5,371,464 bytes**, SHA-256 **fa6f6470af9e214cbfd43dd1b19632816b59667fc3e0bcd8691b3cbf7903b6ef**, matching GitHub's digest. **4,566 files** retained under `artifacts/phase2b-closure-run/evidence/`, including transaction failures that are expected by negative tests. Full parsed receipts/balances (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), offline consistency analysis (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), per-file hash manifest, original zip and run screenshot are retained locally. The Node 20-to-24 action warning was nonblocking.
+
+### Original twelve scenarios — current-run results
+
+These are disposable sandbox hashes, not public explorer transactions. A rejected malicious request is a PASS when its required rejection/accounting assertions hold.
+
+| Scenario | Result | Representative transaction/evidence |
+| --- | --- | --- |
+| 01 authorized payment | **PASS** | `GEWrxsiERLQPMDU27oMtprXta3b4YS2Z3L44rWrWgvQs` |
+| 02 unauthorized recipient | **PASS** | `8awAJCgPyGTzNs8svQiBqwUbw6KvNhgU5pd9SDzRHyGZ` |
+| 03 transaction ceiling | **PASS** | `9p2yJFqpdU9noeJZW73PBrFPaeJst6yfZfpDE5r5vD1H` |
+| 04 total budget | **PASS** | `JCnvZjQnBZXVCA7tWUMgB6fjhbQ8w5B2eZs44dyq79Go` |
+| 05 expired authorization | **PASS** | `FYNbzuiKfAhJgdwFfHQfEoLNZ9Drkyhee5sJSQu85Nhc` |
+| 06 replay | **PASS** | `14P2mjFXLZmd4mjHge4etFD81hwEFWrMerUEqxZameyS` |
+| 07 unauthorized administration | **PASS** | `4YGRBfnSUYZvqTcwxwZds8UYkkA8WddZMk9iSSsQPi5i` |
+| 08 restricted key | **PASS** | Protocol MethodNameMismatch; no included transaction hash |
+| 09 forged callback | **PASS** | `4pSr5YDozkCFYexnJm3zvsYUJDjcdwzCdTWp73tv8VHB` |
+| 10 async successful settlement | **PASS** | `8ZRVaZgboZYZ4pY7cW6p7eaJ3phoR1GTMHRtgmW1N8MQ` |
+| 11 genuine native failure | **PASS** | `768uzENQcswtPaDwag9mpeKJaHjVBfHVrcCtZtxRFbg1` |
+| 12 independent competing requests | **PASS** | `8HtK9FveyKaQV9Qind6Dz6Nzvv8EQTUYj9VRqvQ1yN1K` |
+
+Expiry precondition: **1793453144060815397 > 1793453143961822561 ns** before submission. Concurrent .40 requests used three independent keys and all reached the vault: `H1CTi6ZZewo4TGhnfoTcZ6NbvNtg5tG4XZXjmDJTLHRf` and `J7HRsiNEdbwt7GUhVeUZLQMX9kTXLkkvCLjNBaZCawFW` succeeded; `8HtK9FveyKaQV9Qind6Dz6Nzvv8EQTUYj9VRqvQ1yN1K` failed ERR_BUDGET. Accepted=2, budget-rejected=1, observed pending overlap=PASS; no nonce conflict counted.
+
+### Four Phase 2B scenarios and independent fault branches
+
+| Aggregate scenario | Result | Evidence |
+| --- | --- | --- |
+| Production maximum-state gas, solvency and successful retirement | **PASS** | 64 slots, 32 successful transfers, 32 genuine failures; 258 receipt-block observations including retirement. Callback gas **2.454551126232–2.466162270289 Tgas**, within the 15-Tgas allocation and below the 10-Tgas test threshold. First tx `Z8NVTqeBmZcyGtio6g7DkRJkqTw4fhfPCPVSfvZmSXm`, true callback `2TP9ESu9JMgevnCndT1dVohbSEhhhm6ksKj7wym67Vje`. Last tx `HvRUpaHj9zdTY3f1es5qEikKdJyDwd6h2iNwopyYdFK`, false callback `HbQ6HuAMCXTVpr2dNLbRThP5nFeBDKtd7JpT513qjbp3`. |
+| Production full-access-key custody limitation | **PASS — limitation confirmed** | Tx `9qhnXoSEhVHPP2hDc36iFwh8CYJTGLimq1rJ3NSMUvuH` directly transferred .10 NEAR to the attacker (1 → 1.1), with no contract callback or ledger debit. Vault 11.000070521766673 → 10.900025885254173 NEAR including fees. This is a custody bypass, not a contract authorization failure. |
+| Corrected diagnostic duplicate callbacks | **PASS** | All four repeat callbacks returned false and logged duplicate_settlement_ignored, with no second terminal event, ledger/journal change or principal repayment. Two successful diagnostic probes delivered only two additional yoctoNEAR. Recipient ended at 1.100000000000000000000002 NEAR; A=.9/P=0/S=.1. Sixteen receipt-block checks passed. |
+| Corrected diagnostic callback failure | **PASS**, both independent branches PASS | Paid recipient and genuine failed/refunded transfer each left A=.9/P=.1/S=0, including after expiry, revoke, rejected retirement, rejected owner/direct-self callback and rejected repeat payment. Each branch has 12 receipt-block observations and its own runtime/node/evidence. |
+
+| Fault branch | Result | Payment transaction | Receipts and retirement behavior | Physical vault NEAR, before → after callback |
+| --- | --- | --- | --- | --- |
+| Paid transfer | **PASS** | `8r7isUs71goN9AYebvNpjPTeSYw6BNvQyXTkyta2sLgc` | Transfer `2Fj5iXcyarWXEnegyvFSRNUduyQykuDwCqVU4w36gVP9`; callback `5KfYZdnkeE8wi5dGVcWLHisWMocCnJ9Dv8a3fmr9Vmiz` failed out of gas; retirement `729aizeZMMcnXiounEMMoFGCnw6uH1UDW3np9GFt5toa` failed with ERR_NOT_RETIRABLE and left state unchanged. | 11.0000705938295361 → 10.9001654602169347 |
+| Failed/refunded transfer | **PASS** | `7CgEErSgDKKRBYi2DEwxuHJ4frnZjVZnQa2sQzXgbGNw` | Transfer `H51bRJ4mqfm74nDkcvrXobG9BF4X34i1bjppVVre33Lm`; callback `3S5LjqmLczTnBR78M7Xxt8E5BvBsz6wj9cuFzmrRLLz5` failed out of gas; retirement `3d6HXxLa5PRrCFKPpJMEqEPFtsLKJtZkVwjkdiKi7uTN` failed with ERR_NOT_RETIRABLE and left state unchanged. | 11.000070624110065 → 11.0001655353796778 |
+
+Paid-branch merchant balance was **1 → 1.1 NEAR**; refunded-branch merchant remained **1 NEAR**, and the absent target's native transfer failed with AccountDoesNotExist. Final refund reconciliation verifies zero outgoing principal (fee/reward bounded), while its .10 budget remains pending. Both callbacks consumed **1.888160117030 Tgas at the whole-receipt level** under a deliberately reduced **1-Tgas function allocation**; receipt overhead explains the different quantities. This does not show that the production 15-Tgas callback allocation is insufficient.
+
+Before revocation/retirement probes, observed timestamp exceeded expiry in both nodes:
+
+- Paid branch: **1793453375014746429 > 1793453374904223879 ns**.
+- Refunded branch: **1793453396488422366 > 1793453396384269399 ns**.
+
+Both post-retirement-attempt snapshots retain the same policy/journal and A=.9/P=.1/S=0. Owner callback attempts failed private authorization; direct vault self-calls failed ERR_RESULT_COUNT; repeat payments failed ERR_REVOKED without another transfer. The original Phase 2A replay scenario separately verifies nonce protection before revocation. No uncertain reservation was released.
+
+Duplicate callback evidence (all return false):
+
+| Transaction | Callback receipt | Whole receipt Tgas |
+| --- | --- | --- |
+| `6bBR63SSipow33XLhUxSK9RRYGA27RiaYuEuvGEorE1E` | `B84vGZZUBNw3eENLJoF2Vu7J57vJdoCuNiWzt5VrNchQ` | 2.229798744473 |
+| `GNFocTGp4DEbAAMyYvyEZXo4k2tThsvTeUxtUismKP5N` | `G9wr4cFMtgEwZi7Uy5uyTRj7yzpmkKe4afgoaEHGpJrP` | 2.220862227110 |
+| `7gKzZBQRx2VYMgNRxZposiWLf6SUnzo5gQJVDpzzYJ47` | `9MF7fgLYgcowivyzPLxtvxyEHbnyivwc3SH7dvnE4bXX` | 2.229813554081 |
+| `EueUnGkhHSDUFS6JrjNWxAKHy4xkJ41wuvzJZQErKdFU` | `GkXMk4J15tvhr7iXPVfekH2tXcButqaX8fN7BwckxFKB` | 2.220877036718 |
+
+The corrected diagnostic Wasm hashes were **951f0864e4102cde5f8bb56cd6cd4603fe75abb599d1c47451cb0c5991b6e944** (lowgas) and **3f815f555aba93fd9b894a63e72d75b39e758c79e7bafaa25725e2003f2f6ec6** (duplicate). These are compatible with the production build configuration, not identical production binaries or proof of natural network redelivery.
+
+### Successful retirement and solvency
+
+Production retirement tx **2FRZoAxeJKCQbHF7K163z3SfVfUBoKCveJT3NLf9dM2P** succeeded after all transfers settled. Before: A=.68/P=0/S=.32/U=0. After: policy=null, A=P=S=B=0, **U=.68**, last mandate ID stays **2**. Actual vault **10.6876128757099286 NEAR**, storage usage **159818 bytes**, floor **1.64914 NEAR**, floor+U **2.32914 NEAR**. Retiring the mandate reclassifies remaining principal; it does not withdraw it.
+
+Offline verification found **106 target transactions FINAL**, **81 callback receipts**, **153 active-mandate final snapshots** with A+P+S=B and matching journal sums, plus the separate successful-retirement state. All **298 distinct receipt-block observations** (258 maximum-state/retirement, 16 duplicate, 12 paid-fault, 12 refund-fault) retained protected reserves and liquid backing in this run. No accounting inconsistency was found. Minimum observed excess over floor+U+A: **8.160179739641246099999997 NEAR**. These generously funded fixtures are not near-insolvency stress tests.
+
+**PASS** covers the observed block-end states, authenticated settlement behavior and tested gas paths. **UNVERIFIED**: every intra-block receipt boundary, exact in-flight refund conservation, near-floor runtime funding, every possible gas path and permanent missing-delivery behavior. The callback-failure tests establish failed execution and retained obligations, not successful recovery.
+
+### Defects, limitations and decision
+
+The previous diagnostic-build mismatch and error-string-dependent harness failure are corrected and confirmed by this successful runtime run. **No new harness failure or production-contract accounting/authorization defect was demonstrated.** Expected gas failures, AccountDoesNotExist and authorization/retirement rejections are test evidence, not failed scenarios.
+
+**High limitations remain:** an uncertain/failed callback can strand pending reservations indefinitely, and retained full-access keys bypass policy. No safe automatic recovery exists through the current API; time, balance changes, owner statements and new probe promises do not authenticate an original transfer outcome. A separate recovery/custody design and review would be needed before public custody. **Medium evidence limitations remain:** intra-block/refund conservation and near-floor runtime behavior, as qualified above.
+
+**GO for completion of the explicitly scoped Phase 2B sandbox tests with these limitations recorded. NO-GO for an unconditional production security sign-off or public-funds deployment.** No uncertain budget release, second payment, additional run, public deployment or next phase was introduced. This execution report is a local documentation update only and has not been pushed. The historical preparation/failure reports below remain preserved; their pending-run language is superseded by this section.
+
+
 ## Final-closure corrections — local only, October 31, 2026
 
 **Local checks PASS: 59 tests (44 original + 8 existing model + 4 original harness + 3 new harness regressions). Corrected Linux sandbox execution: UNVERIFIED; not run. GO to request approval for one corrected private sandbox run; NO-GO for final security sign-off or public deployment.** The previous run remains historical evidence: 71 PASS / 1 FAIL, including all twelve original sandbox scenarios. No production contract defect has been confirmed and no production code, dependency version or lockfile changed.
@@ -93,7 +174,7 @@ node scripts/verify-phase2b-fixtures.mjs target/near/mandatelock.wasm target/pha
 - Official repository: [onchainbuilds/MandateLock](https://github.com/onchainbuilds/MandateLock), verified private and empty in Chrome before the migration, private after the push. GitHub CLI login and authenticated `/user` both verified `onchainbuilds`; the old account was inactive. The new checkout explicitly uses the authenticated CLI credential helper and only the official remote.
 - Commit: [`d80992baaa41b860c4eadcbf2c6f584293a7d4b4`](https://github.com/onchainbuilds/MandateLock/commit/d80992baaa41b860c4eadcbf2c6f584293a7d4b4). All **210 committed files exactly matched** the reviewed upload hashes. Both original commits remain ancestors. The CRLF evidence record was preserved byte-for-byte; whitespace checking treated CR as a line ending. No caches, generated binaries or signing secrets were committed. The complete older evidence and Git bundle remain preserved locally.
 - Exactly **one normal push**, followed by exactly **one manual dispatch in Chrome**: [workflow 41202822467, attempt 1](https://github.com/onchainbuilds/MandateLock/actions/runs/41202822467), manually triggered by onchainbuilds at 08:49 EDT; total duration **8m 58s**, job **8m 52s**. No retry, force-push, repository visibility change or public NEAR deployment occurred.
-- [Artifact 13043740969](https://github.com/onchainbuilds/MandateLock/actions/runs/41202822467/artifacts/13043740969), downloaded through Chrome: **3,792,091 bytes**, SHA-256 `abed112b735a97aaa4563452fab6f8ae797971a72afd4eec904621526184df59`, matching GitHub's digest. All **3,472 extracted files** are retained under `artifacts/phase2b-github/evidence/`; the original zip, per-file hash manifest and [offline analysis](../artifacts/phase2b-github/evidence-analysis.json) are preserved beside it. [Detailed transactions, callbacks and balances](../artifacts/phase2b-github/result-details.json).
+- [Artifact 13043740969](https://github.com/onchainbuilds/MandateLock/actions/runs/41202822467/artifacts/13043740969), downloaded through Chrome: **3,792,091 bytes**, SHA-256 `abed112b735a97aaa4563452fab6f8ae797971a72afd4eec904621526184df59`, matching GitHub's digest. All **3,472 extracted files** are retained under `artifacts/phase2b-github/evidence/`; the original zip, per-file hash manifest and offline analysis (historical local-only reference; excluded from public snapshot; result retained without inventing evidence) are preserved beside it. Detailed transactions, callbacks and balances (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 - Ubuntu 24.04 x86_64, Rust/Cargo 1.93.0, cargo-near 0.22.0, near-sdk 5.29.1, near-workspaces 0.23.0, sandbox 2.13.4, protocol 86. Production Wasm remains **159,542 bytes**, SHA-256 `3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87`, identical to the proven Phase 2A Linux artifact. Formatting, strict Clippy and production build passed. The Node 20-to-24 action-runtime warning was nonblocking.
 
 ### Four new runtime scenarios

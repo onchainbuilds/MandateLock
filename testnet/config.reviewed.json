@@ -1,0 +1,32 @@
+{
+  "network": "testnet",
+  "rpc": "https://rpc.testnet.near.org",
+  "accounts": {
+    "owner": "ml-demo-20261031.testnet",
+    "vault": "vault.ml-demo-20261031.testnet",
+    "agent": "agent.ml-demo-20261031.testnet",
+    "recipient": "merchant.ml-demo-20261031.testnet",
+    "attacker": "attacker.ml-demo-20261031.testnet"
+  },
+  "publicKeys": {
+    "owner": "ed25519:uuukiCHdpBwSHGzoxGTQBZLJt4mLo8xaQZWW2uM1no4",
+    "vault": "ed25519:HNbuxCPLJDP7NdVzC9nfRnH3CXYE4GxSECPMVm1fstUD",
+    "agentAdmin": "ed25519:CT9t96mxq34JXQVi8wwn91uxrg2zwwF7dZ97afh4gmcE",
+    "recipient": "ed25519:7ANwdL5Ydro9N5fFrXLij71sDQLZC6HecJMEW8DfdbM1",
+    "attacker": "ed25519:FXDtEpmVTLyyNBma3v9cjzsSr2Sa8eCXsoeK82zYUf8S",
+    "agents": [
+      "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+      "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+      "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+    ]
+  },
+  "expiresAtNs": "1793548800000000000",
+  "wasm": "artifacts/phase2b-closure-run/evidence/phase2a/mandatelock.wasm",
+  "networkReview": {
+    "protocol_version": 88,
+    "storage_amount_per_byte": "10000000000000000000",
+    "transaction_costs_sha256": "eb68321d79f0296d0928eca0603e8c9882c1fc493dee9b66e977c3ea07d04a8e",
+    "max_gas_price": "100000000"
+  },
+  "custodyProfile": "phase4-20261031"
+}

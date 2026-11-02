@@ -1,0 +1,602 @@
+{
+  "phase": "after",
+  "at": "2026-11-02T18:01:38.470Z",
+  "steps": [
+    {
+      "label": "T1",
+      "hash": "DPcXxEw8JKzkYgq9mj6NoKZ1B6j73ZZzeBu5fY1HtTrF",
+      "providers": [
+        {
+          "source": "https://rpc.testnet.fastnear.com",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": ""
+          },
+          "fee": "234976581674100000000",
+          "receipts": [
+            {
+              "id": "6RuEMJaUueLs54U79r45Au1qAsCX1RK7BavqPfiAJEn",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"mandate_retired\",\"data\":[{\"mandate_id\":\"2\",\"unallocated\":\"1000000000000000000000000\"}]}"
+              ],
+              "gas": 2040943377301
+            },
+            {
+              "id": "EnefDoLzr2W7nxER4VMxq1VTNPNiweUbZeAfLxBbnkCu",
+              "executor": "ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        },
+        {
+          "source": "https://near-testnet.drpc.org",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": ""
+          },
+          "fee": "234976581674100000000",
+          "receipts": [
+            {
+              "id": "6RuEMJaUueLs54U79r45Au1qAsCX1RK7BavqPfiAJEn",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"mandate_retired\",\"data\":[{\"mandate_id\":\"2\",\"unallocated\":\"1000000000000000000000000\"}]}"
+              ],
+              "gas": 2040943377301
+            },
+            {
+              "id": "EnefDoLzr2W7nxER4VMxq1VTNPNiweUbZeAfLxBbnkCu",
+              "executor": "ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        }
+      ]
+    },
+    {
+      "label": "T2",
+      "hash": "9AbPXmJcDY2R5MJCrhSDU1nqQtU3gguoMDLoq9wcsqrt",
+      "providers": [
+        {
+          "source": "https://rpc.testnet.fastnear.com",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": ""
+          },
+          "fee": "139928933177600000000",
+          "receipts": [
+            {
+              "id": "CWokR2tq2uR6pQsVmJLfdm3V1vtR3FVfZ4Enp5aHfzke",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 699644665888
+            },
+            {
+              "id": "Eo4rWLLuoE3yqu7AkLrxQi5KcAf3nFzk25dZ1g1PGp2D",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        },
+        {
+          "source": "https://near-testnet.drpc.org",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": ""
+          },
+          "fee": "139928933177600000000",
+          "receipts": [
+            {
+              "id": "CWokR2tq2uR6pQsVmJLfdm3V1vtR3FVfZ4Enp5aHfzke",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 699644665888
+            },
+            {
+              "id": "Eo4rWLLuoE3yqu7AkLrxQi5KcAf3nFzk25dZ1g1PGp2D",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        }
+      ]
+    },
+    {
+      "label": "T3",
+      "hash": "81QCQbgYgM1VYJ2i3gbN7JzM9VsPUESdywtbohZTSXBe",
+      "providers": [
+        {
+          "source": "https://rpc.testnet.fastnear.com",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": "IjMi"
+          },
+          "fee": "248659338354000000000",
+          "receipts": [
+            {
+              "id": "2chip1XtYh9zo4e94PZMBckFNS3Cdm8BAyVQ7sJCjKaR",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": "IjMi"
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"mandate_created\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":null,\"recipient\":null,\"amount\":null,\"available\":\"1000000000000000000000000\",\"pending\":\"0\",\"spent\":\"0\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 2158315988380
+            },
+            {
+              "id": "A7Wjt1cmm93vYcdog3Sxpd2ZhCQLQGDHJj6XVYgyc8Ds",
+              "executor": "ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        },
+        {
+          "source": "https://near-testnet.drpc.org",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": "IjMi"
+          },
+          "fee": "248659338354000000000",
+          "receipts": [
+            {
+              "id": "2chip1XtYh9zo4e94PZMBckFNS3Cdm8BAyVQ7sJCjKaR",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": "IjMi"
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"mandate_created\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":null,\"recipient\":null,\"amount\":null,\"available\":\"1000000000000000000000000\",\"pending\":\"0\",\"spent\":\"0\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 2158315988380
+            },
+            {
+              "id": "A7Wjt1cmm93vYcdog3Sxpd2ZhCQLQGDHJj6XVYgyc8Ds",
+              "executor": "ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        }
+      ]
+    },
+    {
+      "label": "T4",
+      "hash": "EWywBLBSiwZ5F47GYwwSGyBrbMJPz6v6Svj6ECqXKHuT",
+      "providers": [
+        {
+          "source": "https://rpc.testnet.fastnear.com",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "fee": "604499135689200000000",
+          "receipts": [
+            {
+              "id": "7FcSLiohJkyG58ECtLVZn8BFAcqspk7dFGPx8U4a7iWu",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessReceiptId": "DK419poBwS851QphdEBDSWncUB1kFBSGD1unCrsorxE"
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"payment_scheduled\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":0,\"recipient\":\"merchant.ml-demo-20261031.testnet\",\"amount\":\"100000000000000000000000\",\"available\":\"900000000000000000000000\",\"pending\":\"100000000000000000000000\",\"spent\":\"0\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 3081998188390
+            },
+            {
+              "id": "3ruiNf5G8FFuT9BoaXDyWA7dB294UXVv3b9zpDpr3ogE",
+              "executor": "merchant.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "4yHtXFqAN8uwkB9enFWkK71QLDVFUrUvUNuzDWAonVJ2",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "DK419poBwS851QphdEBDSWncUB1kFBSGD1unCrsorxE",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": "dHJ1ZQ=="
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"payment_succeeded\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":0,\"recipient\":\"merchant.ml-demo-20261031.testnet\",\"amount\":\"100000000000000000000000\",\"available\":\"900000000000000000000000\",\"pending\":\"0\",\"spent\":\"100000000000000000000000\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 2425695274197
+            },
+            {
+              "id": "9caZEusBKe2BBgvxMacDnj7MSfnpEQBw65KcC4W4yRWV",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "qzmeqpvZA343wGoZVjKJZXjSApWCpLVS1soC11yQZ6W",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        },
+        {
+          "source": "https://near-testnet.drpc.org",
+          "finality": "FINAL",
+          "status": {
+            "SuccessValue": "dHJ1ZQ=="
+          },
+          "fee": "604499135689200000000",
+          "receipts": [
+            {
+              "id": "7FcSLiohJkyG58ECtLVZn8BFAcqspk7dFGPx8U4a7iWu",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessReceiptId": "DK419poBwS851QphdEBDSWncUB1kFBSGD1unCrsorxE"
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"payment_scheduled\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":0,\"recipient\":\"merchant.ml-demo-20261031.testnet\",\"amount\":\"100000000000000000000000\",\"available\":\"900000000000000000000000\",\"pending\":\"100000000000000000000000\",\"spent\":\"0\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 3081998188390
+            },
+            {
+              "id": "3ruiNf5G8FFuT9BoaXDyWA7dB294UXVv3b9zpDpr3ogE",
+              "executor": "merchant.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "4yHtXFqAN8uwkB9enFWkK71QLDVFUrUvUNuzDWAonVJ2",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "DK419poBwS851QphdEBDSWncUB1kFBSGD1unCrsorxE",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": "dHJ1ZQ=="
+              },
+              "logs": [
+                "EVENT_JSON:{\"standard\":\"mandatelock\",\"version\":\"1.0.0\",\"event\":\"payment_succeeded\",\"data\":[{\"mandate_id\":\"3\",\"nonce\":0,\"recipient\":\"merchant.ml-demo-20261031.testnet\",\"amount\":\"100000000000000000000000\",\"available\":\"900000000000000000000000\",\"pending\":\"0\",\"spent\":\"100000000000000000000000\",\"unallocated\":\"0\"}]}"
+              ],
+              "gas": 2425695274197
+            },
+            {
+              "id": "9caZEusBKe2BBgvxMacDnj7MSfnpEQBw65KcC4W4yRWV",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            },
+            {
+              "id": "qzmeqpvZA343wGoZVjKJZXjSApWCpLVS1soC11yQZ6W",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        }
+      ]
+    },
+    {
+      "label": "T5",
+      "hash": "6YEmjM2aaj5YBzg48844XKgLxJqN5EboV7PV1bGjvR3m",
+      "providers": [
+        {
+          "source": "https://rpc.testnet.fastnear.com",
+          "finality": "FINAL",
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+                  }
+                }
+              }
+            }
+          },
+          "fee": "194998628223600000000",
+          "receipts": [
+            {
+              "id": "6NtZDTGovHSxaC4JxtV5Knkw3p1aCjV9E6Enpdn4bzGK",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "Failure": {
+                  "ActionError": {
+                    "index": 0,
+                    "kind": {
+                      "FunctionCallError": {
+                        "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+                      }
+                    }
+                  }
+                }
+              },
+              "logs": [],
+              "gas": 1635870950431
+            },
+            {
+              "id": "8D7KtRPNJLnRNQ5sQFeLohKro8Dj3GNUiPtdGU6TeVwN",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        },
+        {
+          "source": "https://near-testnet.drpc.org",
+          "finality": "FINAL",
+          "status": {
+            "Failure": {
+              "ActionError": {
+                "index": 0,
+                "kind": {
+                  "FunctionCallError": {
+                    "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+                  }
+                }
+              }
+            }
+          },
+          "fee": "194998628223600000000",
+          "receipts": [
+            {
+              "id": "6NtZDTGovHSxaC4JxtV5Knkw3p1aCjV9E6Enpdn4bzGK",
+              "executor": "vault.ml-demo-20261031.testnet",
+              "status": {
+                "Failure": {
+                  "ActionError": {
+                    "index": 0,
+                    "kind": {
+                      "FunctionCallError": {
+                        "ExecutionError": "Smart contract panicked: ERR_RECIPIENT"
+                      }
+                    }
+                  }
+                }
+              },
+              "logs": [],
+              "gas": 1635870950431
+            },
+            {
+              "id": "8D7KtRPNJLnRNQ5sQFeLohKro8Dj3GNUiPtdGU6TeVwN",
+              "executor": "agent.ml-demo-20261031.testnet",
+              "status": {
+                "SuccessValue": ""
+              },
+              "logs": [],
+              "gas": 223182562500
+            }
+          ],
+          "receipt_verification": "PASS"
+        }
+      ]
+    }
+  ],
+  "common": {
+    "block": "4D6HoBVZPzzYUL9TS6Zme8Dj5WLkaJGgSzmNCQrR1HPL",
+    "height": 275933389,
+    "accounting": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "3",
+      "unallocated": "0",
+      "available": "900000000000000000000000",
+      "pending": "0",
+      "spent": "100000000000000000000000",
+      "budget": "1000000000000000000000000",
+      "storage_and_operating_floor": "1710270000000000000000000",
+      "account_balance": "4897473032905705800000000"
+    },
+    "policy": {
+      "mandate_id": "3",
+      "owner_id": "ml-demo-20261031.testnet",
+      "agent_id": "agent.ml-demo-20261031.testnet",
+      "agent_keys": [
+        "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2",
+        "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC",
+        "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+      ],
+      "allowed_recipients": [
+        "merchant.ml-demo-20261031.testnet"
+      ],
+      "budget": "1000000000000000000000000",
+      "per_transaction_limit": "400000000000000000000000",
+      "expires_at_ns": "1793664000000000000",
+      "paused": false,
+      "revoked": false,
+      "request_capacity": 64
+    },
+    "slots": [
+      {
+        "mandate_id": "3",
+        "nonce": 0,
+        "status": "Succeeded",
+        "amount": "100000000000000000000000",
+        "recipient": "merchant.ml-demo-20261031.testnet",
+        "accepted_at_ns": "1793642467976079449"
+      },
+      {
+        "mandate_id": "3",
+        "nonce": 1,
+        "status": "Unused",
+        "amount": "0",
+        "recipient": "",
+        "accepted_at_ns": "0"
+      }
+    ],
+    "keys": {
+      "owner": [
+        {
+          "access_key": {
+            "nonce": 275614533000011,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:uuukiCHdpBwSHGzoxGTQBZLJt4mLo8xaQZWW2uM1no4"
+        }
+      ],
+      "vault": [
+        {
+          "access_key": {
+            "nonce": 275624669000002,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:HNbuxCPLJDP7NdVzC9nfRnH3CXYE4GxSECPMVm1fstUD"
+        }
+      ],
+      "agent": [
+        {
+          "access_key": {
+            "nonce": 275933295000002,
+            "permission": {
+              "FunctionCall": {
+                "allowance": "399200502236087200000000",
+                "method_names": [
+                  "execute_payment"
+                ],
+                "receiver_id": "vault.ml-demo-20261031.testnet"
+              }
+            }
+          },
+          "public_key": "ed25519:8dTURL2rSnsgNQ5w8Z33U4B29UqLW5YFN8UqAN6soVU2"
+        },
+        {
+          "access_key": {
+            "nonce": 275933295000000,
+            "permission": {
+              "FunctionCall": {
+                "allowance": "150000000000000000000000",
+                "method_names": [
+                  "execute_payment"
+                ],
+                "receiver_id": "vault.ml-demo-20261031.testnet"
+              }
+            }
+          },
+          "public_key": "ed25519:8w6pfvV598veazW3mDoHkipAVPFZHrVjB3eFs4inWdLC"
+        },
+        {
+          "access_key": {
+            "nonce": 275933295000000,
+            "permission": {
+              "FunctionCall": {
+                "allowance": "150000000000000000000000",
+                "method_names": [
+                  "execute_payment"
+                ],
+                "receiver_id": "vault.ml-demo-20261031.testnet"
+              }
+            }
+          },
+          "public_key": "ed25519:9AzP8cJvtQuUX8WEnuB5mhedQdvPi1sWsDZF95c7o2ay"
+        },
+        {
+          "access_key": {
+            "nonce": 275624783000002,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:CT9t96mxq34JXQVi8wwn91uxrg2zwwF7dZ97afh4gmcE"
+        }
+      ],
+      "recipient": [
+        {
+          "access_key": {
+            "nonce": 275624882000000,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:7ANwdL5Ydro9N5fFrXLij71sDQLZC6HecJMEW8DfdbM1"
+        }
+      ],
+      "attacker": [
+        {
+          "access_key": {
+            "nonce": 275675021000000,
+            "permission": "FullAccess"
+          },
+          "public_key": "ed25519:FXDtEpmVTLyyNBma3v9cjzsSr2Sa8eCXsoeK82zYUf8S"
+        }
+      ]
+    },
+    "balances": {
+      "owner": "3769967324141319700000000",
+      "vault": "4897473032905705800000000",
+      "agent": "998977612344732000000000",
+      "recipient": "200000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  },
+  "agreement": true
+}

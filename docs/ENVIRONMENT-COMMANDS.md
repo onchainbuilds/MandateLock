@@ -1,8 +1,6 @@
-> Preserved historical report; local path prefixes redacted for migration. Current status: PHASE2B.md. Some local diagnostic log links are excluded from the upload.
-
 # Phase 1A command record
 
-Executed October 30, 2026, America/New_York, from `<workspace>` unless another working directory is stated. This records the substantive inspection, download, installation and compilation commands. Documentation reads/writes and progress polls are not installation or build commands. Installation/download/build processes used approved elevated execution; no automatic approval rejection occurred.
+Executed October 30, 2026, America/New_York, from `.` unless another working directory is stated. This records the substantive inspection, download, installation and compilation commands. Documentation reads/writes and progress polls are not installation or build commands. Installation/download/build processes used approved elevated execution; no automatic approval rejection occurred.
 
 ## Initial inspection
 
@@ -133,7 +131,7 @@ Result: tagged root declares `rust-version = "1.93"`.
 
 ## Smoke compilation
 
-Working directory: `<workspace>\.phase1a-smoke`. Source files were written with apply_patch, not a downloaded project generator. No other-project source was used.
+Working directory: `.\.phase1a-smoke`. Source files were written with apply_patch, not a downloaded project generator. No other-project source was used.
 
 ```powershell
 $rustBin = Join-Path $env:USERPROFILE '.cargo\bin'

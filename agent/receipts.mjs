@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {isDeepStrictEqual} from 'node:util';
+const terminal=s=>s&&('Failure'in s||'SuccessValue'in s||'SuccessReceiptId'in s);
+export function receipt(request,{raw=null,after=null,evidence=null,expectedHash=null,submitted=false}={}){
+ const out={schema:'mandatelock.receipt.v1',request_id:request.request_id,task_id:request.task_id,mode:request.mode,evidence_kind:evidence?'recorded-sandbox':'local-planning',authorization:request.authorization,transaction_hash:null,finality:'UNVERIFIED',transaction_status:submitted?'UNKNOWN':'NOT_SUBMITTED',payment_status:submitted?'UNKNOWN':'NOT_SUBMITTED',settlement:'UNKNOWN',accounting:null,callbacks:[],evidence,broadcast:false,task_binding:'Local label only; not an onchain task identifier'};
+ if(!raw){if(submitted&&expectedHash){assert(/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(expectedHash),'Invalid known transaction hash');out.transaction_hash=expectedHash;}return out;}
+ const t=raw.transaction,w=request.unsigned_intent;assert(w&&t&&expectedHash&&t.hash===expectedHash,'Missing or mismatched transaction binding');assert.equal(t.signer_id,w.signer_id);assert.equal(t.public_key,w.public_key);assert.equal(t.receiver_id,w.receiver_id);assert.equal(t.actions.length,1);const f=t.actions[0].FunctionCall;assert.equal(f.method_name,w.method_name);assert.equal(f.deposit,'0');assert.equal(String(f.gas),w.gas);assert(isDeepStrictEqual(JSON.parse(Buffer.from(f.args,'base64')),w.args),'Request arguments differ');out.transaction_hash=t.hash;out.transaction_status='UNKNOWN';out.payment_status='UNKNOWN';
+ if(raw.final_execution_status!=='FINAL'||!terminal(raw.status)||!raw.transaction_outcome||!raw.receipts_outcome?.length||![raw.transaction_outcome,...raw.receipts_outcome].every(r=>terminal(r.outcome?.status)))return out;
+ out.finality='FINAL';out.transaction_status=raw.status.Failure?'FINALIZED_FAILURE':'FINALIZED_SUCCESS';
+ const events=[];for(const r of raw.receipts_outcome){if(r.outcome.executor_id!==w.receiver_id)continue;for(const line of r.outcome.logs??[]){if(!line.startsWith('EVENT_JSON:'))continue;let e;try{e=JSON.parse(line.slice(11));}catch{continue;}if(e.standard!=='mandatelock')continue;for(const d of e.data??[])if(d.mandate_id===w.args.mandate_id&&d.nonce===w.args.nonce&&d.amount===w.args.amount&&d.recipient===w.args.recipient){events.push(e.event);if(['payment_succeeded','payment_failed'].includes(e.event)&&!r.outcome.status.Failure)out.callbacks.push({event:e.event,receipt_id:r.id,gas_burnt:String(r.outcome.gas_burnt),status:r.outcome.status});}}}
+ if(!after)return out;const a=after.accounting;assert.equal(a.last_mandate_id,w.args.mandate_id,'Wrong accounting mandate');assert(BigInt(a.available)+BigInt(a.pending)+BigInt(a.spent)===BigInt(a.budget),'Invalid accounting');out.accounting=a;const slot=after.payments.find(x=>x.nonce===w.args.nonce);if(slot&&slot.status!=='Unused'){assert.equal(slot.amount,w.args.amount);assert.equal(slot.recipient,w.args.recipient);}
+ const success=out.callbacks.some(x=>x.event==='payment_succeeded'),failed=out.callbacks.some(x=>x.event==='payment_failed');assert(!(success&&failed),'Conflicting terminal callbacks');
+ if(slot?.status==='Succeeded'&&success){out.payment_status='FINALIZED_SUCCESS';out.settlement='SUCCEEDED';}
+ else if(slot?.status==='Failed'&&failed){out.payment_status='FINALIZED_FAILURE';out.settlement='FAILED_REFUNDED';}
+ else if(slot?.status==='Pending'||events.includes('payment_scheduled'))out.settlement='PENDING_UNCERTAIN';
+ else if(raw.status.Failure&&!events.includes('payment_scheduled')){out.payment_status='FINALIZED_FAILURE';out.settlement='REJECTED';}
+ return out;
+}

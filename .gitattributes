@@ -1,0 +1,2 @@
+# Frozen source/evidence hashes are byte-sensitive. Preserve repository bytes on every platform.
+* -text

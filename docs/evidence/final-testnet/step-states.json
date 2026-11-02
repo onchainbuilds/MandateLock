@@ -1,0 +1,183 @@
+[
+  {
+    "step": "T1",
+    "hash": "DPcXxEw8JKzkYgq9mj6NoKZ1B6j73ZZzeBu5fY1HtTrF",
+    "fee": "234976581674100000000",
+    "block": "3zzYPFE23qjGVPRU9UsLTvqSMNJ1ADzqk7fqAmk7igmU",
+    "height": 275933282,
+    "ledger": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "2",
+      "unallocated": "1000000000000000000000000",
+      "available": "0",
+      "pending": "0",
+      "spent": "0",
+      "budget": "0",
+      "storage_and_operating_floor": "1649180000000000000000000",
+      "account_balance": "4997473032905705800000000"
+    },
+    "slots": [],
+    "balances": {
+      "owner": "3770215983479673700000000",
+      "vault": "4997473032905705800000000",
+      "agent": "999917039041822400000000",
+      "recipient": "100000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  },
+  {
+    "step": "T2",
+    "hash": "9AbPXmJcDY2R5MJCrhSDU1nqQtU3gguoMDLoq9wcsqrt",
+    "fee": "139928933177600000000",
+    "block": "GUnXjn2id8NEemosUYYwxmzKZJyBvjLdBRjg4PRfimb7",
+    "height": 275933298,
+    "ledger": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "2",
+      "unallocated": "1000000000000000000000000",
+      "available": "0",
+      "pending": "0",
+      "spent": "0",
+      "budget": "0",
+      "storage_and_operating_floor": "1649180000000000000000000",
+      "account_balance": "4997473032905705800000000"
+    },
+    "slots": [],
+    "balances": {
+      "owner": "3770215983479673700000000",
+      "vault": "4997473032905705800000000",
+      "agent": "999777110108644800000000",
+      "recipient": "100000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  },
+  {
+    "step": "T3",
+    "hash": "81QCQbgYgM1VYJ2i3gbN7JzM9VsPUESdywtbohZTSXBe",
+    "fee": "248659338354000000000",
+    "block": "42pvSfLnCgg5Gm8Q8FfXquq3YVE7soEUA6qQ81vPdWLb",
+    "height": 275933317,
+    "ledger": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "3",
+      "unallocated": "0",
+      "available": "1000000000000000000000000",
+      "pending": "0",
+      "spent": "0",
+      "budget": "1000000000000000000000000",
+      "storage_and_operating_floor": "1710270000000000000000000",
+      "account_balance": "4997473032905705800000000"
+    },
+    "slots": [
+      {
+        "mandate_id": "3",
+        "nonce": 0,
+        "status": "Unused",
+        "amount": "0",
+        "recipient": "",
+        "accepted_at_ns": "0"
+      },
+      {
+        "mandate_id": "3",
+        "nonce": 1,
+        "status": "Unused",
+        "amount": "0",
+        "recipient": "",
+        "accepted_at_ns": "0"
+      }
+    ],
+    "balances": {
+      "owner": "3769967324141319700000000",
+      "vault": "4997473032905705800000000",
+      "agent": "999777110108644800000000",
+      "recipient": "100000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  },
+  {
+    "step": "T4",
+    "hash": "EWywBLBSiwZ5F47GYwwSGyBrbMJPz6v6Svj6ECqXKHuT",
+    "fee": "604499135689200000000",
+    "block": "9Hmp3ZbUKB7CwTznqCPew8RTdRVxd3ih4Saj4SxA3cyy",
+    "height": 275933338,
+    "ledger": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "3",
+      "unallocated": "0",
+      "available": "900000000000000000000000",
+      "pending": "0",
+      "spent": "100000000000000000000000",
+      "budget": "1000000000000000000000000",
+      "storage_and_operating_floor": "1710270000000000000000000",
+      "account_balance": "4897473032905705800000000"
+    },
+    "slots": [
+      {
+        "mandate_id": "3",
+        "nonce": 0,
+        "status": "Succeeded",
+        "amount": "100000000000000000000000",
+        "recipient": "merchant.ml-demo-20261031.testnet",
+        "accepted_at_ns": "1793642467976079449"
+      },
+      {
+        "mandate_id": "3",
+        "nonce": 1,
+        "status": "Unused",
+        "amount": "0",
+        "recipient": "",
+        "accepted_at_ns": "0"
+      }
+    ],
+    "balances": {
+      "owner": "3769967324141319700000000",
+      "vault": "4897473032905705800000000",
+      "agent": "999172610972955600000000",
+      "recipient": "200000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  },
+  {
+    "step": "T5",
+    "hash": "6YEmjM2aaj5YBzg48844XKgLxJqN5EboV7PV1bGjvR3m",
+    "fee": "194998628223600000000",
+    "block": "drKa2JBUPfLTbWpBSH9zhZrSkXsTmb6Q1S1VxCSoLBj",
+    "height": 275933360,
+    "ledger": {
+      "owner_id": "ml-demo-20261031.testnet",
+      "last_mandate_id": "3",
+      "unallocated": "0",
+      "available": "900000000000000000000000",
+      "pending": "0",
+      "spent": "100000000000000000000000",
+      "budget": "1000000000000000000000000",
+      "storage_and_operating_floor": "1710270000000000000000000",
+      "account_balance": "4897473032905705800000000"
+    },
+    "slots": [
+      {
+        "mandate_id": "3",
+        "nonce": 0,
+        "status": "Succeeded",
+        "amount": "100000000000000000000000",
+        "recipient": "merchant.ml-demo-20261031.testnet",
+        "accepted_at_ns": "1793642467976079449"
+      },
+      {
+        "mandate_id": "3",
+        "nonce": 1,
+        "status": "Unused",
+        "amount": "0",
+        "recipient": "",
+        "accepted_at_ns": "0"
+      }
+    ],
+    "balances": {
+      "owner": "3769967324141319700000000",
+      "vault": "4897473032905705800000000",
+      "agent": "998977612344732000000000",
+      "recipient": "200000000000000000000000",
+      "attacker": "100000000000000000000000"
+    }
+  }
+]

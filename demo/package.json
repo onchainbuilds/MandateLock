@@ -1,0 +1,12 @@
+{
+  "name": "mandatelock-security-demo",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "verify": "node evidence.mjs",
+    "agent": "node agent.mjs"
+  }
+}

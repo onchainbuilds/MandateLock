@@ -1,5 +1,3 @@
-> Preserved historical report; local path prefixes redacted for migration. Current status: PHASE2B.md. Some local diagnostic log links are excluded from the upload.
-
 # MandateLock — Phase 0: Architecture & Security Validation
 
 Research date: October 30, 2026 (America/New_York). Target submission: November 14, 2026, supplied by the owner; event rules, eligibility, track, and cutoff time have not been independently verified. Former working name: AgentGate.
@@ -302,7 +300,7 @@ Inspection was restricted to the current workspace, command discovery/version pr
 
 | Item | Observed October 30, 2026 | Recommendation / readiness |
 | --- | --- | --- |
-| Workspace | `<workspace>`; empty before documentation | Correct isolated destination; no existing source or local AGENTS.md found |
+| Workspace | `.`; empty before documentation | Correct isolated destination; no existing source or local AGENTS.md found |
 | Git | 2.55.0.windows.3 | Available; `git status` reports not a repository. Local init is a later task; no public remote created |
 | Node.js | v24.19.0 | Available; keep installed 24.x for optional later wrapper/UI after checking selected tooling requirements; core Rust contract does not need npm |
 | npm / npx | npm 11.17.0; both commands discoverable | Available; no packages needed in Phase 0 |

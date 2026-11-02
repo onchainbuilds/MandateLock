@@ -1,0 +1,14 @@
+{
+  "classification": "EXPIRED / NON-EXECUTION CORROBORATED",
+  "demo_result": "FAIL — expected payment did not execute; no onchain failure receipt",
+  "height": 275790037,
+  "validity_period": 86400,
+  "reference_height": 275681049,
+  "expired_by_heights": 22588,
+  "independent_state_agreement": true,
+  "nonce_unconsumed": true,
+  "payment_unused": true,
+  "mandate_expired": true,
+  "cannot_execute_original_again": true,
+  "limitations": "RPC-backed operational conclusion, not independent full-chain cryptographic proof. No propagation/drop cause or original signature bytes recovered."
+}

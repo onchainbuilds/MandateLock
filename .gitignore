@@ -9,3 +9,8 @@
 /.env.*
 /*.key
 /*.pem
+/testnet/node_modules/
+/testnet/private/
+/testnet/config.local.json
+/testnet/approval.local.json
+**/*.secret.json

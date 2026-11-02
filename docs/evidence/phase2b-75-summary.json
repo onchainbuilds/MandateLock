@@ -1,0 +1,146 @@
+{
+  "scope": "Derived historical CI summary, not a new run or a complete raw log archive",
+  "workflow": "https://github.com/onchainbuilds/MandateLock/actions/runs/41205116391",
+  "commit": "75051c2fc7ecff6390c49fa67274d70d275d07c8",
+  "total_pass": 75,
+  "total_fail": 0,
+  "phase2a": {
+    "failures": 0,
+    "tests": [
+      {
+        "progress": {
+          "label": "authorized",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "01 authorized payment"
+      },
+      {
+        "progress": {
+          "label": "rejected",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "02 unauthorized recipient"
+      },
+      {
+        "progress": {
+          "label": "rejected",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "03 transaction ceiling"
+      },
+      {
+        "progress": {
+          "label": "over-budget",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "04 total budget"
+      },
+      {
+        "progress": {
+          "label": "rejected",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "05 expired authorization"
+      },
+      {
+        "progress": {
+          "label": "replayed",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "06 replay"
+      },
+      {
+        "progress": {
+          "method": "revoke",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "07 unauthorized administration"
+      },
+      {
+        "progress": {
+          "method": "revoke",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "08 restricted key"
+      },
+      {
+        "progress": {
+          "method": "on_payment_result",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "09 forged callback"
+      },
+      {
+        "progress": {
+          "label": "authorized",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "10 async successful settlement"
+      },
+      {
+        "progress": {
+          "label": "failed-nonce-replay",
+          "stage": "target_submission"
+        },
+        "status": "PASS",
+        "test": "11 genuine native failure"
+      },
+      {
+        "progress": {
+          "stage": "broadcasting_independent_transactions"
+        },
+        "status": "PASS",
+        "test": "12 independent competing requests"
+      }
+    ],
+    "unverified": 0
+  },
+  "phase2b": {
+    "tests": [
+      {
+        "status": "PASS",
+        "test": "production maximum-state gas and receipt-block balances"
+      },
+      {
+        "status": "PASS",
+        "test": "production full-access custody limitation"
+      },
+      {
+        "status": "PASS",
+        "test": "diagnostic duplicate callback idempotency"
+      },
+      {
+        "status": "PASS",
+        "test": "diagnostic out-of-gas callback leaves pending"
+      }
+    ]
+  },
+  "native_excerpts": [
+    {
+      "source": "phase2a/native-tests.log",
+      "source_sha256": "48e8adb81e0cf37352676e34768e712bc7310fe99a16929ff42653cbebe22754",
+      "verbatim_result_lines": [
+        "test result: ok. 44 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "source": "phase2a/harness-regressions.log",
+      "source_sha256": "399af66629509bc2fb1aa125e2ca37d1dd9603528fd0030eddc3208715df31de",
+      "verbatim_result_lines": [
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    }
+  ]
+}

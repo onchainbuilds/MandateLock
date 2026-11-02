@@ -1,0 +1,31 @@
+{
+  "approved": false,
+  "network": "testnet",
+  "config_sha256": "52c3bd8d84b806010536c058491064660b6365eec7853336b6d80919921ef655",
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "expires_at": "2026-11-01T15:00:00Z",
+  "operations": [
+    "create-vault",
+    "create-agent",
+    "create-recipient",
+    "create-attacker",
+    "deploy-init",
+    "install-agent-keys",
+    "fund",
+    "mandate",
+    "authorized",
+    "direct-rejection",
+    "concurrency"
+  ],
+  "dependency_lock_sha256": "0920f50173b086d97b0fbe6b19822f1178a7167a83461f2ad73f74b5666702eb",
+  "note": "Fee-corrected review copy only. Includes current account_creation_charge plus conservative gas allowance. No execution authorized; exact 13 transaction actions unchanged; incoming bootstrap 10 NEAR, outgoing cap 8 NEAR.",
+  "bootstrap_transaction_hash": "HhF51drrwKbaauC1MQLqpPjFUcHXHzvCvX9qzAvvoAjQ",
+  "authorized_starting_balance_near": "10",
+  "max_aggregate_outgoing_near": "8",
+  "max_fees_yocto": "201000000000000000000000",
+  "plan_sha256": "c690ae71c36dc58b026546167949110889b20f284d372e1d04de562fecb182ab",
+  "latest_start_at": "2026-11-01T14:30:00Z",
+  "latest_submission_at": "2026-11-01T14:50:00Z",
+  "fee_model_version": 2,
+  "account_creation_charge": "7000000000000000000000"
+}

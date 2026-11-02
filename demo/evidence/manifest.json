@@ -1,0 +1,119 @@
+{
+  "mode": "recorded-sandbox",
+  "run_id": "41205116391",
+  "workflow_url": "https://github.com/onchainbuilds/MandateLock/actions/runs/41205116391",
+  "commit": "75051c2fc7ecff6390c49fa67274d70d275d07c8",
+  "recorded_date": "2026-10-31",
+  "artifact_sha256": "fa6f6470af9e214cbfd43dd1b19632816b59667fc3e0bcd8691b3cbf7903b6ef",
+  "provenance": "Unmodified selected files from the downloaded private GitHub Actions artifact. Local hashes detect changes; this is not a cryptographic chain-proof verifier.",
+  "files": {
+    "phase2a/authorized/authorized-before.json": {
+      "sha256": "ee093280c716347849d536e290d25d985dcdd4ae59b1abf65113904c5a52e0c1",
+      "bytes": 9319
+    },
+    "phase2a/authorized/authorized-after.json": {
+      "sha256": "e6facb15207282c03ab1de0555438c441e00033340b5523501ecc178f979ef8d",
+      "bytes": 9396
+    },
+    "phase2a/authorized/setup-configure-transaction.json": {
+      "sha256": "d4c9dd96d74cc98befa778a5abbb5c555f1a1fb80486536dd5e1f5d62292edf1",
+      "bytes": 7506
+    },
+    "phase2a/authorized/setup-key-0-transaction.json": {
+      "sha256": "8aedc2f3394753bd7c9a9b20521bcf54d62f7d385205cd2afe50d726d1df8a92",
+      "bytes": 3066
+    },
+    "phase2a/authorized/setup-key-1-transaction.json": {
+      "sha256": "260c974ad0428fe98dd78d3223f9adcab6a8b0bc7ab1fd73bbdf704f5fa68482",
+      "bytes": 3066
+    },
+    "phase2a/authorized/setup-key-2-transaction.json": {
+      "sha256": "125f3e2c9389cb47b3c38f614ab5a8a28c4c88813cb386b9d6ecbf83022db908",
+      "bytes": 3066
+    },
+    "phase2a/authorized/authorized-transaction.json": {
+      "sha256": "ad6b6b76267cb19f1f0d296affe4d1091bb5de9238c3983229d3faa45cf021e6",
+      "bytes": 16171
+    },
+    "phase2a/recipient/rejected-before.json": {
+      "sha256": "26fd535cb76fc0173ecd8f27d3d3a8757cd6f6ab7af760e338ee3ca9146a98e9",
+      "bytes": 9316
+    },
+    "phase2a/recipient/rejected-after.json": {
+      "sha256": "a0e005892c47f520c97b4bac2e4f0d9ac2e2291d03947514b1c2bc10912eb92a",
+      "bytes": 9316
+    },
+    "phase2a/recipient/setup-configure-transaction.json": {
+      "sha256": "fd72e336de7f61bb93deffee935bc8177c5e895c827cbad55f5e731352fd2a38",
+      "bytes": 7499
+    },
+    "phase2a/recipient/setup-key-0-transaction.json": {
+      "sha256": "8806e0daad5a435320e4b35afbc5c63c5a7e4f67db1f542d1619b5929b0ab7b6",
+      "bytes": 3061
+    },
+    "phase2a/recipient/setup-key-1-transaction.json": {
+      "sha256": "8ee3516d87f9a9ec5fb8db620eb5a6f29e434c37e79d9d1832296eacd2cafa45",
+      "bytes": 3061
+    },
+    "phase2a/recipient/setup-key-2-transaction.json": {
+      "sha256": "6ee0310fb67f767ab280b170e0ee5cfe6c3a1ce597b31c84f8695e1121358d67",
+      "bytes": 3060
+    },
+    "phase2a/recipient/rejected-transaction.json": {
+      "sha256": "d545f11a9747cda0a136a75539b6b2b9e3148bb114f97903000a4dfcab08475c",
+      "bytes": 6273
+    },
+    "phase2a/concurrency/before.json": {
+      "sha256": "87cdb44777f70aaefd6ade3328ee670bfad7286d47f596de662c14d74a8aab60",
+      "bytes": 9336
+    },
+    "phase2a/concurrency/after.json": {
+      "sha256": "2710e41b1c1fd68246c431deb5fae745355ea0bc5367c7357e9bc3ea2752e655",
+      "bytes": 9470
+    },
+    "phase2a/concurrency/setup-configure-transaction.json": {
+      "sha256": "64aafce3b46484cb0cad5dfdccad4df60ed432f3baf4101c83c4ba040777fe69",
+      "bytes": 7518
+    },
+    "phase2a/concurrency/setup-key-0-transaction.json": {
+      "sha256": "3cb4d402cca65932189d103929061a5516b599c53e266adc77c572e576cf513a",
+      "bytes": 3074
+    },
+    "phase2a/concurrency/setup-key-1-transaction.json": {
+      "sha256": "4e0870c151b570ba1d567ba1c6ad21b9050d5734571a3100a38c797678871209",
+      "bytes": 3073
+    },
+    "phase2a/concurrency/setup-key-2-transaction.json": {
+      "sha256": "f85fae51a2275ca837f003668dffcfdeedf271bcd83c283d32baea7bd55738ab",
+      "bytes": 3074
+    },
+    "phase2a/concurrency/competing-0-transaction.json": {
+      "sha256": "46b0d447042b2f7b3d49de5b501b980843d123ac545285223138a3788cab7591",
+      "bytes": 6640
+    },
+    "phase2a/concurrency/competing-1-transaction.json": {
+      "sha256": "d1f6207e199c4ec8a393b0223fc9632c11d8289bf1434d820a43cd4cd5592d62",
+      "bytes": 16829
+    },
+    "phase2a/concurrency/competing-2-transaction.json": {
+      "sha256": "c5d5f1e5adfc14f7874b115e55201cf1609363301b9a743408066ee9041fd004",
+      "bytes": 17512
+    },
+    "phase2a/concurrency/summary.json": {
+      "sha256": "7fd3984b7c6afd0c40798a45dbafecea70b4dc3585a7464dd603a7ea4433a30d",
+      "bytes": 557
+    },
+    "phase2a/concurrency/broadcast-0.json": {
+      "sha256": "658046c307b6cf8b7f2458f20021d7d6fb2f63f173862119f6a12d69100ef8a1",
+      "bytes": 274
+    },
+    "phase2a/concurrency/broadcast-1.json": {
+      "sha256": "9b6db7d534e3bcc63a28d8c8f74efadcdeba2b815b01263444fc0ddcfe0e53ba",
+      "bytes": 274
+    },
+    "phase2a/concurrency/broadcast-2.json": {
+      "sha256": "1cd5e60fad5b8de24aaaf188d1278c98e043257bbc1715ecaae8b77d24221be8",
+      "bytes": 273
+    }
+  }
+}

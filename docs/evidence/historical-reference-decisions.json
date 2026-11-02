@@ -1,0 +1,502 @@
+[
+  {
+    "file": "docs/ENVIRONMENT.md",
+    "original_target": "../.phase1a-smoke/build-first-attempt.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/ENVIRONMENT.md",
+    "original_target": "../.phase1a-smoke/build.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/ENVIRONMENT.md",
+    "original_target": "../.phase1a-smoke/clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/ENVIRONMENT.md",
+    "original_target": "../.phase1a-smoke/verification.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/ENVIRONMENT.md",
+    "original_target": "../.phase1a-smoke/build-with-abi.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE1B.md",
+    "original_target": "phase1b-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE1B.md",
+    "original_target": "phase1b-native-clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE1B.md",
+    "original_target": "phase1b-wasm-clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE1B.md",
+    "original_target": "phase1b-build.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/workflow.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/results.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/verification-summary.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/expired/expiry-wait.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/expired/rejected-before.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/expired/rejected-transaction.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/concurrency/broadcasts-complete.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/concurrency/summary.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/failure/native-failure-transaction.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/verification-summary.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-corrected/evidence/additional-unverified.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-native-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-native-clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-check.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-harness-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-harness-clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-repair-integration-build.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/evidence/results.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/evidence/expired/rejected-transaction.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/evidence/expired/rejected-before.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/evidence/expired/rejected-after.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/evidence/expired/rejected-callback-gas.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/observed-payment-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "../artifacts/phase2a-github/workflow.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-docker-pull-alpine320.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-native-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-integration-check.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2A.md",
+    "original_target": "phase2a-integration-clippy.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2B.md",
+    "original_target": "../artifacts/phase2b-closure-run/result-details.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2B.md",
+    "original_target": "../artifacts/phase2b-closure-run/evidence-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2B.md",
+    "original_target": "../artifacts/phase2b-github/evidence-analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE2B.md",
+    "original_target": "../artifacts/phase2b-github/result-details.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_ADAPTER_REVIEW.md",
+    "original_target": "../artifacts/phase4-adapter-review/all-node-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_ADAPTER_REVIEW.md",
+    "original_target": "../artifacts/phase4-adapter-review/native-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_ADAPTER_REVIEW.md",
+    "original_target": "../artifacts/phase4-adapter-review/harness-tests.log",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_ADAPTER_REVIEW.md",
+    "original_target": "../artifacts/phase4-adapter-review/review.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_ADAPTER_REVIEW.md",
+    "original_target": "../artifacts/phase4-adapter-review/continuation-package.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/upload-manifest.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence.zip",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence/phase4-initialization/results.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence/phase4-initialization/parent-identities.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence/phase4-initialization/initialized-accounting.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence/phase2a-regression/results.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/evidence/phase2b-regression/phase2b/results.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/budget-review/review.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_INITIALIZATION_SANDBOX_RESULTS.md",
+    "original_target": "../artifacts/phase4-initialization-ci/updated-proposal.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_TX9_RECOVERY.md",
+    "original_target": "../artifacts/phase4-tx9-recovery/transaction-details.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_TX9_RECOVERY.md",
+    "original_target": "../artifacts/phase4-tx9-recovery/positive-control.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_TX9_RECOVERY.md",
+    "original_target": "../artifacts/phase4-tx9-recovery/index.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PHASE4_TX9_RECOVERY.md",
+    "original_target": "../artifacts/phase4-tx9-recovery/analysis.json",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:100",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:187",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./README.md:27",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:187",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:209",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:295",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:39",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:7",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:118",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:203",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:432",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:302",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:127",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:89",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./README.md:27",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:207",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:156",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:366",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/tests.rs:10",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/lib.rs:4",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./Cargo.toml:15",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/tests.rs:113",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/tests.rs:715",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:345",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:398",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./README.md:7",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./Cargo.toml:1",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:324",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:358",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:116",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/contract.rs:126",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:398",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:170",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:336",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./src/model.rs:173",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./Cargo.toml:5",
+    "disposition": "historical local-only reference; not restored"
+  },
+  {
+    "file": "docs/PRE_PHASE2_REVIEW.md",
+    "original_target": "./Cargo.toml:16",
+    "disposition": "historical local-only reference; not restored"
+  }
+]

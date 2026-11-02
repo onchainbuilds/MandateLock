@@ -1,5 +1,3 @@
-> Preserved historical report; local path prefixes redacted for migration. Current status: PHASE2B.md. Some local diagnostic log links are excluded from the upload.
-
 # MandateLock — Phase 1A environment and architecture review
 
 Date: October 30, 2026, America/New_York. Scope: native Windows development setup and disposable compilation only. No MandateLock contract or frontend implementation, external account creation, deployment, transaction signing, Git initialization, public repository creation or other-project access is authorized by this phase.
@@ -36,9 +34,9 @@ Official installers used:
 - Rust's [Windows installation page](https://rust-lang.org/tools/install/) and [MSVC prerequisites](https://rust-lang.github.io/rustup/installation/windows-msvc.html). Selected minimal host components: MSVC x64/x86 tools and Windows 11 SDK, without the full Visual Studio IDE. Host-side procedural macros/build scripts and ABI tooling need a native linker even when the final output is Wasm.
 - Rustup x64 executable from `static.rust-lang.org`; SHA-256 `00f139da614dced87d3c3d4121c43eebdac3c1bf8a5ee86b9d80dfd71c8d70fd` matched its official checksum before execution. An initial comparison failed because PowerShell returned the checksum body as bytes; decoding UTF-8 resolved it. The failed verification attempt did not run the installer.
 - Microsoft bootstrapper from `https://aka.ms/vs/17/release/vs_buildtools.exe`; Authenticode status Valid, signer Microsoft Corporation. No reboot is initiated by the command.
-- [cargo-near 0.22.0 official release](https://github.com/near/cargo-near/releases/tag/cargo-near-v0.22.0), using its pinned PowerShell installer. It installs `cargo-near.exe` into `<user-profile>\.cargo\bin`. `-NoModifyPath` avoided a duplicate PATH edit after rustup.
+- [cargo-near 0.22.0 official release](https://github.com/near/cargo-near/releases/tag/cargo-near-v0.22.0), using its pinned PowerShell installer. It installs `cargo-near.exe` into `<USER_HOME>\.cargo\bin`. `-NoModifyPath` avoided a duplicate PATH edit after rustup.
 
-Rustup installed tools in `<user-profile>\.cargo\bin` and the compiler under `<user-profile>\.rustup`. A running Codex/shell may retain its old PATH until restarted. Build commands here explicitly prepend Cargo's bin to the process PATH. No WSL or Docker installation/startup is part of Phase 1A.
+Rustup installed tools in `<USER_HOME>\.cargo\bin` and the compiler under `<USER_HOME>\.rustup`. A running Codex/shell may retain its old PATH until restarted. Build commands here explicitly prepend Cargo's bin to the process PATH. No WSL or Docker installation/startup is part of Phase 1A.
 
 ## Selected dependency versions and compatibility reasoning
 
@@ -85,9 +83,9 @@ exit $LASTEXITCODE
 | Lockfile SHA-256 | `765e914f5839a795b58708c281e5c1cc3e940fbb70d5e041d0cafc4b8c1487de` |
 | Resolved SDK / near-sys | 5.29.1 / 0.2.14 |
 
-Logs: [initial SDK-timing failure](../.phase1a-smoke/build-first-attempt.log), [successful locked build](../.phase1a-smoke/build.log), [clippy](../.phase1a-smoke/clippy.log), and [static artifact verification](../.phase1a-smoke/verification.json). The disposable source and Cargo.lock are retained for reproducibility; target build products are ignored. No generated Wasm was deployed or executed as a blockchain transaction.
+Logs: initial SDK-timing failure (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), successful locked build (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), clippy (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), and static artifact verification (historical local-only reference; excluded from public snapshot; result retained without inventing evidence). The disposable source and Cargo.lock are retained for reproducibility; target build products are ignored. No generated Wasm was deployed or executed as a blockchain transaction.
 
-**Additional standard ABI build: FAIL on Windows for this selected combination.** `cargo near build non-reproducible-wasm --locked` reached host ABI DLL linking and failed with LNK2019/LNK1120 (50 unresolved NEAR symbols, including `prepaid_gas`, `storage_read` and `p256_verify`). The complete error is in [build-with-abi.log](../.phase1a-smoke/build-with-abi.log). This is distinct from the repaired missing-SDK library error: the standard ABI pass requires further compatibility work. No dependency or linker patch was applied to mask it. Use the passing `--no-abi` command locally; attempt ABI generation on Linux CI later and report its actual result. No Linux ABI success is claimed yet.
+**Additional standard ABI build: FAIL on Windows for this selected combination.** `cargo near build non-reproducible-wasm --locked` reached host ABI DLL linking and failed with LNK2019/LNK1120 (50 unresolved NEAR symbols, including `prepaid_gas`, `storage_read` and `p256_verify`). The complete error is in build-with-abi.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence). This is distinct from the repaired missing-SDK library error: the standard ABI pass requires further compatibility work. No dependency or linker patch was applied to mask it. Use the passing `--no-abi` command locally; attempt ABI generation on Linux CI later and report its actual result. No Linux ABI success is claimed yet.
 
 Exact substantive inspection/install/build commands and outcomes are recorded in [ENVIRONMENT-COMMANDS.md](ENVIRONMENT-COMMANDS.md).
 

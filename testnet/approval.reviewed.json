@@ -1,0 +1,23 @@
+{
+  "approved": false,
+  "network": "testnet",
+  "config_sha256": "a900b86f3eca441451a63e55e81c7cd17c29b58a16007d935b5904f5ca25059a",
+  "wasm_sha256": "3836647aa9dcee6a461cb7c30b991e919baa9a6fce67065744c97b491f5c0e87",
+  "max_external_funding_near": "8",
+  "expires_at": "2026-11-01T15:00:00Z",
+  "operations": [
+    "create-vault",
+    "create-agent",
+    "create-recipient",
+    "create-attacker",
+    "deploy-init",
+    "install-agent-keys",
+    "fund",
+    "mandate",
+    "authorized",
+    "direct-rejection",
+    "concurrency"
+  ],
+  "dependency_lock_sha256": "0920f50173b086d97b0fbe6b19822f1178a7167a83461f2ad73f74b5666702eb",
+  "note": "Review copy only. No chain authorization granted. Root owner bootstrap is a separate explicit prerequisite within the 8 NEAR total cap."
+}

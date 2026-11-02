@@ -1,0 +1,45 @@
+{
+  "scope": "Byte-identical selected public RPC/transaction observations; no new chain queries for this release",
+  "files": [
+    {
+      "path": "docs/evidence/tx9-final-resolution.json",
+      "sha256": "9fbfc9b2d7c3181487de1b676fd8a5b7c122e67eeff73c9d91ec5f7fea29ec55",
+      "source": "artifacts/phase4-tx9-final/resolution.json"
+    },
+    {
+      "path": "docs/evidence/tx9-final-independent.json",
+      "sha256": "7eedadc812bda1911bbb5fc8331e7b0939a7b3325651f395ce58505d69f27f04",
+      "source": "artifacts/phase4-tx9-final/independent.json"
+    },
+    {
+      "path": "docs/evidence/tx9-final-balances.json",
+      "sha256": "f674c3c0f77294e3a230e21a601413592472e91989f334b9fecef9ccfe6eca95",
+      "source": "artifacts/phase4-tx9-final/independent-balances.json"
+    },
+    {
+      "path": "docs/evidence/r3-safe-stop.json",
+      "sha256": "5e685130f461a9b49d3c01d2e22f891ec0643240f023cf9f63cecb8c379e262b",
+      "source": "artifacts/phase4-final-run/safe-stop.json"
+    },
+    {
+      "path": "docs/evidence/r3-final-snapshot.json",
+      "sha256": "cafa6ab19ea2d04f77e310ffe5a67236067b053d6d8fd229277936d43301ea94",
+      "source": "artifacts/phase4-final-run/final-snapshot.json"
+    },
+    {
+      "path": "docs/evidence/r3-latest-height.json",
+      "sha256": "e1a5f709693f7ed8f245fcea32a9f508a959415d838dbb204de7f43918fe430b",
+      "source": "artifacts/key-remediation/2026-11-01T19-53-13.800Z/rpc-2.json"
+    },
+    {
+      "path": "docs/evidence/owner-retirement.json",
+      "sha256": "7673015a138b8b9924f5e18859674c9033d06c9424afe74da27b00bd39cf133c",
+      "source": "artifacts/phase4-final-run/R1.log"
+    },
+    {
+      "path": "docs/evidence/owner-mandate2.json",
+      "sha256": "32da8edf88f22277f88b106273e14e5a360da21003c541c9e941f1daaa578288",
+      "source": "artifacts/phase4-final-run/R2.log"
+    }
+  ]
+}

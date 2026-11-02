@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MandateLock evidence receipt v1",
+  "type": "object",
+  "required": ["schema", "request_id", "task_id", "mode", "evidence_kind", "authorization", "transaction_hash", "finality", "transaction_status", "payment_status", "settlement", "accounting", "callbacks", "broadcast"],
+  "properties": {
+    "schema": {"const": "mandatelock.receipt.v1"},
+    "request_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "mode": {"enum": ["offline", "sandbox", "testnet"]},
+    "evidence_kind": {"enum": ["local-planning", "recorded-sandbox"]},
+    "authorization": {"type": "object"},
+    "transaction_hash": {"type": ["string", "null"]},
+    "finality": {"enum": ["FINAL", "UNVERIFIED"]},
+    "transaction_status": {"enum": ["NOT_SUBMITTED", "UNKNOWN", "FINALIZED_SUCCESS", "FINALIZED_FAILURE"]},
+    "payment_status": {"enum": ["NOT_SUBMITTED", "UNKNOWN", "FINALIZED_SUCCESS", "FINALIZED_FAILURE"]},
+    "settlement": {"enum": ["UNKNOWN", "SUCCEEDED", "FAILED_REFUNDED", "PENDING_UNCERTAIN", "REJECTED"]},
+    "accounting": {"type": ["object", "null"]},
+    "callbacks": {"type": "array"},
+    "broadcast": {"const": false}
+  }
+}

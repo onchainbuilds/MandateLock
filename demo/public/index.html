@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MandateLock — Agent Security Lab</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.js"></script></head>
+<body>
+<header class="top"><a class="brand" href="/"><span class="mark">M</span>MandateLock<span class="lab">/ SECURITY LAB</span></a><span class="pill">RECORDED SANDBOX</span></header>
+<main>
+  <section class="intro"><div><p class="eyebrow">NEAR HACKATHON · AI SECURITY &amp; DEFENSE</p><h1>Give the agent a budget.<br>Keep the boundaries.</h1><p class="lead">A deterministic policy gate, restricted agent keys, and a contract that enforces the final limit.</p></div><aside class="provenance"><span class="eyebrow">PROVEN CONTRACT · FROZEN</span><strong>75 PASS <span>/ 0 FAIL</span></strong><p>Prior Phase 2B sandbox validation</p><a id="run-link" target="_blank" rel="noreferrer">Inspect source run ↗</a></aside></section>
+  <div class="mode-note"><strong>No live transactions. No LLM.</strong> This demo runs local deterministic policy checks and replays genuine sandbox evidence from October 31, 2026. Steps select separate recorded checkpoints; they do not create a continuous live ledger.</div>
+  <nav class="steps" aria-label="Judge demonstration sequence">
+    <button data-step="1" aria-current="step"><span>01</span> Create mandate</button><button data-step="2"><span>02</span> Authorized payment</button><button data-step="3"><span>03</span> Malicious instruction</button><button data-step="4"><span>04</span> Onchain rejection</button><button data-step="5"><span>05</span> Competing payments</button>
+  </nav>
+  <div id="error" role="alert" hidden></div>
+  <div class="workspace">
+    <aside class="card mandate"><div class="card-head"><h2>Owner mandate</h2><span class="mini">RECORDED</span></div><p id="context" class="context"></p><dl id="identities"></dl><div class="limits"><div><span>Budget</span><strong id="budget"></strong></div><div><span>Per payment</span><strong id="ceiling"></strong></div></div><div class="ledger"><div><span>Available</span><strong id="available"></strong></div><div><span>Pending</span><strong id="pending"></strong></div><div><span>Spent</span><strong id="spent"></strong></div></div><p class="small">NEAR · available + pending + spent = budget</p><dl id="physical"></dl><details><summary>Restricted authority &amp; expiry</summary><div id="authority"></div></details></aside>
+    <section class="card workbench"><p class="eyebrow" id="step-label"></p><h2 id="scene-title">Loading verified evidence…</h2><p id="scene-description" class="description"></p><div id="scene-body"></div><div id="decision" aria-live="polite"></div></section>
+  </div>
+  <section class="card evidence"><div class="card-head"><div><p class="eyebrow">VERIFY THE BOUNDARY</p><h2>Transaction &amp; receipt evidence</h2></div><span id="verification" class="mini">CHECKING HASHES</span></div><p id="evidence-note" class="small"></p><div id="transactions"></div><div id="sources" class="source-links"></div><details><summary>Recording provenance and frozen contract hash</summary><pre id="provenance"></pre></details></section>
+  <section class="limitations"><h2>What this demonstration does not guarantee</h2><ul><li>Failed callbacks can strand pending reservations. Uncertain reservations are never released automatically.</li><li>Retained owner and vault full-access keys remain trusted; a vault key can bypass contract policy.</li><li>Receipt-block observations passed. Every intra-block solvency boundary and near-reserve runtime funding remain unverified.</li><li>No production custody security sign-off. No public deployment, real funds, live LLM, or prompt-injection immunity claim.</li></ul></section>
+  <footer>Localhost only · Synthetic funds in the source sandbox · <a href="/testnet">Inspect public testnet mandate and receipts ↗</a> · No browser signing</footer>
+</main>
+</body></html>

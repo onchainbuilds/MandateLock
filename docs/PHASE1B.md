@@ -1,5 +1,3 @@
-> Preserved historical report; local path prefixes redacted for migration. Current status: PHASE2B.md. Some local diagnostic log links are excluded from the upload.
-
 # MandateLock — Phase 1B implementation evidence
 
 Date: October 30, 2026 (America/New_York). **Local implementation complete; conditional GO for Phase 2 hardening. No deployment or live-chain claim.**
@@ -60,11 +58,11 @@ The competing-request suite enumerates six submission orderings, two settlement 
 
 ## C. Test and check results
 
-Final result: **44 passed, 0 failed, 0 ignored.** Full named results: [phase1b-tests.log](phase1b-tests.log).
+Final result: **44 passed, 0 failed, 0 ignored.** Full named results: phase1b-tests.log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 
 - Format check passed.
-- Native model/test Clippy with `-D warnings` passed: [native log](phase1b-native-clippy.log).
-- Wasm adapter/model Clippy passed: [Wasm log](phase1b-wasm-clippy.log).
+- Native model/test Clippy with `-D warnings` passed: native log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
+- Wasm adapter/model Clippy passed: Wasm log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence).
 - Native Windows generated a nonfatal incremental-cache hard-link warning and copied files instead; this did not fail tests or lint.
 
 The initial test run caught an immediate-parent parsing error, corrected before final verification; an intermediate strict lint run caught a boolean-style warning, also corrected. Final logs report the corrected sources. Storage-floor computation was reviewed to use prospective persisted size and tested for stability across a state commit.
@@ -77,7 +75,7 @@ Verified environment: Rust/Cargo 1.93.0, MSVC Windows x64, near-sdk 5.29.1, carg
 
 | Evidence | Final result |
 | --- | --- |
-| Actual contract artifact | `<workspace>\target\near\mandatelock.wasm` |
+| Actual contract artifact | `.\target\near\mandatelock.wasm` |
 | Size | 160,477 bytes |
 | Wasm SHA-256 | `eeded7009d4e56c460744ba7bdf17a52cc04a3d41fa1997903bf7622fb102bb3` |
 | Cargo.lock SHA-256 | `2b94d41e4acf7c6b44c331f6e1281d3887c3edac6e6dfe33aca72af7382344fd` |
@@ -85,7 +83,7 @@ Verified environment: Rust/Cargo 1.93.0, MSVC Windows x64, near-sdk 5.29.1, carg
 | Compatibility | cargo-near accepted compiler 1.93.0 for SDK protocol minimum 84 |
 | Static validation | Valid Wasm v1 header; Node module parser and WebAssembly.validate passed; twelve expected application functions, SDK metadata function, only `env` imports |
 
-Evidence: [build log](phase1b-build.log), [artifact inspection JSON](phase1b-wasm.json). The artifact is the actual policy vault, separate from Phase 1A's constant-method smoke artifact. Static validation does not establish NEAR VM acceptance or payment correctness. The known Windows ABI limitation was not retried; no ABI is embedded.
+Evidence: build log (historical local-only reference; excluded from public snapshot; result retained without inventing evidence), [artifact inspection JSON](phase1b-wasm.json). The artifact is the actual policy vault, separate from Phase 1A's constant-method smoke artifact. Static validation does not establish NEAR VM acceptance or payment correctness. The known Windows ABI limitation was not retried; no ABI is embedded.
 
 ## E. Async accounting, reserves and unresolved integration risks
 
@@ -117,7 +115,7 @@ Required Phase 2 evidence:
 
 ## G. Reproduction commands and remaining blockers
 
-From `<workspace>` in PowerShell, using the installed Phase 1A toolchain:
+From `.` in PowerShell, using the installed Phase 1A toolchain:
 
 ```powershell
 $rustBin = Join-Path $env:USERPROFILE '.cargo\bin'
